@@ -5,50 +5,104 @@ import { AuthContext } from "../../context/auth";
 
 const DUMMY_DATA = [
   {
-    id: 39,
-    title: "Research number 22",
-    usageTimeCapture: true,
+    id: 86,
+    title: "Research number 84",
+    activeModules: ["totalClicks"],
     questions: [
       {
-        type: "multiple_choice",
-        question: "pergunta 84",
-        answers: ["string1", "string2", "string3"],
+        question: "pergunta 16",
+        order: 0,
+        alternatives: [
+          {
+            type: "multiple_choice",
+            text: "alternativa1",
+            value: 0,
+          },
+          {
+            type: "multiple_choice",
+            text: "alternativa2",
+            value: 1,
+          },
+        ],
       },
       {
-        type: "other",
-        question: "pergunta 15",
+        question: "pergunta 92",
+        order: 1,
+        alternatives: [
+          {
+            type: "other",
+            text: "alternativa única",
+            value: 0,
+          },
+        ],
       },
     ],
   },
   {
-    id: 46,
-    title: "Research number 19",
-    usageTimeCapture: false,
+    id: 56,
+    title: "Research number 15",
+    activeModules: ["usageTime"],
     questions: [
       {
-        type: "multiple_choice",
-        question: "pergunta 96",
-        answers: ["string1", "string2", "string3"],
+        question: "pergunta 65",
+        order: 0,
+        alternatives: [
+          {
+            type: "multiple_choice",
+            text: "alternativa1",
+            value: 0,
+          },
+          {
+            type: "multiple_choice",
+            text: "alternativa2",
+            value: 1,
+          },
+        ],
       },
       {
-        type: "other",
-        question: "pergunta 62",
+        question: "pergunta 77",
+        order: 1,
+        alternatives: [
+          {
+            type: "other",
+            text: "alternativa única",
+            value: 0,
+          },
+        ],
       },
     ],
   },
   {
-    id: 55,
-    title: "Research number 34",
-    usageTimeCapture: true,
+    id: 12,
+    title: "Research number 30",
+    activeModules: ["usageTime"],
     questions: [
       {
-        type: "multiple_choice",
-        question: "pergunta 56",
-        answers: ["string1", "string2", "string3"],
+        question: "pergunta 59",
+        order: 1,
+        alternatives: [
+          {
+            type: "multiple_choice",
+            text: "alternativa1",
+            value: 0,
+          },
+          {
+            type: "multiple_choice",
+            text: "alternativa2",
+            value: 1,
+          },
+        ],
       },
       {
-        type: "other",
-        question: "pergunta 93",
+        question: "pergunta 72",
+        order: 0,
+        alternatives: [
+          {
+            type: "other",
+            text: "alternativa única",
+            value: 0,
+          },
+        ],
       },
     ],
   },

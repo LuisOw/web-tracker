@@ -1,7 +1,13 @@
 function Questions(props) {
+  console.log(props);
   return (
     <div className="modal">
-      <p>Questions placeholder</p>
+      {props.questions.map((question) => (
+        <p>
+          {question.question}
+          {question.order}
+        </p>
+      ))}
       <button onClick={props.onClickClose}>Fechar</button>
     </div>
   );

@@ -5,13 +5,21 @@ import Questions from "../../components/researches/questions/Questions";
 
 function ResearchesList(props) {
   const [questionsIsOpen, setQuestionsIsOpen] = useState(false);
+  const [modulesIsOpen, setModulesIsOpen] = useState(false);
   const [questions, setQuestions] = useState([]);
-  function showResearchHandler() {
+
+  function showResearchHandler(questions) {
     setQuestionsIsOpen(true);
+    setQuestions(questions);
   }
 
-  function closeResearchHandler() {
+  function showModulesHandler() {
+    setModulesIsOpen(true);
+  }
+
+  function closeAnyHandler() {
     setQuestionsIsOpen(false);
+    setModulesIsOpen(false);
   }
 
   return (
@@ -19,7 +27,7 @@ function ResearchesList(props) {
       <table>
         <tr>
           <th>Título</th>
-          <th>Capturar tempo de uso</th>
+          <th>Módulos ativos</th>
           <th>Questions</th>
         </tr>
         {props.researches.map((research) => (
@@ -27,13 +35,18 @@ function ResearchesList(props) {
             key={research.id}
             id={research.id}
             title={research.title}
-            usageTimeCapture={research.usageTimeCapture}
+            activeModules={research.activeModules}
             questions={research.questions}
             showResearchHandler={showResearchHandler}
+            showModulesHandler={showModulesHandler}
           />
         ))}
-        {questionsIsOpen && <Questions onClickClose={closeResearchHandler} />}
-        {questionsIsOpen && <Backdrop onClickClose={closeResearchHandler} />}
+        {modulesIsOpen && <Questions onClickClose={closeAnyHandler} />}
+        {modulesIsOpen && <Backdrop onClickClose={closeAnyHandler} />}
+        {questionsIsOpen && (
+          <Questions onClickClose={closeAnyHandler} questions={questions} />
+        )}
+        {questionsIsOpen && <Backdrop onClickClose={closeAnyHandler} />}
       </table>
     </>
   );
