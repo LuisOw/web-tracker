@@ -30,7 +30,7 @@ export const AuthProvider = ({ children }) => {
 
     if (password === "s") {
       setUser(loggedUser);
-      navigate("/");
+      navigate("/pesquisas");
     }
   };
 

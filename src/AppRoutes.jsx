@@ -9,9 +9,9 @@ import {
 } from "react-router-dom";
 
 import LoginPage from "./pages/LoginPage/loginPage";
-import HomePage from "./pages/HomePage /homePage";
 
 import { AuthProvider, AuthContext } from "./context/auth";
+import ResearchesPage from "./pages/ResearchesPage/ResearchesPage";
 
 const AppRoutes = () => {
   const Private = ({ children }) => {
@@ -34,10 +34,10 @@ const AppRoutes = () => {
           <Route exact path="/login" element={<LoginPage />} />
           <Route
             exact
-            path="/"
+            path="/pesquisas"
             element={
               <Private>
-                <HomePage />
+                <ResearchesPage />
               </Private>
             }
           />
