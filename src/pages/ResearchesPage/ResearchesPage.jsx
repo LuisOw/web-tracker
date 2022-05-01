@@ -1,8 +1,10 @@
 import React, { useContext } from "react";
 import ResearchesList from "../../components/researches/ResearchList";
-import QuestionsList from "../../components/researches/questions/QuestionsList";
+import QuestionsList from "../../components/questions/QuestionsList";
 
 import { AuthContext } from "../../context/auth";
+import QuestionnariesList from "../../components/questionnaries/QuestionnariesList";
+import NewResearchPage from "../newResearchPage/NewResearchPage";
 
 const DUMMY_DATA = [
   {
@@ -132,42 +134,83 @@ const DUMMY_DATA = [
   },
 ];
 
-const DUMMY_DATA2 = {
-  id: 1,
-  public: true,
-  title: "questionario 1",
-  questions: [
-    {
-      id: 1,
-      query: "pergunta 16",
-      order: 0,
-      alternatives: [
-        {
-          type: "multiple_choice",
-          text: "alternativa1",
-          value: 0,
-        },
-        {
-          type: "multiple_choice",
-          text: "alternativa2",
-          value: 1,
-        },
-      ],
-    },
-    {
-      id: 2,
-      query: "pergunta 92",
-      order: 1,
-      alternatives: [
-        {
-          type: "other",
-          text: "alternativa única",
-          value: 0,
-        },
-      ],
-    },
-  ],
-};
+const DUMMY_DATA2 = [
+  {
+    id: 1,
+    public: true,
+    title: "questionario 1",
+    questions: [
+      {
+        id: 1,
+        query: "pergunta 16",
+        order: 0,
+        alternatives: [
+          {
+            type: "multiple_choice",
+            text: "alternativa1",
+            value: 0,
+          },
+          {
+            type: "multiple_choice",
+            text: "alternativa2",
+            value: 1,
+          },
+        ],
+      },
+      {
+        id: 2,
+        query: "pergunta 92",
+        order: 1,
+        alternatives: [
+          {
+            type: "other",
+            text: "alternativa única",
+            value: 0,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 8,
+    public: false,
+    title: "questionario 20",
+    questions: [
+      {
+        id: 0,
+        query: "pergunta 81",
+        order: 0,
+        alternatives: [
+          {
+            id: 0,
+            type: "multiple_choice",
+            text: "alternativa1",
+            value: 0,
+          },
+          {
+            id: 0,
+            type: "multiple_choice",
+            text: "alternativa2",
+            value: 1,
+          },
+        ],
+      },
+      {
+        id: 1,
+        question: "pergunta 22",
+        order: 0,
+        alternatives: [
+          {
+            id: 0,
+            type: "other",
+            text: "alternativa única",
+            value: 0,
+          },
+        ],
+      },
+    ],
+  },
+];
 
 const ResearchesPage = () => {
   const { authenticated, logout } = useContext(AuthContext);
@@ -176,16 +219,19 @@ const ResearchesPage = () => {
     logout();
   };
 
-  const options = ["one", "two", "three"];
-  const defaultOption = options[0];
+  const addResearch = () => {
+    console.log("Nova pesquisa");
+  };
 
   return (
     <>
-      <h1>Suas pesquisas</h1>
       <button onClick={handleLogout}>Logout</button>
+      <h1>Suas pesquisas</h1>
+      <button onClick={addResearch}> Adicionar pesquisa</button>
       <ResearchesList researches={DUMMY_DATA} />
-      <h1>Exibidor de questão</h1>
-      <QuestionsList questionnaire={DUMMY_DATA2} />
+      <h1>Exibidor de Questionários</h1>
+      <QuestionnariesList questionnaries={DUMMY_DATA2} />
+      <NewResearchPage />
     </>
   );
 };

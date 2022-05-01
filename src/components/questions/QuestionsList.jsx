@@ -3,18 +3,6 @@ import QuestionItem from "./QuestionsItem";
 function QuestionsList(props) {
   return (
     <>
-      <h2>Informações Questionário</h2>
-      <table>
-        <tr>
-          <th>Título</th>
-          <th>Público</th>
-        </tr>
-        <tr>
-          <th>{props.questionnaire.title}</th>
-          <th>{JSON.stringify(props.questionnaire.public)}</th>
-        </tr>
-      </table>
-      <p>Lista de questões</p>
       <table>
         <tr>
           <th>ID</th>
@@ -22,7 +10,7 @@ function QuestionsList(props) {
           <th>Ordem</th>
           <th>Alternativas</th>
         </tr>
-        {props.questionnaire.questions.map((question) => (
+        {props.questions.map((question) => (
           <QuestionItem
             key={question.id}
             id={question.id}

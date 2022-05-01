@@ -9,7 +9,7 @@ function ResearchesItem(props) {
       </th>
       <th>
         <button onClick={() => props.showResearchHandler(props.questions)}>
-          Exibir perguntas
+          Exibir questionários
         </button>
       </th>
     </tr>

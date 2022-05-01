@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import AlternativesList from "../../alternatives/AlternativesList";
+import AlternativesList from "../alternatives/AlternativesList";
 
 function QuestionItem(props) {
   const [viewAlternatives, setViewAlternatives] = useState(false);
