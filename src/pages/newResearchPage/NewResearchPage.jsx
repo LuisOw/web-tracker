@@ -7,8 +7,8 @@ function NewResearchPage() {
   const [questionForms, setQuestionForms] = useState([]);
   const [alternativeForms, setAlternativeForms] = useState([]);
 
-  const handleChange = (index, setter, event) => {
-    let data = questionnaireForms;
+  const handleChange = (index, forms, setter, event) => {
+    let data = forms;
     data[index][event.target.name] = event.target.value;
     setter(data);
   };
@@ -17,7 +17,9 @@ function NewResearchPage() {
     event.preventDefault();
     setResearchInformation();
     setQuestionnaireForms([]);
-    console.log(questionnaireForms);
+    setQuestionForms([]);
+    setAlternativeForms([]);
+    console.log(questionnaireForms, questionForms, alternativeForms);
   };
 
   return (
@@ -31,7 +33,12 @@ function NewResearchPage() {
             myKey={index}
             changer={handleChange}
             questionnarie={questionnarie}
-            setter={setQuestionnaireForms}
+            questionnaireForms={questionnaireForms}
+            questionnaireSetter={setQuestionnaireForms}
+            questionForms={questionForms}
+            questionSetter={setQuestionForms}
+            alternativeForms={alternativeForms}
+            alternativeSetter={setAlternativeForms}
           />
         ))}
         <button

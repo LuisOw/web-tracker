@@ -9,7 +9,14 @@ function NewAlternative(props) {
         <input
           name="type"
           placeholder="tipo"
-          onChange={(event) => props.changer(props.myKey, props.setter, event)}
+          onChange={(event) =>
+            props.changer(
+              props.myKey,
+              props.alternativeForms,
+              props.alternativeSetter,
+              event
+            )
+          }
         />
       </div>
       <div>
@@ -17,7 +24,14 @@ function NewAlternative(props) {
         <input
           name="text"
           placeholder="texto"
-          onChange={(event) => props.changer(props.myKey, props.setter, event)}
+          onChange={(event) =>
+            props.changer(
+              props.myKey,
+              props.alternativeForms,
+              props.alternativeSetter,
+              event
+            )
+          }
         />
       </div>
       <div>
@@ -25,7 +39,14 @@ function NewAlternative(props) {
         <input
           name="value"
           placeholder="0"
-          onChange={(event) => props.changer(props.myKey, props.setter, event)}
+          onChange={(event) =>
+            props.changer(
+              props.myKey,
+              props.alternativeForms,
+              props.alternativeSetter,
+              event
+            )
+          }
         />
       </div>
     </>

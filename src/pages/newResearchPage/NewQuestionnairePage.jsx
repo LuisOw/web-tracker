@@ -2,23 +2,18 @@ import { useState } from "react";
 import NewQuestionPage from "./NewQuestionPage";
 
 function NewQuestionnairePage(props) {
-  const [questionForms, setQuestionForms] = useState([]);
-
-  const handleChange = (index, setter, event) => {
-    let data = questionForms;
-    data[index][event.target.name] = event.target.value;
-    setter(data);
-  };
-
   const showQuestionForms = (question, index) => {
     if (question.questionnaireId === props.myKey) {
       return (
         <NewQuestionPage
           key={index}
           myKey={index}
-          changer={handleChange}
+          changer={props.changer}
           question={question}
-          setter={setQuestionForms}
+          questionSetter={props.questionSetter}
+          questionForms={props.questionForms}
+          alternativeSetter={props.alternativeSetter}
+          alternativeForms={props.alternativeForms}
         />
       );
     }
@@ -34,7 +29,14 @@ function NewQuestionnairePage(props) {
         <input
           name="public"
           placeholder="nome"
-          onChange={(event) => props.changer(props.myKey, props.setter, event)}
+          onChange={(event) =>
+            props.changer(
+              props.myKey,
+              props.questionnaireForms,
+              props.questionnaireSetter,
+              event
+            )
+          }
         />
       </div>
       <div>
@@ -42,7 +44,14 @@ function NewQuestionnairePage(props) {
         <input
           name="title"
           placeholder="título"
-          onChange={(event) => props.changer(props.myKey, props.setter, event)}
+          onChange={(event) =>
+            props.changer(
+              props.myKey,
+              props.questionnaireForms,
+              props.questionnaireSetter,
+              event
+            )
+          }
         />
       </div>
       <div>
@@ -50,16 +59,23 @@ function NewQuestionnairePage(props) {
         <input
           name="order"
           placeholder="ordem"
-          onChange={(event) => props.changer(props.myKey, props.setter, event)}
+          onChange={(event) =>
+            props.changer(
+              props.myKey,
+              props.questionnaireForms,
+              props.questionnaireSetter,
+              event
+            )
+          }
         />
       </div>
-      {questionForms.map((question, index) =>
+      {props.questionForms.map((question, index) =>
         showQuestionForms(question, index)
       )}
       <button
         type="button"
         onClick={() =>
-          setQuestionForms((prev) => [
+          props.questionSetter((prev) => [
             ...prev,
             { questionnaireId: props.myKey, query: "", order: 0 },
           ])
