@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import NewQuestionnairePage from "./NewQuestionnairePage";
 
 function NewResearchPage() {
-  const [researchInformation, setResearchInformation] = useState();
+  const [researchInformation, setResearchInformation] = useState({ title: "" });
   const [questionnaireForms, setQuestionnaireForms] = useState([]);
   const [questionForms, setQuestionForms] = useState([]);
   const [alternativeForms, setAlternativeForms] = useState([]);
@@ -13,20 +13,44 @@ function NewResearchPage() {
     setter(data);
   };
 
+  const formatBody = () => {
+    const researchData = {
+      reseachInfo: researchInformation,
+      questionnaireInfo: questionnaireForms,
+      questionInfo: questionForms,
+      alternativeInfo: alternativeForms,
+    };
+    return JSON.stringify(researchData);
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    setResearchInformation();
+    fetch("placeholderUrl/research", { method: "POST", body: formatBody() });
+    console.log(
+      researchInformation,
+      questionnaireForms,
+      questionForms,
+      alternativeForms
+    );
+    setResearchInformation({ title: "" });
     setQuestionnaireForms([]);
     setQuestionForms([]);
     setAlternativeForms([]);
-    console.log(questionnaireForms, questionForms, alternativeForms);
   };
 
   return (
     <>
       <form onSubmit={handleSubmit}>
         <label htmlFor="title">Título</label>
-        <input name="title" placeholder="título" />
+        <input
+          name="title"
+          placeholder="título"
+          onChange={(event) => {
+            let data = researchInformation;
+            data[event.target.name] = event.target.value;
+            setResearchInformation(data);
+          }}
+        />
         {questionnaireForms.map((questionnarie, index) => (
           <NewQuestionnairePage
             key={index}
