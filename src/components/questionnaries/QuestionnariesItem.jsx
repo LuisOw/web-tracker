@@ -11,7 +11,7 @@ function QuestionnariesItem(props) {
         <th>{JSON.stringify(props.public)}</th>
         <th>
           <button onClick={() => setViewQuestions(!viewQuestions)}>
-            Exibir Questões
+            {viewQuestions ? "Esconder questões" : "Exibir questões"}
           </button>
         </th>
       </tr>

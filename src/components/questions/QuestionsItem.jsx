@@ -13,7 +13,7 @@ function QuestionItem(props) {
         <th>{props.order}</th>
         <th>
           <button onClick={() => setViewAlternatives(!viewAlternatives)}>
-            Exibir alternativas
+            {viewAlternatives ? "Esconder alternativas" : "Exibir alternativas"}
           </button>
         </th>
       </tr>

@@ -188,7 +188,7 @@ const DUMMY_DATA2 = [
             value: 0,
           },
           {
-            id: 0,
+            id: 1,
             type: "multiple_choice",
             text: "alternativa2",
             value: 1,
