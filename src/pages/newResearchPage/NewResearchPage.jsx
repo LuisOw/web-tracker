@@ -15,7 +15,7 @@ function NewResearchPage() {
 
   const formatBody = () => {
     const researchData = {
-      reseachInfo: researchInformation,
+      researchInfo: researchInformation.title,
       questionnaireInfo: questionnaireForms,
       questionInfo: questionForms,
       alternativeInfo: alternativeForms,
@@ -25,17 +25,26 @@ function NewResearchPage() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    fetch("placeholderUrl/research", { method: "POST", body: formatBody() });
-    console.log(
-      researchInformation,
-      questionnaireForms,
-      questionForms,
-      alternativeForms
-    );
+    fetch("http://127.0.0.1:8000/pesquisas", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: formatBody(),
+    });
+    console.log(formatBody());
     setResearchInformation({ title: "" });
     setQuestionnaireForms([]);
     setQuestionForms([]);
     setAlternativeForms([]);
+  };
+
+  const handleSubmitTemp = (event) => {
+    event.preventDefault();
+    console.log(researchInformation);
+    fetch("http://127.0.0.1:8000/test", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ title: researchInformation.title }),
+    });
   };
 
   return (
