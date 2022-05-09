@@ -3,6 +3,7 @@ import ResearchItem from "./ResearchItem";
 
 function ResearchesList(props) {
   const [newRresearchView, setNewResearchView] = useState(false);
+  const [editMode, setEditMode] = useState(false);
   const [newResearch, setNewResearch] = useState({ title: "" });
 
   const handleChange = (event) => {
@@ -42,6 +43,19 @@ function ResearchesList(props) {
     }
   };
 
+  const showEditMode = () => {
+    if (editMode) {
+      return (
+        <>
+          <p>Editando pesquisa {}</p>
+          <form>
+            <input name="title" />
+          </form>
+        </>
+      );
+    }
+  };
+
   function showResearchHandler() {}
 
   function showModulesHandler() {}
@@ -55,21 +69,25 @@ function ResearchesList(props) {
             <th>Módulos ativos</th>
             <th>Questionários</th>
           </tr>
-          {props.researches.map((research) => (
+          {props.researches.map((research, index) => (
             <ResearchItem
               key={research.id}
               id={research.id}
               title={research.title}
               activeModules={research.activeModules}
               questions={research.questions}
+              position={index}
               showResearchHandler={showResearchHandler}
               showModulesHandler={showModulesHandler}
               handleDelete={props.delete}
-              handleEdit={props.edit}
+              handleSave={props.save}
+              editSetter={setEditMode}
+              //handleEdit={handleEditMode}
             />
           ))}
         </tbody>
       </table>
+      {showEditMode()}
       {showNewResearchView()}
       {showAddResearchButton()}
     </>

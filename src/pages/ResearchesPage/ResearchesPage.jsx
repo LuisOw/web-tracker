@@ -52,7 +52,7 @@ const ResearchesPage = () => {
     setResearches((prev) => [...prev, { id: data.id, title: data.title }]);
   };
 
-  const handleEdit = async (dataToSend) => {
+  const handleSave = async (dataToSend) => {
     const response = await fetch("http://127.0.0.1:8000/pesquisas", {
       method: "POST",
       headers: {
@@ -98,7 +98,7 @@ const ResearchesPage = () => {
         researches={researches}
         add={handleSubmit}
         delete={handleDelete}
-        edit={handleEdit}
+        save={handleSave}
       />
     </>
   );
