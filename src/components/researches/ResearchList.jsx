@@ -1,9 +1,12 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import ResearchItem from "./ResearchItem";
 
 function ResearchesList(props) {
   const [newRresearchView, setNewResearchView] = useState(false);
   const [newResearch, setNewResearch] = useState({ title: "" });
+  const navigate = useNavigate();
 
   const handleChange = (event) => {
     let data = newResearch;
@@ -42,7 +45,9 @@ function ResearchesList(props) {
     }
   };
 
-  function showResearchHandler() {}
+  const navigateHandler = (id) => {
+    navigate("/pesquisas/" + id + "/questionarios");
+  };
 
   function showModulesHandler() {}
 
@@ -62,7 +67,7 @@ function ResearchesList(props) {
               title={research.title}
               activeModules={research.activeModules}
               questions={research.questions}
-              showResearchHandler={showResearchHandler}
+              navigate={navigateHandler}
               showModulesHandler={showModulesHandler}
               handleDelete={props.delete}
               handleEdit={props.edit}

@@ -20,7 +20,11 @@ function ResearchesItem(props) {
         </button>
       </th>
       <th>
-        <button onClick={() => props.showResearchHandler(props.questions)}>
+        <button
+          onClick={() => {
+            props.navigate(props.id);
+          }}
+        >
           Exibir questionários
         </button>
       </th>

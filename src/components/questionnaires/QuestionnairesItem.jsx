@@ -1,7 +1,7 @@
 import { useState } from "react";
 import QuestionsList from "../questions/QuestionsList";
 
-function QuestionnariesItem(props) {
+function QuestionnairesItem(props) {
   const [viewQuestions, setViewQuestions] = useState(false);
 
   return (
@@ -20,4 +20,4 @@ function QuestionnariesItem(props) {
   );
 }
 
-export default QuestionnariesItem;
+export default QuestionnairesItem;
