@@ -4,6 +4,10 @@ import QuestionsList from "../questions/QuestionsList";
 function QuestionnairesItem(props) {
   const [viewQuestions, setViewQuestions] = useState(false);
 
+  const localDelete = () => {
+    props.handleDelete(props.id);
+  };
+
   return (
     <>
       <tr>
@@ -14,8 +18,8 @@ function QuestionnairesItem(props) {
             {viewQuestions ? "Esconder questões" : "Exibir questões"}
           </button>
         </th>
+        <button onClick={localDelete}>Excluir</button>
       </tr>
-      {viewQuestions ? <QuestionsList questions={props.questions} /> : null}
     </>
   );
 }

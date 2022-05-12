@@ -1,8 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
+import { useNavigate } from "react-router-dom";
 import QuestionnairesList from "../../components/questionnaires/QuestionnairesList";
 
 function QuestionnairesPage() {
+  const navigate = useNavigate();
   const { researchId } = useParams();
   const url =
     "http://127.0.0.1:8000/pesquisas/" + researchId + "/questionarios/";
@@ -36,7 +38,12 @@ function QuestionnairesPage() {
     const data = await response.json();
     setQuestionnaires((prev) => [
       ...prev,
-      { id: data.id, title: data.title, public: data.public },
+      {
+        id: data.id,
+        researchId: data.researchId,
+        title: data.title,
+        public: data.public,
+      },
     ]);
   };
 
@@ -56,6 +63,10 @@ function QuestionnairesPage() {
     setQuestionnaires(newState);
   };
 
+  const navigateBack = () => {
+    navigate("/pesquisas");
+  };
+
   if (loading) {
     return <div>Carregante...</div>;
   }
@@ -63,8 +74,10 @@ function QuestionnairesPage() {
   return (
     <>
       <h1>Questionário da pesquisa de id = {researchId}</h1>
+      <button onClick={navigateBack}>Voltar</button>
       <QuestionnairesList
         questionnaires={questionnaires}
+        researchId={researchId}
         add={handleSubmit}
         delete={handleDelete}
       />
