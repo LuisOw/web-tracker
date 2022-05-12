@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import QuestionnariesItem from "./QuestionnairesItem";
 
 function QuestionnairesList(props) {
+  const navigate = useNavigate();
   const [newQuestionnaireView, setNewQuestionnaireView] = useState(false);
   const [newQuestionnaire, setNewQuestionnaire] = useState({
     researchId: props.researchId,
@@ -19,6 +21,14 @@ function QuestionnairesList(props) {
     event.preventDefault();
     setNewQuestionnaireView(false);
     props.add(newQuestionnaire);
+  };
+
+  const navigateBack = () => {
+    navigate("/pesquisas");
+  };
+
+  const handleNavigate = (id) => {
+    navigate("/pesquisas/" + props.researchId + "/questionarios/" + id);
   };
 
   const showNewQuestionnaireView = () => {
@@ -53,6 +63,7 @@ function QuestionnairesList(props) {
 
   return (
     <>
+      <button onClick={navigateBack}>Voltar</button>
       <h2>Questionários</h2>
       <table>
         <tr>
@@ -68,6 +79,7 @@ function QuestionnairesList(props) {
             public={questionnaire.public}
             questions={questionnaire.questions}
             handleDelete={props.delete}
+            navigate={handleNavigate}
           />
         ))}
       </table>

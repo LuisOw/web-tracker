@@ -1,25 +1,28 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
-import QuestionnairesList from "../../components/questionnaires/QuestionnairesList";
+import QuestionsList from "../../components/questions/QuestionsList";
 
-function QuestionnairesPage() {
-  const { researchId } = useParams();
+function QuestionsPage() {
+  const { researchId, questionnaireId } = useParams();
   const url =
     "http://127.0.0.1:8000/pesquisas/" + researchId + "/questionarios/";
   const [loading, setLoading] = useState(true);
-  const [questionnaires, setQuestionnaires] = useState([]);
+  const [questions, setQuestions] = useState([]);
 
   useEffect(() => {
     (async () => {
       const response = await fetch(
-        "http://127.0.0.1:8000/pesquisas/" + researchId + "/questionarios/",
+        "http://127.0.0.1:8000/pesquisas/" +
+          researchId +
+          "/questionarios/" +
+          questionnaireId,
         {
           method: "GET",
           headers: { Authorizaton: "Bearer 1" },
         }
       );
       const data = await response.json();
-      setQuestionnaires(data);
+      setQuestions(data);
       setLoading(false);
     })();
   }, []);
@@ -34,13 +37,13 @@ function QuestionnairesPage() {
       body: JSON.stringify(dataToSend),
     });
     const data = await response.json();
-    setQuestionnaires((prev) => [
+    setQuestions((prev) => [
       ...prev,
       {
         id: data.id,
-        researchId: data.researchId,
-        title: data.title,
-        public: data.public,
+        questionnaireId: data.questionnaireId,
+        query: data.query,
+        order: data.order,
       },
     ]);
   };
@@ -56,9 +59,9 @@ function QuestionnairesPage() {
   };
 
   const stateRemoval = (id) => {
-    let state = questionnaires;
-    const newState = state.filter((questionnaire) => questionnaire.id !== id);
-    setQuestionnaires(newState);
+    let state = questions;
+    const newState = state.filter((question) => question.id !== id);
+    setQuestions(newState);
   };
 
   if (loading) {
@@ -67,10 +70,11 @@ function QuestionnairesPage() {
 
   return (
     <>
-      <h1>Questionário da pesquisa de id = {researchId}</h1>
-      <QuestionnairesList
-        questionnaires={questionnaires}
+      <h1>Questão do questionário de id = {questionnaireId}</h1>
+      <QuestionsList
+        questions={questions}
         researchId={researchId}
+        questionnaireId={questionnaireId}
         add={handleSubmit}
         delete={handleDelete}
       />
@@ -78,4 +82,4 @@ function QuestionnairesPage() {
   );
 }
 
-export default QuestionnairesPage;
+export default QuestionsPage;

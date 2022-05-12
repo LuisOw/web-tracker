@@ -2,8 +2,6 @@ import { useState } from "react";
 import QuestionsList from "../questions/QuestionsList";
 
 function QuestionnairesItem(props) {
-  const [viewQuestions, setViewQuestions] = useState(false);
-
   const localDelete = () => {
     props.handleDelete(props.id);
   };
@@ -14,8 +12,8 @@ function QuestionnairesItem(props) {
         <th>{props.title}</th>
         <th>{JSON.stringify(props.public)}</th>
         <th>
-          <button onClick={() => setViewQuestions(!viewQuestions)}>
-            {viewQuestions ? "Esconder questões" : "Exibir questões"}
+          <button onClick={() => props.navigate(props.id)}>
+            Exibit questões
           </button>
         </th>
         <button onClick={localDelete}>Excluir</button>
