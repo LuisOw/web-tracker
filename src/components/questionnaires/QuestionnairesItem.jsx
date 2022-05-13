@@ -1,5 +1,4 @@
 import { useState } from "react";
-import QuestionsList from "../questions/QuestionsList";
 
 function QuestionnairesItem(props) {
   const localDelete = () => {

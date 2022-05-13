@@ -77,7 +77,6 @@ function QuestionnairesList(props) {
             id={questionnaire.id}
             title={questionnaire.title}
             public={questionnaire.public}
-            questions={questionnaire.questions}
             handleDelete={props.delete}
             navigate={handleNavigate}
           />

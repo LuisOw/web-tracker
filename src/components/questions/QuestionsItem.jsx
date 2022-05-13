@@ -1,9 +1,9 @@
 import { useState } from "react";
 
-import AlternativesList from "../alternatives/AlternativesList";
-
 function QuestionItem(props) {
-  const [viewAlternatives, setViewAlternatives] = useState(false);
+  const localDelete = () => {
+    props.handleDelete(props.id);
+  };
 
   return (
     <>
@@ -12,14 +12,10 @@ function QuestionItem(props) {
         <th>{props.query}</th>
         <th>{props.order}</th>
         <th>
-          <button onClick={() => setViewAlternatives(!viewAlternatives)}>
-            {viewAlternatives ? "Esconder alternativas" : "Exibir alternativas"}
-          </button>
+          <button onClick={() => props}>Exibir alternativas</button>
         </th>
+        <button onClick={localDelete}>Excluir</button>
       </tr>
-      {viewAlternatives ? (
-        <AlternativesList alternatives={props.alternatives} />
-      ) : null}
     </>
   );
 }

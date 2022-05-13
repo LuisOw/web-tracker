@@ -5,7 +5,11 @@ import QuestionsList from "../../components/questions/QuestionsList";
 function QuestionsPage() {
   const { researchId, questionnaireId } = useParams();
   const url =
-    "http://127.0.0.1:8000/pesquisas/" + researchId + "/questionarios/";
+    "http://127.0.0.1:8000/pesquisas/" +
+    researchId +
+    "/questionarios/" +
+    questionnaireId +
+    "/questoes/";
   const [loading, setLoading] = useState(true);
   const [questions, setQuestions] = useState([]);
 
@@ -15,7 +19,8 @@ function QuestionsPage() {
         "http://127.0.0.1:8000/pesquisas/" +
           researchId +
           "/questionarios/" +
-          questionnaireId,
+          questionnaireId +
+          "/questoes/",
         {
           method: "GET",
           headers: { Authorizaton: "Bearer 1" },
