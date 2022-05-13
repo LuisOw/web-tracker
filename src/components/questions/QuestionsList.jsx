@@ -15,6 +15,17 @@ function QuestionsList(props) {
     navigate("/pesquisas/" + props.researchId + "/questionarios");
   };
 
+  const handleNavigate = (id) => {
+    navigate(
+      "/pesquisas/" +
+        props.researchId +
+        "/questionarios/" +
+        props.questionnaireId +
+        "/questoes/" +
+        id
+    );
+  };
+
   const handleChange = (event) => {
     let data = newQuestion;
     data[event.target.name] = event.target.value;
@@ -74,6 +85,7 @@ function QuestionsList(props) {
             query={question.query}
             order={question.order}
             handleDelete={props.delete}
+            navigate={handleNavigate}
           />
         ))}
       </table>

@@ -14,6 +14,7 @@ import { AuthProvider, AuthContext } from "./context/auth";
 import ResearchesPage from "./pages/ResearchesPage/ResearchesPage";
 import QuestionnairesPage from "./pages/questionnairePage/QuerionnairesPage";
 import QuestionsPage from "./pages/questionPage/QuestionsPage";
+import AlternativesPage from "./pages/alternativesPage/AlternativesPage";
 
 const AppRoutes = () => {
   const Private = ({ children }) => {
@@ -53,7 +54,19 @@ const AppRoutes = () => {
           />
           <Route
             path="/pesquisas/:researchId/questionarios/:questionnaireId"
-            element={<QuestionsPage />}
+            element={
+              <Private>
+                <QuestionsPage />
+              </Private>
+            }
+          />
+          <Route
+            path="/pesquisas/:researchId/questionarios/:questionnaireId/questoes/:questionId"
+            element={
+              <Private>
+                <AlternativesPage />
+              </Private>
+            }
           />
         </Routes>
       </AuthProvider>

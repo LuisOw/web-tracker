@@ -12,7 +12,9 @@ function QuestionItem(props) {
         <th>{props.query}</th>
         <th>{props.order}</th>
         <th>
-          <button onClick={() => props}>Exibir alternativas</button>
+          <button onClick={() => props.navigate(props.id)}>
+            Exibir alternativas
+          </button>
         </th>
         <button onClick={localDelete}>Excluir</button>
       </tr>
