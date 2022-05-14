@@ -50,6 +50,7 @@ function QuestionsList(props) {
           <input
             name="order"
             placeholder="Ordem"
+            type="number"
             onChange={(event) => handleChange(event)}
           />
           <button type="submit">Enviar</button>

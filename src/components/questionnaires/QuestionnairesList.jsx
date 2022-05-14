@@ -13,6 +13,7 @@ function QuestionnairesList(props) {
 
   const handleChange = (event) => {
     let data = newQuestionnaire;
+    console.log(event);
     data[event.target.name] = event.target.value;
     setNewQuestionnaire(data);
   };
@@ -40,11 +41,10 @@ function QuestionnairesList(props) {
             placeholder="Título"
             onChange={(event) => handleChange(event)}
           />
-          <input
-            name="public"
-            placeholder="Público"
-            onChange={(event) => handleChange(event)}
-          />
+          <select name="public" onChange={(event) => handleChange(event)}>
+            <option value="public">Público</option>
+            <option value="privado">Privado</option>
+          </select>
           <button type="submit">Enviar</button>
         </form>
       );

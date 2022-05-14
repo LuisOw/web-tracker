@@ -37,11 +37,10 @@ function AlternativesList(props) {
     if (newAlternativeView) {
       return (
         <form onSubmit={localSubmit}>
-          <input
-            name="type"
-            placeholder="Tipo"
-            onChange={(event) => handleChange(event)}
-          />
+          <select name="type" onChange={(event) => handleChange(event)}>
+            <option value="multiplaEscolha">Multipla escolha</option>
+            <option value="discursiva">Discursiva</option>
+          </select>
           <input
             name="text"
             placeholder="Texto da alternativa"
@@ -50,6 +49,7 @@ function AlternativesList(props) {
           <input
             name="value"
             placeholder="valor"
+            type="number"
             onChange={(event) => handleChange(event)}
           />
           <button type="submit">Enviar</button>
