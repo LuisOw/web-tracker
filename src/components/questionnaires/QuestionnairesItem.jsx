@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function QuestionItem(props) {
+function QuestionnairesItem(props) {
   const localDelete = () => {
     props.handleDelete(props.id);
   };
@@ -8,12 +8,11 @@ function QuestionItem(props) {
   return (
     <>
       <tr>
-        <th>{props.id}</th>
-        <th>{props.query}</th>
-        <th>{props.order}</th>
+        <th>{props.title}</th>
+        <th>{JSON.stringify(props.public)}</th>
         <th>
           <button onClick={() => props.navigate(props.id)}>
-            Exibir alternativas
+            Exibit questões
           </button>
         </th>
         <button onClick={localDelete}>Excluir</button>
@@ -22,4 +21,4 @@ function QuestionItem(props) {
   );
 }
 
-export default QuestionItem;
+export default QuestionnairesItem;
