@@ -5,11 +5,15 @@ import QuestionnariesItem from "./QuestionnairesItem";
 function QuestionnairesList(props) {
   const navigate = useNavigate();
   const [newQuestionnaireView, setNewQuestionnaireView] = useState(false);
+  const [editQuestionnaireView, setEditQuestionnaireView] = useState(false);
   const [newQuestionnaire, setNewQuestionnaire] = useState({
     researchId: props.researchId,
     title: "",
-    public: "",
+    public: "privado",
   });
+  const [id, setId] = useState("");
+  const [title, setTitle] = useState("");
+  const [_public, setPublic] = useState("privado");
 
   const handleChange = (event) => {
     let data = newQuestionnaire;
@@ -23,6 +27,22 @@ function QuestionnairesList(props) {
     props.add(newQuestionnaire);
   };
 
+  const submitEdit = (event) => {
+    event.preventDefault();
+    let data = newQuestionnaire;
+    data["title"] = title;
+    data["public"] = _public;
+    data["id"] = id;
+    setNewQuestionnaire(data);
+    setEditQuestionnaireView(false);
+    props.edit(newQuestionnaire);
+    setNewQuestionnaire({
+      researchId: props.researchId,
+      title: "",
+      public: "privado",
+    });
+  };
+
   const navigateBack = () => {
     navigate("/pesquisas");
   };
@@ -32,7 +52,7 @@ function QuestionnairesList(props) {
   };
 
   const showNewQuestionnaireView = () => {
-    if (newQuestionnaireView) {
+    if (newQuestionnaireView && !editQuestionnaireView) {
       return (
         <form onSubmit={localSubmit}>
           <input
@@ -41,8 +61,32 @@ function QuestionnairesList(props) {
             onChange={(event) => handleChange(event)}
           />
           <select name="public" onChange={(event) => handleChange(event)}>
-            <option value="public">Público</option>
             <option value="privado">Privado</option>
+            <option value="publico">Público</option>
+          </select>
+          <button type="submit">Enviar</button>
+        </form>
+      );
+    }
+  };
+
+  const showEditQuestionnaireView = () => {
+    if (!newQuestionnaireView && editQuestionnaireView) {
+      return (
+        <form onSubmit={submitEdit}>
+          <input
+            name="title"
+            placeholder="Título"
+            value={title}
+            onChange={(event) => setTitle(event.target.value)}
+          />
+          <select
+            name="public"
+            value={_public}
+            onChange={(event) => setPublic(event.target.value)}
+          >
+            <option value="privado">Privado</option>
+            <option value="publico">Público</option>
           </select>
           <button type="submit">Enviar</button>
         </form>
@@ -53,7 +97,12 @@ function QuestionnairesList(props) {
   const showAddQuestionnaireButton = () => {
     if (!newQuestionnaireView) {
       return (
-        <button onClick={() => setNewQuestionnaireView(true)}>
+        <button
+          onClick={() => {
+            setNewQuestionnaireView(true);
+            setEditQuestionnaireView(false);
+          }}
+        >
           Adicionar questionário
         </button>
       );
@@ -65,23 +114,31 @@ function QuestionnairesList(props) {
       <button onClick={navigateBack}>Voltar</button>
       <h2>Questionários</h2>
       <table>
-        <tr>
-          <th>Título</th>
-          <th>Público</th>
-          <th>Questões</th>
-        </tr>
-        {props.questionnaires.map((questionnaire) => (
-          <QuestionnariesItem
-            key={questionnaire.id}
-            id={questionnaire.id}
-            title={questionnaire.title}
-            public={questionnaire.public}
-            handleDelete={props.delete}
-            navigate={handleNavigate}
-          />
-        ))}
+        <tbody>
+          <tr>
+            <th>Título</th>
+            <th>Público</th>
+            <th>Questões</th>
+          </tr>
+          {props.questionnaires.map((questionnaire) => (
+            <QuestionnariesItem
+              key={questionnaire.id}
+              id={questionnaire.id}
+              title={questionnaire.title}
+              public={questionnaire.public}
+              handleDelete={props.delete}
+              navigate={handleNavigate}
+              setTitle={setTitle}
+              setPublic={setPublic}
+              setId={setId}
+              setNewQuestionnaireView={setNewQuestionnaireView}
+              setEditQuestionnaireView={setEditQuestionnaireView}
+            />
+          ))}
+        </tbody>
       </table>
       {showNewQuestionnaireView()}
+      {showEditQuestionnaireView()}
       {showAddQuestionnaireButton()}
     </>
   );

@@ -5,6 +5,14 @@ function QuestionnairesItem(props) {
     props.handleDelete(props.id);
   };
 
+  const handleEdit = (id, localTitle, localPublic) => {
+    props.setTitle(localTitle);
+    props.setPublic(localPublic);
+    props.setId(id);
+    props.setNewQuestionnaireView(false);
+    props.setEditQuestionnaireView(true);
+  };
+
   return (
     <>
       <tr>
@@ -15,7 +23,14 @@ function QuestionnairesItem(props) {
             Exibit questões
           </button>
         </th>
-        <button onClick={localDelete}>Excluir</button>
+        <th>
+          <button
+            onClick={() => handleEdit(props.id, props.title, props.public)}
+          >
+            Editar
+          </button>
+          <button onClick={localDelete}>Excluir</button>
+        </th>
       </tr>
     </>
   );

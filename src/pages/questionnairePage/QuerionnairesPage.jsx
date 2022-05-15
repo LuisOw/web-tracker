@@ -45,6 +45,30 @@ function QuestionnairesPage() {
     ]);
   };
 
+  const handleEdit = async (dataToSend) => {
+    const response = await fetch(
+      "http://127.0.0.1:8000/pesquisas/" +
+        researchId +
+        "/questionarios/" +
+        dataToSend.id,
+      {
+        method: "PUT",
+        headers: {
+          Authorizaton: "Bearer 1",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dataToSend),
+      }
+    );
+    const newData = questionnaires.map((questionnaire) => {
+      if (questionnaire.id === dataToSend.id) {
+        return dataToSend;
+      }
+      return questionnaire;
+    });
+    setQuestionnaires(newData);
+  };
+
   const handleDelete = async (id) => {
     const response = await fetch(url + id, {
       method: "DELETE",
@@ -73,6 +97,7 @@ function QuestionnairesPage() {
         researchId={researchId}
         add={handleSubmit}
         delete={handleDelete}
+        edit={handleEdit}
       />
     </>
   );
