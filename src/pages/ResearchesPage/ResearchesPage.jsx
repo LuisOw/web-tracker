@@ -24,21 +24,6 @@ const ResearchesPage = () => {
     logout();
   };
 
-  /*
-  const handlePost = async (dataToSend) => {
-    const response = await fetch("http://127.0.0.1:8000/pesquisas", {
-      method: "POST",
-      headers: {
-        Authorizaton: "Bearer 1",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(dataToSend),
-    });
-    const data = await response.json();
-    return data;
-  };
-  */
-
   const handleSubmit = async (dataToSend) => {
     const response = await fetch("http://127.0.0.1:8000/pesquisas", {
       method: "POST",
@@ -53,21 +38,24 @@ const ResearchesPage = () => {
   };
 
   const handleEdit = async (dataToSend) => {
-    const response = await fetch("http://127.0.0.1:8000/pesquisas", {
-      method: "POST",
-      headers: {
-        Authorizaton: "Bearer 1",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(dataToSend),
-    });
-    const data = await response.json();
-    let state = researches;
-    state.forEach((research) => {
-      if (research.id === data.id) {
-        research.title = data.title;
+    const response = await fetch(
+      "http://127.0.0.1:8000/pesquisas/" + dataToSend.id,
+      {
+        method: "PUT",
+        headers: {
+          Authorizaton: "Bearer 1",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dataToSend),
       }
+    );
+    const newData = researches.map((research) => {
+      if (research.id === dataToSend.id) {
+        return dataToSend;
+      }
+      return research;
     });
+    setResearches(newData);
   };
 
   const handleDelete = async (id) => {

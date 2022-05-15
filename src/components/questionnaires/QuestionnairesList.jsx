@@ -13,7 +13,6 @@ function QuestionnairesList(props) {
 
   const handleChange = (event) => {
     let data = newQuestionnaire;
-    console.log(event);
     data[event.target.name] = event.target.value;
     setNewQuestionnaire(data);
   };

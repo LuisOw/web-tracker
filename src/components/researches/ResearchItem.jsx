@@ -1,14 +1,15 @@
 import { useState } from "react";
 
 function ResearchesItem(props) {
-  const [editMode, setEditMode] = useState(false);
-
   const localDelete = () => {
     props.handleDelete(props.id);
   };
 
-  const localEdit = () => {
-    props.handleEdit();
+  const handleEdit = (id, localTitle) => {
+    props.setTitle(localTitle);
+    props.setId(id);
+    props.setNewResearchView(false);
+    props.setEditResearchView(true);
   };
 
   return (
@@ -29,7 +30,9 @@ function ResearchesItem(props) {
         </button>
       </th>
       <th>
-        <button>Editar</button>
+        <button onClick={() => handleEdit(props.id, props.title)}>
+          Editar
+        </button>
         <button onClick={localDelete}>Excluir</button>
       </th>
     </tr>
