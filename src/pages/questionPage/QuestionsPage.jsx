@@ -20,7 +20,7 @@ function QuestionsPage() {
           researchId +
           "/questionarios/" +
           questionnaireId +
-          "/questoes/",
+          "/questoes",
         {
           method: "GET",
           headers: { Authorizaton: "Bearer 1" },
@@ -53,6 +53,24 @@ function QuestionsPage() {
     ]);
   };
 
+  const handleEdit = async (dataToSend) => {
+    const response = await fetch(url + dataToSend.id, {
+      method: "PUT",
+      headers: {
+        Authorizaton: "Bearer 1",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(dataToSend),
+    });
+    const newData = questions.map((question) => {
+      if (question.id === dataToSend.id) {
+        return dataToSend;
+      }
+      return question;
+    });
+    setQuestions(newData);
+  };
+
   const handleDelete = async (id) => {
     const response = await fetch(url + id, {
       method: "DELETE",
@@ -82,6 +100,7 @@ function QuestionsPage() {
         questionnaireId={questionnaireId}
         add={handleSubmit}
         delete={handleDelete}
+        edit={handleEdit}
       />
     </>
   );
