@@ -24,7 +24,7 @@ function AlternativesPage() {
           questionnaireId +
           "/questoes/" +
           questionId +
-          "/alternativas/",
+          "/alternativas",
         {
           method: "GET",
           headers: { Authorizaton: "Bearer 1" },
@@ -58,6 +58,24 @@ function AlternativesPage() {
     ]);
   };
 
+  const handleEdit = async (dataToSend) => {
+    const response = await fetch(url + dataToSend.id, {
+      method: "PUT",
+      headers: {
+        Authorizaton: "Bearer 1",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(dataToSend),
+    });
+    const newData = alternatives.map((alternative) => {
+      if (alternative.id === dataToSend.id) {
+        return dataToSend;
+      }
+      return alternative;
+    });
+    setAlternatives(newData);
+  };
+
   const handleDelete = async (id) => {
     const response = await fetch(url + id, {
       method: "DELETE",
@@ -88,6 +106,7 @@ function AlternativesPage() {
         questionId={questionId}
         add={handleSubmit}
         delete={handleDelete}
+        edit={handleEdit}
       />
     </>
   );
