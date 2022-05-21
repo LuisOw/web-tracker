@@ -1,0 +1,27 @@
+.research_page_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 16px;
+    flex-direction: column;
+}
+
+.research_page_button {
+    background: none;
+    border: 2px solid black;
+    border-radius: 24px;
+    width: 120px;
+    padding: 8px;
+    transition: background-color .2s;
+    animation: mymove 10s linear infinite;
+}
+
+.research_page_button:hover {
+    background-color: purple;
+    color: white;
+    border-color: purple;
+}
+
+@keyframes mymove {
+  100% {transform: rotate(360deg);}
+}

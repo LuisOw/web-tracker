@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import "./ResearchItem.css";
+
 function ResearchesItem(props) {
   const localDelete = () => {
     props.handleDelete(props.id);
@@ -30,10 +32,15 @@ function ResearchesItem(props) {
         </button>
       </th>
       <th>
-        <button onClick={() => handleEdit(props.id, props.title)}>
+        <button
+          className="research_item_button_edit"
+          onClick={() => handleEdit(props.id, props.title)}
+        >
           Editar
         </button>
-        <button onClick={localDelete}>Excluir</button>
+        <button className="research_item_button_delete" onClick={localDelete}>
+          Excluir
+        </button>
       </th>
     </tr>
   );

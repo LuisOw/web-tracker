@@ -3,6 +3,8 @@ import ResearchesList from "../../components/researches/ResearchList";
 
 import { AuthContext } from "../../context/auth";
 
+import "./ResearchesPage.css";
+
 const ResearchesPage = () => {
   const { authenticated, logout } = useContext(AuthContext);
   const [loading, setLoading] = useState(true);
@@ -79,8 +81,10 @@ const ResearchesPage = () => {
   }
 
   return (
-    <>
-      <button onClick={handleLogout}>Logout</button>
+    <div className="research_page_container">
+      <button onClick={handleLogout} className="research_page_button">
+        Weeeee
+      </button>
       <h1>Suas pesquisas</h1>
       <ResearchesList
         researches={researches}
@@ -88,7 +92,7 @@ const ResearchesPage = () => {
         delete={handleDelete}
         edit={handleEdit}
       />
-    </>
+    </div>
   );
 };
 

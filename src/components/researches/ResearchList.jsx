@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 
 import ResearchItem from "./ResearchItem";
 
+import "./ResearchList.css";
+
 function ResearchesList(props) {
   const [newRresearchView, setNewResearchView] = useState(false);
   const [editResearchView, setEditResearchView] = useState(false);
@@ -69,6 +71,7 @@ function ResearchesList(props) {
     if (!newRresearchView) {
       return (
         <button
+          className="research_list_button"
           onClick={() => {
             setNewResearchView(true);
             setEditResearchView(false);
