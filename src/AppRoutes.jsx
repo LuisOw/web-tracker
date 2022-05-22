@@ -8,13 +8,14 @@ import {
   useParams,
 } from "react-router-dom";
 
-import LoginPage from "./pages/LoginPage/loginPage";
+import LoginPage from "./pages/authPages/LoginPage/LoginPage";
 
 import { AuthProvider, AuthContext } from "./context/auth";
 import ResearchesPage from "./pages/ResearchesPage/ResearchesPage";
-import QuestionnairesPage from "./pages/questionnairePage/QuerionnairesPage";
+import QuestionnairesPage from "./pages/questionnairePage/QuestionnairesPage";
 import QuestionsPage from "./pages/questionPage/QuestionsPage";
 import AlternativesPage from "./pages/alternativesPage/AlternativesPage";
+import SigninPage from "./pages/authPages/signinPage/SigninPage";
 
 const AppRoutes = () => {
   const Private = ({ children }) => {
@@ -34,7 +35,8 @@ const AppRoutes = () => {
     <Router>
       <AuthProvider>
         <Routes>
-          <Route exact path="/" element={<LoginPage />} />
+          <Route exact path="/" element={<SigninPage />} />
+          <Route exact path="/login" element={<LoginPage />} />
           <Route
             exact
             path="/pesquisas"

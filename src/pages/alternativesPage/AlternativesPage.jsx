@@ -1,72 +1,51 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
+import { httpFetch, httpFetchWithBody } from "../../services/Services";
+import { AuthContext } from "../../context/auth";
 import AlternativesList from "../../components/alternatives/AlternativesList";
 
 function AlternativesPage() {
+  const { token, logout } = useContext(AuthContext);
   const { researchId, questionnaireId, questionId } = useParams();
-  const url =
-    "http://127.0.0.1:8000/pesquisas/" +
-    researchId +
-    "/questionarios/" +
-    questionnaireId +
-    "/questoes/" +
-    questionId +
-    "/alternativas/";
+  const endpoint = `pesquisas/${researchId}/questionarios/${questionnaireId}/questoes/${questionId}/alternativas`;
   const [loading, setLoading] = useState(true);
   const [alternatives, setAlternatives] = useState([]);
 
   useEffect(() => {
     (async () => {
-      const response = await fetch(
-        "http://127.0.0.1:8000/pesquisas/" +
-          researchId +
-          "/questionarios/" +
-          questionnaireId +
-          "/questoes/" +
-          questionId +
-          "/alternativas",
-        {
-          method: "GET",
-          headers: { Authorizaton: "Bearer 1" },
-        }
-      );
-      const data = await response.json();
-      setAlternatives(data);
+      const response = await httpFetch(endpoint, token);
+      setAlternatives(response);
       setLoading(false);
     })();
   }, []);
 
   const handleSubmit = async (dataToSend) => {
-    const response = await fetch(url, {
-      method: "POST",
-      headers: {
-        Authorizaton: "Bearer 1",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(dataToSend),
+    const response = await httpFetchWithBody(endpoint, "POST", dataToSend, {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     });
-    const data = await response.json();
     setAlternatives((prev) => [
       ...prev,
       {
-        id: data.id,
-        questionId: data.questionId,
-        type: data.type,
-        text: data.text,
-        value: data.value,
+        id: response.id,
+        questionId: response.questionId,
+        type: response.type,
+        text: response.text,
+        value: response.value,
       },
     ]);
   };
 
   const handleEdit = async (dataToSend) => {
-    const response = await fetch(url + dataToSend.id, {
-      method: "PUT",
-      headers: {
-        Authorizaton: "Bearer 1",
+    const response = await httpFetchWithBody(
+      `${endpoint}/${dataToSend.id}`,
+      "PUT",
+      dataToSend,
+      {
         "Content-Type": "application/json",
-      },
-      body: JSON.stringify(dataToSend),
-    });
+        Authorization: `Bearer ${token}`,
+      }
+    );
     const newData = alternatives.map((alternative) => {
       if (alternative.id === dataToSend.id) {
         return dataToSend;
@@ -77,12 +56,14 @@ function AlternativesPage() {
   };
 
   const handleDelete = async (id) => {
-    const response = await fetch(url + id, {
-      method: "DELETE",
-      headers: {
-        Authorizaton: "Bearer 1",
-      },
-    });
+    const response = await httpFetchWithBody(
+      `${endpoint}/${id}`,
+      "DELETE",
+      null,
+      {
+        Authorization: `Bearer ${token}`,
+      }
+    );
     stateRemoval(id);
   };
 

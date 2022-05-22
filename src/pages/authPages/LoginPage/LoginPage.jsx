@@ -1,8 +1,8 @@
 import { useRef, useContext } from "react";
 
-import { AuthContext } from "../../context/auth";
+import { AuthContext } from "../../../context/auth";
 
-import "./styles.css";
+import "../AuthPages.css";
 
 const LoginPage = () => {
   const { authenticated, login } = useContext(AuthContext);

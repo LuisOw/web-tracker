@@ -2,22 +2,20 @@ import React, { useContext, useEffect, useState } from "react";
 import ResearchesList from "../../components/researches/ResearchList";
 
 import { AuthContext } from "../../context/auth";
+import { httpFetch, httpFetchWithBody } from "../../services/Services";
 
 import "./ResearchesPage.css";
 
 const ResearchesPage = () => {
-  const { authenticated, logout } = useContext(AuthContext);
+  const { token, logout } = useContext(AuthContext);
   const [loading, setLoading] = useState(true);
   const [researches, setResearches] = useState([]);
+  const endpoint = "pesquisas";
 
   useEffect(() => {
     (async () => {
-      const response = await fetch("http://127.0.0.1:8000/pesquisas", {
-        method: "GET",
-        headers: { Authorizaton: "Bearer 1" },
-      });
-      const data = await response.json();
-      setResearches(data);
+      const response = await httpFetch(endpoint, token);
+      setResearches(response);
       setLoading(false);
     })();
   }, []);
@@ -27,30 +25,25 @@ const ResearchesPage = () => {
   };
 
   const handleSubmit = async (dataToSend) => {
-    const response = await fetch("http://127.0.0.1:8000/pesquisas", {
-      method: "POST",
-      headers: {
-        Authorizaton: "Bearer 1",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(dataToSend),
+    const response = await httpFetchWithBody(endpoint, "POST", dataToSend, {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     });
-    const data = await response.json();
-    setResearches((prev) => [...prev, { id: data.id, title: data.title }]);
+    setResearches((prev) => [
+      ...prev,
+      { id: response.id, title: response.title },
+    ]);
   };
 
   const handleEdit = async (dataToSend) => {
-    const response = await fetch(
-      "http://127.0.0.1:8000/pesquisas/" + dataToSend.id,
-      {
-        method: "PUT",
-        headers: {
-          Authorizaton: "Bearer 1",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(dataToSend),
-      }
-    );
+    const response = await httpFetchWithBody(endpoint, "PUT", dataToSend, {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    });
+    setResearches((prev) => [
+      ...prev,
+      { id: response.id, title: response.title },
+    ]);
     const newData = researches.map((research) => {
       if (research.id === dataToSend.id) {
         return dataToSend;
@@ -61,12 +54,14 @@ const ResearchesPage = () => {
   };
 
   const handleDelete = async (id) => {
-    const response = await fetch("http://127.0.0.1:8000/pesquisas/" + id, {
-      method: "DELETE",
-      headers: {
-        Authorizaton: "Bearer 1",
-      },
-    });
+    const response = await httpFetchWithBody(
+      `${endpoint}/${id}`,
+      "DELETE",
+      null,
+      {
+        Authorization: `Bearer ${token}`,
+      }
+    );
     stateRemoval(id);
   };
 
