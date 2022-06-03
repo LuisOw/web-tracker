@@ -1,4 +1,4 @@
-const baseUrl = "https://tcc-cco-tracker.herokuapp.com/";
+const baseUrl = "https://tcc-cco-tracker.herokuapp.com";
 
 export const httpFetch = async (endpoint, token) => {
   const response = await fetch(`${baseUrl}/${endpoint}`, {
