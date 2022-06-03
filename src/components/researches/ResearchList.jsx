@@ -3,9 +3,14 @@ import { useNavigate } from "react-router-dom";
 
 import ResearchItem from "./ResearchItem";
 
+import "./ResearchList.css";
+
 function ResearchesList(props) {
   const [newRresearchView, setNewResearchView] = useState(false);
+  const [editResearchView, setEditResearchView] = useState(false);
   const [newResearch, setNewResearch] = useState({ title: "" });
+  const [title, setTitle] = useState("");
+  const [id, setId] = useState("");
   const navigate = useNavigate();
 
   const handleChange = (event) => {
@@ -18,10 +23,22 @@ function ResearchesList(props) {
     event.preventDefault();
     setNewResearchView(false);
     props.add(newResearch);
+    setNewResearch({ title: "" });
+  };
+
+  const submitEdit = (event) => {
+    event.preventDefault();
+    let data = newResearch;
+    data["title"] = title;
+    data["id"] = id;
+    setNewResearch(data);
+    setEditResearchView(false);
+    props.edit(newResearch);
+    setNewResearch({ title: "" });
   };
 
   const showNewResearchView = () => {
-    if (newRresearchView) {
+    if (newRresearchView && !editResearchView) {
       return (
         <form onSubmit={localSubmit}>
           <input
@@ -35,10 +52,32 @@ function ResearchesList(props) {
     }
   };
 
+  const showEditResearchView = () => {
+    if (!newRresearchView && editResearchView) {
+      return (
+        <form onSubmit={submitEdit}>
+          <input
+            name="title"
+            placeholder="Título"
+            value={title}
+            onChange={(event) => setTitle(event.target.value)}
+          />
+          <button type="submit">Enviar</button>
+        </form>
+      );
+    }
+  };
+
   const showAddResearchButton = () => {
     if (!newRresearchView) {
       return (
-        <button onClick={() => setNewResearchView(true)}>
+        <button
+          className="research_list_button"
+          onClick={() => {
+            setNewResearchView(true);
+            setEditResearchView(false);
+          }}
+        >
           Adicionar pesquisa
         </button>
       );
@@ -70,12 +109,16 @@ function ResearchesList(props) {
               navigate={navigateHandler}
               showModulesHandler={showModulesHandler}
               handleDelete={props.delete}
-              handleEdit={props.edit}
+              setTitle={setTitle}
+              setId={setId}
+              setNewResearchView={setNewResearchView}
+              setEditResearchView={setEditResearchView}
             />
           ))}
         </tbody>
       </table>
       {showNewResearchView()}
+      {showEditResearchView()}
       {showAddResearchButton()}
     </>
   );

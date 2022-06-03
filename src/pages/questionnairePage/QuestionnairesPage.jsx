@@ -2,19 +2,20 @@ import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { httpFetch, httpFetchWithBody } from "../../services/Services";
 import { AuthContext } from "../../context/auth";
-import AlternativesList from "../../components/alternatives/AlternativesList";
 
-function AlternativesPage() {
+import QuestionnairesList from "../../components/questionnaires/QuestionnairesList";
+
+function QuestionnairesPage() {
   const { token, logout } = useContext(AuthContext);
-  const { researchId, questionnaireId, questionId } = useParams();
-  const endpoint = `pesquisas/${researchId}/questionarios/${questionnaireId}/questoes/${questionId}/alternativas`;
+  const { researchId } = useParams();
+  const endpoint = `pesquisas/${researchId}/questionarios`;
   const [loading, setLoading] = useState(true);
-  const [alternatives, setAlternatives] = useState([]);
+  const [questionnaires, setQuestionnaires] = useState([]);
 
   useEffect(() => {
     (async () => {
       const response = await httpFetch(endpoint, token);
-      setAlternatives(response);
+      setQuestionnaires(response);
       setLoading(false);
     })();
   }, []);
@@ -24,14 +25,13 @@ function AlternativesPage() {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     });
-    setAlternatives((prev) => [
+    setQuestionnaires((prev) => [
       ...prev,
       {
         id: response.id,
-        questionId: response.questionId,
-        type: response.type,
-        text: response.text,
-        value: response.value,
+        researchId: response.researchId,
+        title: response.title,
+        public: response.public,
       },
     ]);
   };
@@ -46,13 +46,13 @@ function AlternativesPage() {
         Authorization: `Bearer ${token}`,
       }
     );
-    const newData = alternatives.map((alternative) => {
-      if (alternative.id === dataToSend.id) {
+    const newData = questionnaires.map((questionnaire) => {
+      if (questionnaire.id === dataToSend.id) {
         return dataToSend;
       }
-      return alternative;
+      return questionnaire;
     });
-    setAlternatives(newData);
+    setQuestionnaires(newData);
   };
 
   const handleDelete = async (id) => {
@@ -68,9 +68,9 @@ function AlternativesPage() {
   };
 
   const stateRemoval = (id) => {
-    let state = alternatives;
-    const newState = state.filter((alternative) => alternative.id !== id);
-    setAlternatives(newState);
+    let state = questionnaires;
+    const newState = state.filter((questionnaire) => questionnaire.id !== id);
+    setQuestionnaires(newState);
   };
 
   if (loading) {
@@ -79,12 +79,10 @@ function AlternativesPage() {
 
   return (
     <>
-      <h1>Alternativa da questão de id = {questionId}</h1>
-      <AlternativesList
-        alternatives={alternatives}
+      <h1>Questionário da pesquisa de id = {researchId}</h1>
+      <QuestionnairesList
+        questionnaires={questionnaires}
         researchId={researchId}
-        questionnaireId={questionnaireId}
-        questionId={questionId}
         add={handleSubmit}
         delete={handleDelete}
         edit={handleEdit}
@@ -93,4 +91,4 @@ function AlternativesPage() {
   );
 }
 
-export default AlternativesPage;
+export default QuestionnairesPage;

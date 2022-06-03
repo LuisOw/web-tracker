@@ -5,6 +5,14 @@ function QuestionItem(props) {
     props.handleDelete(props.id);
   };
 
+  const handleEdit = (id, localQuery, localOrder) => {
+    props.setQuery(localQuery);
+    props.setOrder(localOrder);
+    props.setId(id);
+    props.setNewQuestionView(false);
+    props.setEditQuestionView(true);
+  };
+
   return (
     <>
       <tr>
@@ -16,7 +24,14 @@ function QuestionItem(props) {
             Exibir alternativas
           </button>
         </th>
-        <button onClick={localDelete}>Excluir</button>
+        <th>
+          <button
+            onClick={() => handleEdit(props.id, props.query, props.order)}
+          >
+            Editar
+          </button>
+          <button onClick={localDelete}>Excluir</button>
+        </th>
       </tr>
     </>
   );
