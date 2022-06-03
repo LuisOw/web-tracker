@@ -36,14 +36,15 @@ const ResearchesPage = () => {
   };
 
   const handleEdit = async (dataToSend) => {
-    const response = await httpFetchWithBody(endpoint, "PUT", dataToSend, {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    });
-    setResearches((prev) => [
-      ...prev,
-      { id: response.id, title: response.title },
-    ]);
+    const response = await httpFetchWithBody(
+      `${endpoint}/${dataToSend.id}`,
+      "PUT",
+      dataToSend,
+      {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      }
+    );
     const newData = researches.map((research) => {
       if (research.id === dataToSend.id) {
         return dataToSend;

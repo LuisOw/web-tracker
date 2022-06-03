@@ -25,6 +25,11 @@ function QuestionnairesList(props) {
     event.preventDefault();
     setNewQuestionnaireView(false);
     props.add(newQuestionnaire);
+    setNewQuestionnaire({
+      researchId: props.researchId,
+      title: "",
+      public: "privado",
+    });
   };
 
   const submitEdit = (event) => {
@@ -61,7 +66,9 @@ function QuestionnairesList(props) {
             onChange={(event) => handleChange(event)}
           />
           <select name="public" onChange={(event) => handleChange(event)}>
-            <option value="privado">Privado</option>
+            <option defaultValue={"privado"} value="privado">
+              Privado
+            </option>
             <option value="publico">Público</option>
           </select>
           <button type="submit">Enviar</button>

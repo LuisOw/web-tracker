@@ -36,6 +36,12 @@ function AlternativesList(props) {
     event.preventDefault();
     setNewAlternativeView(false);
     props.add(newAlternative);
+    setNewAlternative({
+      questionId: props.questionId,
+      type: "discursiva",
+      text: "",
+      value: 0,
+    });
   };
 
   const submitEdit = (event) => {
@@ -60,7 +66,11 @@ function AlternativesList(props) {
     if (newAlternativeView && !editAlternativeView) {
       return (
         <form onSubmit={localSubmit}>
-          <select name="type" onChange={(event) => handleChange(event)}>
+          <select
+            defaultValue={"discursiva"}
+            name="type"
+            onChange={(event) => handleChange(event)}
+          >
             <option value="discursiva">Discursiva</option>
             <option value="multiplaEscolha">Multipla escolha</option>
           </select>

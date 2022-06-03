@@ -40,6 +40,11 @@ function QuestionsList(props) {
     event.preventDefault();
     setNewQuestionView(false);
     props.add(newQuestion);
+    setNewQuestion({
+      questionnaireId: props.questionnaireId,
+      query: "",
+      order: 0,
+    });
   };
 
   const submitEdit = (event) => {

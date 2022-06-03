@@ -23,6 +23,7 @@ function ResearchesList(props) {
     event.preventDefault();
     setNewResearchView(false);
     props.add(newResearch);
+    setNewResearch({ title: "" });
   };
 
   const submitEdit = (event) => {
