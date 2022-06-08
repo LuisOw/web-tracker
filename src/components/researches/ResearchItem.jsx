@@ -17,7 +17,7 @@ function ResearchesItem(props) {
       <td>{props.title}</td>
       <td>
         <button
-          className="button_view"
+          className="button button_view"
           onClick={() => props.showModulesHandler()}
         >
           Exibir módulos ativos
@@ -25,7 +25,7 @@ function ResearchesItem(props) {
       </td>
       <td>
         <button
-          className="button_view"
+          className="button button_view"
           onClick={() => {
             props.navigate(props.id);
           }}
@@ -36,12 +36,12 @@ function ResearchesItem(props) {
       <td>
         <div className="flex-container">
           <button
-            className="button_edit"
+            className="button button_edit"
             onClick={() => handleEdit(props.id, props.title)}
           >
             Editar
           </button>
-          <button className="button_delete" onClick={localDelete}>
+          <button className="button button_delete" onClick={localDelete}>
             Excluir
           </button>
         </div>

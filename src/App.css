@@ -13,6 +13,8 @@
     max-width: 960px;
     min-width: 560px;
     text-align: center;
+    margin-bottom: 15px;
+    margin-top: 15px;
   }
   
 .table td, .table th {
@@ -38,11 +40,12 @@
     justify-content: space-evenly;
 }
 
-.button_edit, .button_delete {
+.button {
+    margin: 2px;
     background: none;
     border: 2px solid black;
     border-radius: 6px;
-    width: 80px;
+    min-width: 80px;
     padding: 4px;
     transition: background-color .2s;
 }
@@ -53,45 +56,16 @@
     border-color: orange;
 }
 
-.button_delete {
-    margin-left: 2px;
-    background: none;
-    border: 2px solid black;
-    border-radius: 6px;
-    width: 80px;
-    padding: 4px;
-    transition: background-color .2s;
-}
-
 .button_delete:hover {
     background-color: red;
     color: white;
     border-color: red;
 }
 
-.button_view {
-    margin-left: 2px;
-    background: none;
-    border: 2px solid black;
-    border-radius: 6px;
-    padding: 4px;
-    transition: background-color .2s;
-}
-
 .button_view:hover {
     background-color: purple;
     color: white;
     border-color: purple;
-}
-
-.button_add {
-    margin-left: 2px;
-    background: none;
-    border: 2px solid black;
-    border-radius: 6px;
-    padding: 8px;
-    width: 200px;
-    transition: background-color .2s;
 }
 
 .button_add:hover {

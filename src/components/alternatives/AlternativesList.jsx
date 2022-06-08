@@ -126,7 +126,7 @@ function AlternativesList(props) {
     if (!newAlternativeView) {
       return (
         <button
-          className="button_add"
+          className="button button_add"
           onClick={() => {
             setNewAlternativeView(true);
             setEditAlternativeView(false);

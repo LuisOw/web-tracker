@@ -23,30 +23,38 @@ const SigninPage = () => {
   };
 
   return (
-    <div id="login">
-      <h1 className="title">Criação de conta</h1>
+    <div className="box">
+      <h1>Criação de conta</h1>
       <form className="form" onSubmit={submitHandler}>
-        <div className="field">
-          <label htmlFor="text">Nome completo</label>
-          <input type="text" name="name" id="name" ref={nameInputRef} />
-        </div>
-        <div className="field">
-          <label htmlFor="email">Email</label>
-          <input type="email" name="email" id="email" ref={usernameInputRef} />
-        </div>
-        <div className="field">
-          <label htmlFor="password">Senha</label>
-          <input
-            type="password"
-            name="password"
-            id="password"
-            ref={passwordInputRef}
-          />
-        </div>
-        <div className="actions">
-          <button type="submit">Criar</button>
-        </div>
+        <input
+          className="credentials"
+          type="text"
+          name="name"
+          id="name"
+          placeholder="Nome"
+          ref={nameInputRef}
+        />
+        <input
+          className="credentials"
+          type="email"
+          name="email"
+          id="email"
+          placeholder="Email"
+          ref={usernameInputRef}
+        />
+        <input
+          className="credentials"
+          type="password"
+          name="password"
+          id="password"
+          placeholder="Senha"
+          ref={passwordInputRef}
+        />
+        <button className="btn" type="submit">
+          Criar
+        </button>
       </form>
+      <br />
     </div>
   );
 };

@@ -20,7 +20,7 @@ function QuestionnairesItem(props) {
         <td>{JSON.stringify(props.public)}</td>
         <td>
           <button
-            className="button_view"
+            className="button button_view"
             onClick={() => props.navigate(props.id)}
           >
             Exibit questões
@@ -29,12 +29,12 @@ function QuestionnairesItem(props) {
         <td>
           <div className="flex-container">
             <button
-              className="button_edit"
+              className="button button_edit"
               onClick={() => handleEdit(props.id, props.title, props.public)}
             >
               Editar
             </button>
-            <button className="button_delete" onClick={localDelete}>
+            <button className="button button_delete" onClick={localDelete}>
               Excluir
             </button>
           </div>

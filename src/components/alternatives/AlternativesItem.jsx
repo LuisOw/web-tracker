@@ -18,18 +18,19 @@ function AlternativesItem(props) {
       <td>{props.text}</td>
       <td>{props.value}</td>
       <td>
-        <button
-          className="button_edit"
-          onClick={() => {
-            handleEdit(props.id, props.type, props.text, props.value);
-          }}
-        >
-          Editar
-        </button>
-        <button className="button_delete" onClick={localDelete}>
-          {" "}
-          Excluir
-        </button>
+        <div className="flex-container">
+          <button
+            className="button button_edit"
+            onClick={() => {
+              handleEdit(props.id, props.type, props.text, props.value);
+            }}
+          >
+            Editar
+          </button>
+          <button className="button button_delete" onClick={localDelete}>
+            Excluir
+          </button>
+        </div>
       </td>
     </tr>
   );

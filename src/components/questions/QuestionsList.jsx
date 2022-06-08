@@ -111,7 +111,7 @@ function QuestionsList(props) {
     if (!newQuestionView) {
       return (
         <button
-          className="button_add"
+          className="button button_add"
           onClick={() => {
             setNewQuestionView(true);
             setEditQuestionView(false);

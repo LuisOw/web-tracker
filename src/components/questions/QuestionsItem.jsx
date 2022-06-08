@@ -21,22 +21,24 @@ function QuestionItem(props) {
         <td>{props.order}</td>
         <td>
           <button
-            className="button_view"
+            className="button button_view"
             onClick={() => props.navigate(props.id)}
           >
             Exibir alternativas
           </button>
         </td>
         <td>
-          <button
-            className="button_edit"
-            onClick={() => handleEdit(props.id, props.query, props.order)}
-          >
-            Editar
-          </button>
-          <button className="button_delete" onClick={localDelete}>
-            Excluir
-          </button>
+          <div className="flex-container">
+            <button
+              className="button button_edit"
+              onClick={() => handleEdit(props.id, props.query, props.order)}
+            >
+              Editar
+            </button>
+            <button className="button button_delete" onClick={localDelete}>
+              Excluir
+            </button>
+          </div>
         </td>
       </tr>
     </>

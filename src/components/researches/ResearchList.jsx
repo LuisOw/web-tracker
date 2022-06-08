@@ -70,7 +70,7 @@ function ResearchesList(props) {
     if (!newRresearchView) {
       return (
         <button
-          className="button_add"
+          className="button button_add"
           onClick={() => {
             setNewResearchView(true);
             setEditResearchView(false);

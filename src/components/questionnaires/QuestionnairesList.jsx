@@ -105,7 +105,7 @@ function QuestionnairesList(props) {
     if (!newQuestionnaireView) {
       return (
         <button
-          className="button_add"
+          className="button button_add"
           onClick={() => {
             setNewQuestionnaireView(true);
             setEditQuestionnaireView(false);
@@ -125,7 +125,7 @@ function QuestionnairesList(props) {
         <tbody>
           <tr>
             <th>Título</th>
-            <th>Público</th>
+            <th>Visibilidade</th>
             <th>Questões</th>
             <th>Ações</th>
           </tr>
