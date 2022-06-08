@@ -30,3 +30,49 @@
     text-align: center;
     margin-top: 0.5rem;
 }
+
+body{
+    width:100%; 
+    text-align:center;
+    margin: 20px 0px 20px 0px;   
+  }
+  
+  
+h1{
+    font-size:1.5em;
+    color:#525252;
+  }
+  
+.box{
+    background:white;
+    width:300px;
+    border-radius:6px;
+    margin: 0 auto 0 auto;
+    border: purple 4px solid; 
+  }
+  
+.credentials{
+    background:#ecf0f1;
+    border: #ccc 1px solid;
+    padding: 8px;
+    width:250px;
+    margin-top:10px;
+    border-radius:4px;
+  }
+  
+.btn{
+    background: none;
+    border: 2px solid black;
+    border-radius: 6px;
+    padding: 8px;
+    width: 200px;
+    transition: background-color .2s;
+    
+    margin-top:20px;
+  }
+  
+.btn:hover{
+    background-color: purple;
+    color: white;
+    border-color: purple;
+  }

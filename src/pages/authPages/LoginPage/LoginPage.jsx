@@ -21,26 +21,30 @@ const LoginPage = () => {
   };
 
   return (
-    <div id="login">
-      <h1 className="title">Login do sistema</h1>
+    <div className="box">
+      <h1>Login do sistema</h1>
       <form className="form" onSubmit={submitHandler}>
-        <div className="field">
-          <label htmlFor="email">Email</label>
-          <input type="email" name="email" id="email" ref={emailInputRef} />
-        </div>
-        <div className="field">
-          <label htmlFor="password">Senha</label>
-          <input
-            type="password"
-            name="password"
-            id="password"
-            ref={passwordInputRef}
-          />
-        </div>
-        <div className="actions">
-          <button type="submit">Entrar</button>
-        </div>
+        <input
+          className="credentials"
+          type="email"
+          name="email"
+          id="email"
+          placeholder="Email"
+          ref={emailInputRef}
+        />
+        <input
+          className="credentials"
+          type="password"
+          name="password"
+          id="password"
+          placeholder="Senha"
+          ref={passwordInputRef}
+        />
+        <button className="btn" type="submit">
+          Entrar
+        </button>
       </form>
+      <br />
     </div>
   );
 };

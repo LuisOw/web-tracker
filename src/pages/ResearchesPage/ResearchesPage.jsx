@@ -77,7 +77,7 @@ const ResearchesPage = () => {
   }
 
   return (
-    <div className="research_page_container">
+    <div className="page_container">
       <button onClick={handleLogout} className="research_page_button">
         Weeeee
       </button>

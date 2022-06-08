@@ -105,6 +105,7 @@ function QuestionnairesList(props) {
     if (!newQuestionnaireView) {
       return (
         <button
+          className="button button_add"
           onClick={() => {
             setNewQuestionnaireView(true);
             setEditQuestionnaireView(false);
@@ -120,12 +121,13 @@ function QuestionnairesList(props) {
     <>
       <button onClick={navigateBack}>Voltar</button>
       <h2>Questionários</h2>
-      <table>
+      <table className="table">
         <tbody>
           <tr>
             <th>Título</th>
-            <th>Público</th>
+            <th>Visibilidade</th>
             <th>Questões</th>
+            <th>Ações</th>
           </tr>
           {props.questionnaires.map((questionnaire) => (
             <QuestionnariesItem

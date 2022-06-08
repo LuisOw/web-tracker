@@ -78,7 +78,7 @@ function QuestionnairesPage() {
   }
 
   return (
-    <>
+    <div className="page_container">
       <h1>Questionário da pesquisa de id = {researchId}</h1>
       <QuestionnairesList
         questionnaires={questionnaires}
@@ -87,7 +87,7 @@ function QuestionnairesPage() {
         delete={handleDelete}
         edit={handleEdit}
       />
-    </>
+    </div>
   );
 }
 
