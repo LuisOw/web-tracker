@@ -1,11 +1,3 @@
-.research_page_container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 16px;
-    flex-direction: column;
-}
-
 .research_page_button {
     background: none;
     border: 2px solid black;

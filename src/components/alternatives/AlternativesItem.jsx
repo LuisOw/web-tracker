@@ -14,19 +14,23 @@ function AlternativesItem(props) {
 
   return (
     <tr>
-      <th>{props.type}</th>
-      <th>{props.text}</th>
-      <th>{props.value}</th>
-      <th>
+      <td>{props.type}</td>
+      <td>{props.text}</td>
+      <td>{props.value}</td>
+      <td>
         <button
+          className="button_edit"
           onClick={() => {
             handleEdit(props.id, props.type, props.text, props.value);
           }}
         >
           Editar
         </button>
-        <button onClick={localDelete}> Excluir</button>
-      </th>
+        <button className="button_delete" onClick={localDelete}>
+          {" "}
+          Excluir
+        </button>
+      </td>
     </tr>
   );
 }

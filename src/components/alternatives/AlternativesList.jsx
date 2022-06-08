@@ -126,6 +126,7 @@ function AlternativesList(props) {
     if (!newAlternativeView) {
       return (
         <button
+          className="button_add"
           onClick={() => {
             setNewAlternativeView(true);
             setEditAlternativeView(false);
@@ -140,12 +141,13 @@ function AlternativesList(props) {
   return (
     <>
       <button onClick={navigateBack}>Voltar</button>
-      <table>
+      <table className="table">
         <tbody>
           <tr>
             <th>Tipo</th>
             <th>Texto</th>
             <th>Valor</th>
+            <th>Ações</th>
           </tr>
           {props.alternatives.map((alternative) => (
             <AlternativesItem

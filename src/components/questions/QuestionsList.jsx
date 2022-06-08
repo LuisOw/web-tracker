@@ -111,6 +111,7 @@ function QuestionsList(props) {
     if (!newQuestionView) {
       return (
         <button
+          className="button_add"
           onClick={() => {
             setNewQuestionView(true);
             setEditQuestionView(false);
@@ -125,13 +126,14 @@ function QuestionsList(props) {
   return (
     <>
       <button onClick={navigateBack}>Voltar</button>
-      <table>
+      <table className="table">
         <tbody>
           <tr>
             <th>ID</th>
             <th>Pergunta</th>
             <th>Ordem</th>
             <th>Alternativas</th>
+            <th>Ações</th>
           </tr>
           {props.questions.map((question) => (
             <QuestionItem

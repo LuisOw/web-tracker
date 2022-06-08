@@ -16,21 +16,29 @@ function QuestionnairesItem(props) {
   return (
     <>
       <tr>
-        <th>{props.title}</th>
-        <th>{JSON.stringify(props.public)}</th>
-        <th>
-          <button onClick={() => props.navigate(props.id)}>
+        <td>{props.title}</td>
+        <td>{JSON.stringify(props.public)}</td>
+        <td>
+          <button
+            className="button_view"
+            onClick={() => props.navigate(props.id)}
+          >
             Exibit questões
           </button>
-        </th>
-        <th>
-          <button
-            onClick={() => handleEdit(props.id, props.title, props.public)}
-          >
-            Editar
-          </button>
-          <button onClick={localDelete}>Excluir</button>
-        </th>
+        </td>
+        <td>
+          <div className="flex-container">
+            <button
+              className="button_edit"
+              onClick={() => handleEdit(props.id, props.title, props.public)}
+            >
+              Editar
+            </button>
+            <button className="button_delete" onClick={localDelete}>
+              Excluir
+            </button>
+          </div>
+        </td>
       </tr>
     </>
   );

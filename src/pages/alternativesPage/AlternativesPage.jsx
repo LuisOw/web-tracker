@@ -78,7 +78,7 @@ function AlternativesPage() {
   }
 
   return (
-    <>
+    <div className="page_container">
       <h1>Alternativa da questão de id = {questionId}</h1>
       <AlternativesList
         alternatives={alternatives}
@@ -89,7 +89,7 @@ function AlternativesPage() {
         delete={handleDelete}
         edit={handleEdit}
       />
-    </>
+    </div>
   );
 }
 

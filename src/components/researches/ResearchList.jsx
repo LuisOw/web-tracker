@@ -3,8 +3,6 @@ import { useNavigate } from "react-router-dom";
 
 import ResearchItem from "./ResearchItem";
 
-import "./ResearchList.css";
-
 function ResearchesList(props) {
   const [newRresearchView, setNewResearchView] = useState(false);
   const [editResearchView, setEditResearchView] = useState(false);
@@ -72,7 +70,7 @@ function ResearchesList(props) {
     if (!newRresearchView) {
       return (
         <button
-          className="research_list_button"
+          className="button_add"
           onClick={() => {
             setNewResearchView(true);
             setEditResearchView(false);
@@ -92,12 +90,13 @@ function ResearchesList(props) {
 
   return (
     <>
-      <table>
+      <table className="table">
         <tbody>
           <tr>
             <th>Título</th>
             <th>Módulos ativos</th>
             <th>Questionários</th>
+            <th>Ações</th>
           </tr>
           {props.researches.map((research) => (
             <ResearchItem

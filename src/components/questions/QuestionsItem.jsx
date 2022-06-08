@@ -16,22 +16,28 @@ function QuestionItem(props) {
   return (
     <>
       <tr>
-        <th>{props.id}</th>
-        <th>{props.query}</th>
-        <th>{props.order}</th>
-        <th>
-          <button onClick={() => props.navigate(props.id)}>
+        <td>{props.id}</td>
+        <td>{props.query}</td>
+        <td>{props.order}</td>
+        <td>
+          <button
+            className="button_view"
+            onClick={() => props.navigate(props.id)}
+          >
             Exibir alternativas
           </button>
-        </th>
-        <th>
+        </td>
+        <td>
           <button
+            className="button_edit"
             onClick={() => handleEdit(props.id, props.query, props.order)}
           >
             Editar
           </button>
-          <button onClick={localDelete}>Excluir</button>
-        </th>
+          <button className="button_delete" onClick={localDelete}>
+            Excluir
+          </button>
+        </td>
       </tr>
     </>
   );

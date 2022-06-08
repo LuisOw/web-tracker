@@ -1,7 +1,5 @@
 import { useState } from "react";
 
-import "./ResearchItem.css";
-
 function ResearchesItem(props) {
   const localDelete = () => {
     props.handleDelete(props.id);
@@ -16,32 +14,38 @@ function ResearchesItem(props) {
 
   return (
     <tr>
-      <th>{props.title}</th>
-      <th>
-        <button onClick={() => props.showModulesHandler()}>
+      <td>{props.title}</td>
+      <td>
+        <button
+          className="button_view"
+          onClick={() => props.showModulesHandler()}
+        >
           Exibir módulos ativos
         </button>
-      </th>
-      <th>
+      </td>
+      <td>
         <button
+          className="button_view"
           onClick={() => {
             props.navigate(props.id);
           }}
         >
           Exibir questionários
         </button>
-      </th>
-      <th>
-        <button
-          className="research_item_button_edit"
-          onClick={() => handleEdit(props.id, props.title)}
-        >
-          Editar
-        </button>
-        <button className="research_item_button_delete" onClick={localDelete}>
-          Excluir
-        </button>
-      </th>
+      </td>
+      <td>
+        <div className="flex-container">
+          <button
+            className="button_edit"
+            onClick={() => handleEdit(props.id, props.title)}
+          >
+            Editar
+          </button>
+          <button className="button_delete" onClick={localDelete}>
+            Excluir
+          </button>
+        </div>
+      </td>
     </tr>
   );
 }
