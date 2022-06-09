@@ -59,7 +59,6 @@ const SigninPage = () => {
       <button className="button button_view" onClick={() => navigate("/login")}>
         Login
       </button>
-      <br />
     </div>
   );
 };

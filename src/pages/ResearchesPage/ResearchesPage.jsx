@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import Layout from "../../components/Layout/Layout";
 import ResearchesList from "../../components/researches/ResearchList";
 
 import { AuthContext } from "../../context/auth";
@@ -77,15 +78,17 @@ const ResearchesPage = () => {
   }
 
   return (
-    <div className="page_container">
-      <h1>Suas pesquisas</h1>
-      <ResearchesList
-        researches={researches}
-        add={handleSubmit}
-        delete={handleDelete}
-        edit={handleEdit}
-      />
-    </div>
+    <Layout>
+      <div className="page_container">
+        <h1>Suas pesquisas</h1>
+        <ResearchesList
+          researches={researches}
+          add={handleSubmit}
+          delete={handleDelete}
+          edit={handleEdit}
+        />
+      </div>
+    </Layout>
   );
 };
 

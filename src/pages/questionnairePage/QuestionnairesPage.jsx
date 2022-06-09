@@ -4,6 +4,7 @@ import { httpFetch, httpFetchWithBody } from "../../services/Services";
 import { AuthContext } from "../../context/auth";
 
 import QuestionnairesList from "../../components/questionnaires/QuestionnairesList";
+import Layout from "../../components/Layout/Layout";
 
 function QuestionnairesPage() {
   const { token, logout } = useContext(AuthContext);
@@ -78,15 +79,17 @@ function QuestionnairesPage() {
   }
 
   return (
-    <div className="page_container">
-      <QuestionnairesList
-        questionnaires={questionnaires}
-        researchId={researchId}
-        add={handleSubmit}
-        delete={handleDelete}
-        edit={handleEdit}
-      />
-    </div>
+    <Layout>
+      <div className="page_container">
+        <QuestionnairesList
+          questionnaires={questionnaires}
+          researchId={researchId}
+          add={handleSubmit}
+          delete={handleDelete}
+          edit={handleEdit}
+        />
+      </div>
+    </Layout>
   );
 }
 

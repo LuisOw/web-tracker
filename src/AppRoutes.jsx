@@ -35,7 +35,6 @@ const AppRoutes = () => {
   return (
     <Router>
       <AuthProvider>
-        <Navbar />
         <Routes>
           <Route exact path="/" element={<SigninPage />} />
           <Route exact path="/login" element={<LoginPage />} />

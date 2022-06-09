@@ -3,6 +3,7 @@ import { useParams } from "react-router";
 import { httpFetch, httpFetchWithBody } from "../../services/Services";
 import { AuthContext } from "../../context/auth";
 import QuestionsList from "../../components/questions/QuestionsList";
+import Layout from "../../components/Layout/Layout";
 
 function QuestionsPage() {
   const { token, logout } = useContext(AuthContext);
@@ -77,16 +78,18 @@ function QuestionsPage() {
   }
 
   return (
-    <div className="page_container">
-      <QuestionsList
-        questions={questions}
-        researchId={researchId}
-        questionnaireId={questionnaireId}
-        add={handleSubmit}
-        delete={handleDelete}
-        edit={handleEdit}
-      />
-    </div>
+    <Layout>
+      <div className="page_container">
+        <QuestionsList
+          questions={questions}
+          researchId={researchId}
+          questionnaireId={questionnaireId}
+          add={handleSubmit}
+          delete={handleDelete}
+          edit={handleEdit}
+        />
+      </div>
+    </Layout>
   );
 }
 

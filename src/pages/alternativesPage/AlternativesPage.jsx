@@ -3,6 +3,7 @@ import { useParams } from "react-router";
 import { httpFetch, httpFetchWithBody } from "../../services/Services";
 import { AuthContext } from "../../context/auth";
 import AlternativesList from "../../components/alternatives/AlternativesList";
+import Layout from "../../components/Layout/Layout";
 
 function AlternativesPage() {
   const { token, logout } = useContext(AuthContext);
@@ -78,18 +79,19 @@ function AlternativesPage() {
   }
 
   return (
-    <div className="page_container">
-      <h1>Alternativa da questão de id = {questionId}</h1>
-      <AlternativesList
-        alternatives={alternatives}
-        researchId={researchId}
-        questionnaireId={questionnaireId}
-        questionId={questionId}
-        add={handleSubmit}
-        delete={handleDelete}
-        edit={handleEdit}
-      />
-    </div>
+    <Layout>
+      <div className="page_container">
+        <AlternativesList
+          alternatives={alternatives}
+          researchId={researchId}
+          questionnaireId={questionnaireId}
+          questionId={questionId}
+          add={handleSubmit}
+          delete={handleDelete}
+          edit={handleEdit}
+        />
+      </div>
+    </Layout>
   );
 }
 

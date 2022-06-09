@@ -8,7 +8,8 @@ h1{
     width:300px;
     border-radius:6px;
     margin: 0 auto 0 auto;
-    border: purple 4px solid; 
+    border: purple 4px solid;
+    padding-bottom: 16px;
   }
   
 .credentials{
