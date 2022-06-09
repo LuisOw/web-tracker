@@ -48,10 +48,6 @@ function QuestionnairesList(props) {
     });
   };
 
-  const navigateBack = () => {
-    navigate("/pesquisas");
-  };
-
   const handleNavigate = (id) => {
     navigate("/pesquisas/" + props.researchId + "/questionarios/" + id);
   };
@@ -119,7 +115,6 @@ function QuestionnairesList(props) {
 
   return (
     <>
-      <button onClick={navigateBack}>Voltar</button>
       <h2>Questionários</h2>
       <table className="table">
         <tbody>

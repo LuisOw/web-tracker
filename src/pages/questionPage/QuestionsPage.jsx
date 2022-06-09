@@ -78,7 +78,6 @@ function QuestionsPage() {
 
   return (
     <div className="page_container">
-      <h1>Questão do questionário de id = {questionnaireId}</h1>
       <QuestionsList
         questions={questions}
         researchId={researchId}

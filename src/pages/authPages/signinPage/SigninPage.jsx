@@ -1,4 +1,5 @@
 import { useRef, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { AuthContext } from "../../../context/auth";
 
@@ -6,6 +7,7 @@ import "../AuthPages.css";
 
 const SigninPage = () => {
   const { signin } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const nameInputRef = useRef();
   const usernameInputRef = useRef();
@@ -54,6 +56,9 @@ const SigninPage = () => {
           Criar
         </button>
       </form>
+      <button className="button button_view" onClick={() => navigate("/login")}>
+        Login
+      </button>
       <br />
     </div>
   );

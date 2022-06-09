@@ -17,15 +17,6 @@ function AlternativesList(props) {
   const [text, setText] = useState("");
   const [value, setValue] = useState("");
 
-  const navigateBack = () => {
-    navigate(
-      "/pesquisas/" +
-        props.researchId +
-        "/questionarios/" +
-        props.questionnaireId
-    );
-  };
-
   const handleChange = (event) => {
     let data = newAlternative;
     data[event.target.name] = event.target.value;
@@ -140,7 +131,7 @@ function AlternativesList(props) {
 
   return (
     <>
-      <button onClick={navigateBack}>Voltar</button>
+      <h2>Alternativas</h2>
       <table className="table">
         <tbody>
           <tr>

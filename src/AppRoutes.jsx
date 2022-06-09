@@ -16,6 +16,7 @@ import QuestionnairesPage from "./pages/questionnairePage/QuestionnairesPage";
 import QuestionsPage from "./pages/questionPage/QuestionsPage";
 import AlternativesPage from "./pages/alternativesPage/AlternativesPage";
 import SigninPage from "./pages/authPages/signinPage/SigninPage";
+import Navbar from "./components/Navbar/Navbar";
 
 const AppRoutes = () => {
   const Private = ({ children }) => {
@@ -34,6 +35,7 @@ const AppRoutes = () => {
   return (
     <Router>
       <AuthProvider>
+        <Navbar />
         <Routes>
           <Route exact path="/" element={<SigninPage />} />
           <Route exact path="/login" element={<LoginPage />} />

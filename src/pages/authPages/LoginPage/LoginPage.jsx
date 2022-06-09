@@ -1,4 +1,5 @@
 import { useRef, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { AuthContext } from "../../../context/auth";
 
@@ -6,6 +7,7 @@ import "../AuthPages.css";
 
 const LoginPage = () => {
   const { authenticated, login } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
@@ -44,6 +46,9 @@ const LoginPage = () => {
           Entrar
         </button>
       </form>
+      <button className="button button_view" onClick={() => navigate("/")}>
+        Criar conta
+      </button>
       <br />
     </div>
   );

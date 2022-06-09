@@ -15,10 +15,6 @@ function QuestionsList(props) {
   const [query, setQuery] = useState("");
   const [order, setOrder] = useState(0);
 
-  const navigateBack = () => {
-    navigate("/pesquisas/" + props.researchId + "/questionarios");
-  };
-
   const handleNavigate = (id) => {
     navigate(
       "/pesquisas/" +
@@ -125,7 +121,7 @@ function QuestionsList(props) {
 
   return (
     <>
-      <button onClick={navigateBack}>Voltar</button>
+      <h2>Questões</h2>
       <table className="table">
         <tbody>
           <tr>

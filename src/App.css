@@ -1,3 +1,11 @@
+body{
+    width:100%; 
+    text-align:center;
+    margin: 20px 0px 20px 0px;   
+    margin-top: 70px;
+    font-family: 'Roboto', sans-serif;
+  }
+
 .page_container {
     display: flex;
     justify-content: center;
@@ -7,7 +15,6 @@
 }
 
 .table {
-    font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 75vw;
     max-width: 960px;
@@ -72,4 +79,30 @@
     background-color: green;
     color: white;
     border-color: green;
+}
+
+.navbar {
+    background-color: purple;
+    width: 100%;
+    top: 0;
+    height: 50px;
+    left: 0;
+    position: fixed;
+    z-index: 1;
+}
+
+.button_navbar {
+    position: absolute;
+    padding: 10px;
+    background: none;
+    border: none;
+    height: 100%;
+    right: 0;
+    font-size: medium;
+    color: white;
+}
+
+.button_navbar:hover {
+    background-color: white;
+    color: purple;
 }
