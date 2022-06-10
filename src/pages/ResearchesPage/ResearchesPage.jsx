@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import Layout from "../../components/Layout/Layout";
+import Layout from "../../components/layout/Layout";
 import ResearchesList from "../../components/researches/ResearchList";
 
 import { AuthContext } from "../../context/auth";

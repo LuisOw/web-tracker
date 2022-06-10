@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import ResearchItem from "./ResearchItem";
+import Modal from "../modal/Modal";
 
 function ResearchesList(props) {
   const [newRresearchView, setNewResearchView] = useState(false);
@@ -10,6 +11,15 @@ function ResearchesList(props) {
   const [title, setTitle] = useState("");
   const [id, setId] = useState("");
   const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const handleChange = (event) => {
     let data = newResearch;
@@ -19,7 +29,7 @@ function ResearchesList(props) {
 
   const localSubmit = (event) => {
     event.preventDefault();
-    setNewResearchView(false);
+    setOpen(false);
     props.add(newResearch);
     setNewResearch({ title: "" });
   };
@@ -36,18 +46,16 @@ function ResearchesList(props) {
   };
 
   const showNewResearchView = () => {
-    if (newRresearchView && !editResearchView) {
-      return (
-        <form onSubmit={localSubmit}>
-          <input
-            name="title"
-            placeholder="Título"
-            onChange={(event) => handleChange(event)}
-          />
-          <button type="submit">Enviar</button>
-        </form>
-      );
-    }
+    return (
+      <form onSubmit={localSubmit}>
+        <input
+          name="title"
+          placeholder="Título"
+          onChange={(event) => handleChange(event)}
+        />
+        <button type="submit">Enviar</button>
+      </form>
+    );
   };
 
   const showEditResearchView = () => {
@@ -67,19 +75,18 @@ function ResearchesList(props) {
   };
 
   const showAddResearchButton = () => {
-    if (!newRresearchView) {
-      return (
-        <button
-          className="button button_add"
-          onClick={() => {
-            setNewResearchView(true);
-            setEditResearchView(false);
-          }}
-        >
-          Adicionar pesquisa
-        </button>
-      );
-    }
+    return (
+      <button
+        className="button button_add"
+        onClick={() => {
+          setNewResearchView(true);
+          setEditResearchView(false);
+          handleClickOpen();
+        }}
+      >
+        Adicionar pesquisa
+      </button>
+    );
   };
 
   const navigateHandler = (id) => {
@@ -90,6 +97,7 @@ function ResearchesList(props) {
 
   return (
     <>
+      {showAddResearchButton()}
       <table className="table">
         <tbody>
           <tr>
@@ -116,9 +124,13 @@ function ResearchesList(props) {
           ))}
         </tbody>
       </table>
-      {showNewResearchView()}
+      <Modal
+        open={open}
+        handleClose={handleClose}
+        pageName={"pesquisa"}
+        data={showNewResearchView}
+      />
       {showEditResearchView()}
-      {showAddResearchButton()}
     </>
   );
 }

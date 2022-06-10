@@ -3,7 +3,7 @@ import { useParams } from "react-router";
 import { httpFetch, httpFetchWithBody } from "../../services/Services";
 import { AuthContext } from "../../context/auth";
 import AlternativesList from "../../components/alternatives/AlternativesList";
-import Layout from "../../components/Layout/Layout";
+import Layout from "../../components/layout/Layout";
 
 function AlternativesPage() {
   const { token, logout } = useContext(AuthContext);

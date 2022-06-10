@@ -4,7 +4,7 @@ import { httpFetch, httpFetchWithBody } from "../../services/Services";
 import { AuthContext } from "../../context/auth";
 
 import QuestionnairesList from "../../components/questionnaires/QuestionnairesList";
-import Layout from "../../components/Layout/Layout";
+import Layout from "../../components/layout/Layout";
 
 function QuestionnairesPage() {
   const { token, logout } = useContext(AuthContext);
