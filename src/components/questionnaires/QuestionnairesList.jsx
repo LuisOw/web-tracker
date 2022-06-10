@@ -1,10 +1,4 @@
-import {
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  TextField,
-} from "@mui/material";
+import { FormControl, TextField } from "@mui/material";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import QuestionnariesItem from "./QuestionnairesItem";
@@ -89,14 +83,13 @@ function QuestionnairesList(props) {
             fullWidth
             size="small"
           />
-          <Select
-            name="public"
-            onChange={(event) => handleChange(event)}
-            label="Visibilidade"
-          >
-            <MenuItem value="privado">Privado</MenuItem>
-            <MenuItem value="publico">Público</MenuItem>
-          </Select>
+          <select name="public" onChange={(event) => handleChange(event)}>
+            <option defaultValue={"privado"} value="privado">
+              Privado
+            </option>
+            <option value="publico">Público</option>
+          </select>
+          <button type="submit">Enviar</button>
         </FormControl>
       </>
     );
@@ -104,7 +97,7 @@ function QuestionnairesList(props) {
 
   const showEditQuestionnaireView = () => {
     return (
-      <form>
+      <FormControl>
         <TextField
           name="title"
           placeholder="Título"
@@ -119,7 +112,7 @@ function QuestionnairesList(props) {
           <option value="privado">Privado</option>
           <option value="publico">Público</option>
         </select>
-      </form>
+      </FormControl>
     );
   };
 

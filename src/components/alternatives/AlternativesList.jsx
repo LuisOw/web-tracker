@@ -1,11 +1,9 @@
+import { FormControl, TextField } from "@mui/material";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import AlternativesItem from "./AlternativesItem";
+import Modal from "../modal/Modal";
 
 function AlternativesList(props) {
-  const navigate = useNavigate();
-  const [newAlternativeView, setNewAlternativeView] = useState(false);
-  const [editAlternativeView, setEditAlternativeView] = useState(false);
   const [newAlternative, setNewAlternative] = useState({
     questionId: props.questionId,
     type: "discursiva",
@@ -16,6 +14,24 @@ function AlternativesList(props) {
   const [type, setType] = useState("");
   const [text, setText] = useState("");
   const [value, setValue] = useState("");
+  const [addOpen, setAddOpen] = useState(false);
+  const [editOpen, setEditOpen] = useState(false);
+
+  const handleClickAddOpen = () => {
+    setAddOpen(true);
+  };
+
+  const handlAddClose = () => {
+    setAddOpen(false);
+  };
+
+  const handleClickEditOpen = () => {
+    setEditOpen(true);
+  };
+
+  const handlEditClose = () => {
+    setEditOpen(false);
+  };
 
   const handleChange = (event) => {
     let data = newAlternative;
@@ -25,7 +41,7 @@ function AlternativesList(props) {
 
   const localSubmit = (event) => {
     event.preventDefault();
-    setNewAlternativeView(false);
+    setAddOpen(false);
     props.add(newAlternative);
     setNewAlternative({
       questionId: props.questionId,
@@ -37,13 +53,13 @@ function AlternativesList(props) {
 
   const submitEdit = (event) => {
     event.preventDefault();
+    setEditOpen(false);
     let data = newAlternative;
     data["type"] = type;
     data["text"] = text;
     data["value"] = value;
     data["id"] = id;
     setNewAlternative(data);
-    setEditAlternativeView(false);
     props.edit(newAlternative);
     setNewAlternative({
       questionId: props.questionId,
@@ -54,9 +70,9 @@ function AlternativesList(props) {
   };
 
   const showAlternativeView = () => {
-    if (newAlternativeView && !editAlternativeView) {
-      return (
-        <form onSubmit={localSubmit}>
+    return (
+      <>
+        <FormControl>
           <select
             defaultValue={"discursiva"}
             name="type"
@@ -65,73 +81,81 @@ function AlternativesList(props) {
             <option value="discursiva">Discursiva</option>
             <option value="multiplaEscolha">Multipla escolha</option>
           </select>
-          <input
+          <TextField
             name="text"
             placeholder="Texto da alternativa"
             onChange={(event) => handleChange(event)}
+            variant="outlined"
+            margin="dense"
+            fullWidth
+            size="small"
           />
-          <input
+          <TextField
             name="value"
             placeholder="valor"
             type="number"
             onChange={(event) => handleChange(event)}
+            variant="outlined"
+            margin="dense"
+            fullWidth
+            size="small"
           />
-          <button type="submit">Enviar</button>
-        </form>
-      );
-    }
+        </FormControl>
+      </>
+    );
   };
 
   const showEditAlternativeView = () => {
-    if (!newAlternativeView && editAlternativeView) {
-      return (
-        <form onSubmit={submitEdit}>
-          <select
-            name="type"
-            value={type}
-            onChange={(event) => setType(event.target.value)}
-          >
-            <option value="discursiva">Discursiva</option>
-            <option value="multiplaEscolha">Multipla escolha</option>
-          </select>
-          <input
-            name="text"
-            placeholder="Texto da alternativa"
-            value={text}
-            onChange={(event) => setText(event.target.value)}
-          />
-          <input
-            name="value"
-            placeholder="valor"
-            type="number"
-            value={value}
-            onChange={(event) => setValue(event.target.value)}
-          />
-          <button type="submit">Enviar</button>
-        </form>
-      );
-    }
+    return (
+      <FormControl>
+        <select
+          name="type"
+          value={type}
+          onChange={(event) => setType(event.target.value)}
+        >
+          <option value="discursiva">Discursiva</option>
+          <option value="multiplaEscolha">Multipla escolha</option>
+        </select>
+        <TextField
+          name="text"
+          placeholder="Texto da alternativa"
+          value={text}
+          onChange={(event) => setText(event.target.value)}
+          margin="dense"
+          fullWidth
+          size="small"
+        />
+        <TextField
+          name="value"
+          placeholder="valor"
+          type="number"
+          value={value}
+          onChange={(event) => setValue(event.target.value)}
+          margin="dense"
+          fullWidth
+          size="small"
+        />
+      </FormControl>
+    );
   };
 
   const showAddAlternativeButton = () => {
-    if (!newAlternativeView) {
-      return (
-        <button
-          className="button button_add"
-          onClick={() => {
-            setNewAlternativeView(true);
-            setEditAlternativeView(false);
-          }}
-        >
-          Adicionar alternativa
-        </button>
-      );
-    }
+    return (
+      <button
+        className="button button_add"
+        onClick={() => {
+          handleClickAddOpen();
+        }}
+      >
+        Adicionar alternativa
+      </button>
+    );
   };
 
   return (
     <>
       <h2>Alternativas</h2>
+      {showAddAlternativeButton()}
       <table className="table">
         <tbody>
           <tr>
@@ -152,15 +176,25 @@ function AlternativesList(props) {
               setText={setText}
               setValue={setValue}
               setId={setId}
-              setNewAlternativeView={setNewAlternativeView}
-              setEditAlternativeView={setEditAlternativeView}
+              modalOpen={handleClickEditOpen}
             />
           ))}
         </tbody>
       </table>
-      {showAlternativeView()}
-      {showEditAlternativeView()}
-      {showAddAlternativeButton()}
+      <Modal
+        open={addOpen}
+        handleClose={handlAddClose}
+        pageName={"pesquisa"}
+        data={showAlternativeView}
+        submit={localSubmit}
+      />
+      <Modal
+        open={editOpen}
+        handleClose={handlEditClose}
+        pageName={"pesquisa"}
+        data={showEditAlternativeView}
+        submit={submitEdit}
+      />
     </>
   );
 }

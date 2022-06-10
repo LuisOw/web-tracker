@@ -8,8 +8,7 @@ function AlternativesItem(props) {
     props.setText(localText);
     props.setValue(localValue);
     props.setId(id);
-    props.setNewAlternativeView(false);
-    props.setEditAlternativeView(true);
+    props.modalOpen();
   };
 
   return (

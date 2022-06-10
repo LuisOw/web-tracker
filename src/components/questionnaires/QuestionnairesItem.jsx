@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 function QuestionnairesItem(props) {
   const localDelete = () => {
     props.handleDelete(props.id);

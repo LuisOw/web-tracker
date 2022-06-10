@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import QuestionItem from "./QuestionsItem";
+import Modal from "../modal/Modal";
+
+import { TextField } from "@mui/material";
 
 function QuestionsList(props) {
   const navigate = useNavigate();
-  const [newQuestionView, setNewQuestionView] = useState(false);
-  const [edtiQuestionView, setEditQuestionView] = useState(false);
   const [newQuestion, setNewQuestion] = useState({
     questionnaireId: props.questionnaireId,
     query: "",
@@ -14,6 +15,24 @@ function QuestionsList(props) {
   const [id, setId] = useState("");
   const [query, setQuery] = useState("");
   const [order, setOrder] = useState(0);
+  const [addOpen, setAddOpen] = useState(false);
+  const [editOpen, setEditOpen] = useState(false);
+
+  const handleClickAddOpen = () => {
+    setAddOpen(true);
+  };
+
+  const handlAddClose = () => {
+    setAddOpen(false);
+  };
+
+  const handleClickEditOpen = () => {
+    setEditOpen(true);
+  };
+
+  const handlEditClose = () => {
+    setEditOpen(false);
+  };
 
   const handleNavigate = (id) => {
     navigate(
@@ -34,7 +53,7 @@ function QuestionsList(props) {
 
   const localSubmit = (event) => {
     event.preventDefault();
-    setNewQuestionView(false);
+    setAddOpen(false);
     props.add(newQuestion);
     setNewQuestion({
       questionnaireId: props.questionnaireId,
@@ -45,12 +64,12 @@ function QuestionsList(props) {
 
   const submitEdit = (event) => {
     event.preventDefault();
+    setEditOpen(false);
     let data = newQuestion;
     data["query"] = query;
     data["order"] = order;
     data["id"] = id;
     setNewQuestion(data);
-    setEditQuestionView(false);
     props.edit(newQuestion);
     setNewQuestion({
       questionnaireId: props.questionnaireId,
@@ -60,68 +79,76 @@ function QuestionsList(props) {
   };
 
   const showQuestionView = () => {
-    if (newQuestionView && !edtiQuestionView) {
-      return (
-        <form onSubmit={localSubmit}>
-          <input
-            name="query"
-            placeholder="Pergunta"
-            onChange={(event) => handleChange(event)}
-          />
-          <input
-            name="order"
-            placeholder="Ordem"
-            type="number"
-            onChange={(event) => handleChange(event)}
-          />
-          <button type="submit">Enviar</button>
-        </form>
-      );
-    }
+    return (
+      <form>
+        <TextField
+          name="query"
+          placeholder="Pergunta"
+          onChange={(event) => handleChange(event)}
+          variant="outlined"
+          margin="dense"
+          fullWidth
+          size="small"
+        />
+        <TextField
+          name="order"
+          placeholder="Ordem"
+          type="number"
+          onChange={(event) => handleChange(event)}
+          variant="outlined"
+          margin="dense"
+          fullWidth
+          size="small"
+        />
+      </form>
+    );
   };
 
   const showEditQuestionView = () => {
-    if (!newQuestionView && edtiQuestionView) {
-      return (
-        <form onSubmit={submitEdit}>
-          <input
-            name="query"
-            placeholder="Pergunta"
-            value={query}
-            onChange={(event) => setQuery(event.target.value)}
-          />
-          <input
-            name="order"
-            placeholder="Ordem"
-            type="number"
-            value={order}
-            onChange={(event) => setOrder(event.target.value)}
-          />
-          <button type="submit">Enviar</button>
-        </form>
-      );
-    }
+    return (
+      <form>
+        <TextField
+          name="query"
+          placeholder="Pergunta"
+          value={query}
+          onChange={(event) => setQuery(event.target.value)}
+          variant="outlined"
+          margin="dense"
+          fullWidth
+          size="small"
+        />
+        <TextField
+          name="order"
+          placeholder="Ordem"
+          type="number"
+          value={order}
+          onChange={(event) => setOrder(event.target.value)}
+          variant="outlined"
+          margin="dense"
+          fullWidth
+          size="small"
+        />
+      </form>
+    );
   };
 
   const showAddQuestionButton = () => {
-    if (!newQuestionView) {
-      return (
-        <button
-          className="button button_add"
-          onClick={() => {
-            setNewQuestionView(true);
-            setEditQuestionView(false);
-          }}
-        >
-          Adicionar questão
-        </button>
-      );
-    }
+    return (
+      <button
+        className="button button_add"
+        onClick={() => {
+          handleClickAddOpen();
+        }}
+      >
+        Adicionar questão
+      </button>
+    );
   };
 
   return (
     <>
       <h2>Questões</h2>
+      {showAddQuestionButton()}
       <table className="table">
         <tbody>
           <tr>
@@ -142,15 +169,25 @@ function QuestionsList(props) {
               setQuery={setQuery}
               setOrder={setOrder}
               setId={setId}
-              setNewQuestionView={setNewQuestionView}
-              setEditQuestionView={setEditQuestionView}
+              modalOpen={handleClickEditOpen}
             />
           ))}
         </tbody>
       </table>
-      {showQuestionView()}
-      {showEditQuestionView()}
-      {showAddQuestionButton()}
+      <Modal
+        open={addOpen}
+        handleClose={handlAddClose}
+        pageName={"pesquisa"}
+        data={showQuestionView}
+        submit={localSubmit}
+      />
+      <Modal
+        open={editOpen}
+        handleClose={handlEditClose}
+        pageName={"pesquisa"}
+        data={showEditQuestionView}
+        submit={submitEdit}
+      />
     </>
   );
 }

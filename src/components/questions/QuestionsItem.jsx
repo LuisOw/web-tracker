@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 function QuestionItem(props) {
   const localDelete = () => {
     props.handleDelete(props.id);
@@ -9,8 +7,7 @@ function QuestionItem(props) {
     props.setQuery(localQuery);
     props.setOrder(localOrder);
     props.setId(id);
-    props.setNewQuestionView(false);
-    props.setEditQuestionView(true);
+    props.modalOpen();
   };
 
   return (
