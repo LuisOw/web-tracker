@@ -8,8 +8,7 @@ function ResearchesItem(props) {
   const handleEdit = (id, localTitle) => {
     props.setTitle(localTitle);
     props.setId(id);
-    props.setNewResearchView(false);
-    props.setEditResearchView(true);
+    props.modalOpen();
   };
 
   return (

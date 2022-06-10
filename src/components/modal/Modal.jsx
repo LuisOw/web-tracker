@@ -6,7 +6,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
-export default function Modal({ open, handleClose, pageName, data }) {
+export default function Modal({ open, handleClose, pageName, data, submit }) {
   return (
     <div>
       <Dialog
@@ -21,7 +21,7 @@ export default function Modal({ open, handleClose, pageName, data }) {
         <DialogContent>{data()}</DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancelar</Button>
-          <Button onClick={handleClose} autoFocus>
+          <Button onClick={submit} autoFocus>
             Enviar
           </Button>
         </DialogActions>

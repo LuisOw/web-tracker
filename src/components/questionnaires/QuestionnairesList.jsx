@@ -1,11 +1,17 @@
+import {
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+} from "@mui/material";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import QuestionnariesItem from "./QuestionnairesItem";
+import Modal from "../modal/Modal";
 
 function QuestionnairesList(props) {
   const navigate = useNavigate();
-  const [newQuestionnaireView, setNewQuestionnaireView] = useState(false);
-  const [editQuestionnaireView, setEditQuestionnaireView] = useState(false);
   const [newQuestionnaire, setNewQuestionnaire] = useState({
     researchId: props.researchId,
     title: "",
@@ -14,6 +20,24 @@ function QuestionnairesList(props) {
   const [id, setId] = useState("");
   const [title, setTitle] = useState("");
   const [_public, setPublic] = useState("privado");
+  const [addOpen, setAddOpen] = useState(false);
+  const [editOpen, setEditOpen] = useState(false);
+
+  const handleClickAddOpen = () => {
+    setAddOpen(true);
+  };
+
+  const handlAddClose = () => {
+    setAddOpen(false);
+  };
+
+  const handleClickEditOpen = () => {
+    setEditOpen(true);
+  };
+
+  const handlEditClose = () => {
+    setEditOpen(false);
+  };
 
   const handleChange = (event) => {
     let data = newQuestionnaire;
@@ -23,7 +47,7 @@ function QuestionnairesList(props) {
 
   const localSubmit = (event) => {
     event.preventDefault();
-    setNewQuestionnaireView(false);
+    setAddOpen(false);
     props.add(newQuestionnaire);
     setNewQuestionnaire({
       researchId: props.researchId,
@@ -34,12 +58,12 @@ function QuestionnairesList(props) {
 
   const submitEdit = (event) => {
     event.preventDefault();
+    setEditOpen(false);
     let data = newQuestionnaire;
     data["title"] = title;
     data["public"] = _public;
     data["id"] = id;
     setNewQuestionnaire(data);
-    setEditQuestionnaireView(false);
     props.edit(newQuestionnaire);
     setNewQuestionnaire({
       researchId: props.researchId,
@@ -53,69 +77,69 @@ function QuestionnairesList(props) {
   };
 
   const showNewQuestionnaireView = () => {
-    if (newQuestionnaireView && !editQuestionnaireView) {
-      return (
-        <form onSubmit={localSubmit}>
-          <input
+    return (
+      <>
+        <FormControl>
+          <TextField
             name="title"
             placeholder="Título"
             onChange={(event) => handleChange(event)}
+            variant="outlined"
+            margin="dense"
+            fullWidth
+            size="small"
           />
-          <select name="public" onChange={(event) => handleChange(event)}>
-            <option defaultValue={"privado"} value="privado">
-              Privado
-            </option>
-            <option value="publico">Público</option>
-          </select>
-          <button type="submit">Enviar</button>
-        </form>
-      );
-    }
+          <Select
+            name="public"
+            onChange={(event) => handleChange(event)}
+            label="Visibilidade"
+          >
+            <MenuItem value="privado">Privado</MenuItem>
+            <MenuItem value="publico">Público</MenuItem>
+          </Select>
+        </FormControl>
+      </>
+    );
   };
 
   const showEditQuestionnaireView = () => {
-    if (!newQuestionnaireView && editQuestionnaireView) {
-      return (
-        <form onSubmit={submitEdit}>
-          <input
-            name="title"
-            placeholder="Título"
-            value={title}
-            onChange={(event) => setTitle(event.target.value)}
-          />
-          <select
-            name="public"
-            value={_public}
-            onChange={(event) => setPublic(event.target.value)}
-          >
-            <option value="privado">Privado</option>
-            <option value="publico">Público</option>
-          </select>
-          <button type="submit">Enviar</button>
-        </form>
-      );
-    }
+    return (
+      <form>
+        <TextField
+          name="title"
+          placeholder="Título"
+          value={title}
+          onChange={(event) => setTitle(event.target.value)}
+        />
+        <select
+          name="public"
+          value={_public}
+          onChange={(event) => setPublic(event.target.value)}
+        >
+          <option value="privado">Privado</option>
+          <option value="publico">Público</option>
+        </select>
+      </form>
+    );
   };
 
   const showAddQuestionnaireButton = () => {
-    if (!newQuestionnaireView) {
-      return (
-        <button
-          className="button button_add"
-          onClick={() => {
-            setNewQuestionnaireView(true);
-            setEditQuestionnaireView(false);
-          }}
-        >
-          Adicionar questionário
-        </button>
-      );
-    }
+    return (
+      <button
+        className="button button_add"
+        onClick={() => {
+          handleClickAddOpen();
+        }}
+      >
+        Adicionar questionário
+      </button>
+    );
   };
 
   return (
     <>
       <h2>Questionários</h2>
+      {showAddQuestionnaireButton()}
       <table className="table">
         <tbody>
           <tr>
@@ -135,15 +159,25 @@ function QuestionnairesList(props) {
               setTitle={setTitle}
               setPublic={setPublic}
               setId={setId}
-              setNewQuestionnaireView={setNewQuestionnaireView}
-              setEditQuestionnaireView={setEditQuestionnaireView}
+              modalOpen={handleClickEditOpen}
             />
           ))}
         </tbody>
       </table>
-      {showNewQuestionnaireView()}
-      {showEditQuestionnaireView()}
-      {showAddQuestionnaireButton()}
+      <Modal
+        open={addOpen}
+        handleClose={handlAddClose}
+        pageName={"pesquisa"}
+        data={showNewQuestionnaireView}
+        submit={localSubmit}
+      />
+      <Modal
+        open={editOpen}
+        handleClose={handlEditClose}
+        pageName={"pesquisa"}
+        data={showEditQuestionnaireView}
+        submit={submitEdit}
+      />
     </>
   );
 }

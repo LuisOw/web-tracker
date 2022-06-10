@@ -3,22 +3,30 @@ import { useNavigate } from "react-router-dom";
 
 import ResearchItem from "./ResearchItem";
 import Modal from "../modal/Modal";
+import { TextField } from "@mui/material";
 
 function ResearchesList(props) {
-  const [newRresearchView, setNewResearchView] = useState(false);
-  const [editResearchView, setEditResearchView] = useState(false);
   const [newResearch, setNewResearch] = useState({ title: "" });
   const [title, setTitle] = useState("");
   const [id, setId] = useState("");
   const navigate = useNavigate();
-  const [open, setOpen] = useState(false);
+  const [addOpen, setAddOpen] = useState(false);
+  const [editOpen, setEditOpen] = useState(false);
 
-  const handleClickOpen = () => {
-    setOpen(true);
+  const handleClickAddOpen = () => {
+    setAddOpen(true);
   };
 
-  const handleClose = () => {
-    setOpen(false);
+  const handlAddClose = () => {
+    setAddOpen(false);
+  };
+
+  const handleClickEditOpen = () => {
+    setEditOpen(true);
+  };
+
+  const handlEditClose = () => {
+    setEditOpen(false);
   };
 
   const handleChange = (event) => {
@@ -29,49 +37,53 @@ function ResearchesList(props) {
 
   const localSubmit = (event) => {
     event.preventDefault();
-    setOpen(false);
+    setAddOpen(false);
     props.add(newResearch);
     setNewResearch({ title: "" });
   };
 
   const submitEdit = (event) => {
     event.preventDefault();
+    setEditOpen(false);
     let data = newResearch;
     data["title"] = title;
     data["id"] = id;
     setNewResearch(data);
-    setEditResearchView(false);
     props.edit(newResearch);
     setNewResearch({ title: "" });
   };
 
   const showNewResearchView = () => {
     return (
-      <form onSubmit={localSubmit}>
-        <input
+      <form>
+        <TextField
           name="title"
           placeholder="Título"
           onChange={(event) => handleChange(event)}
+          variant="outlined"
+          margin="dense"
+          fullWidth
+          size="small"
         />
-        <button type="submit">Enviar</button>
       </form>
     );
   };
 
   const showEditResearchView = () => {
-    if (!newRresearchView && editResearchView) {
-      return (
-        <form onSubmit={submitEdit}>
-          <input
-            name="title"
-            placeholder="Título"
-            value={title}
-            onChange={(event) => setTitle(event.target.value)}
-          />
-          <button type="submit">Enviar</button>
-        </form>
-      );
-    }
+    return (
+      <form>
+        <TextField
+          name="title"
+          placeholder="Título"
+          value={title}
+          onChange={(event) => setTitle(event.target.value)}
+          variant="outlined"
+          margin="dense"
+          fullWidth
+          size="small"
+        />
+      </form>
+    );
   };
 
   const showAddResearchButton = () => {
@@ -79,9 +91,7 @@ function ResearchesList(props) {
       <button
         className="button button_add"
         onClick={() => {
-          setNewResearchView(true);
-          setEditResearchView(false);
-          handleClickOpen();
+          handleClickAddOpen();
         }}
       >
         Adicionar pesquisa
@@ -118,19 +128,25 @@ function ResearchesList(props) {
               handleDelete={props.delete}
               setTitle={setTitle}
               setId={setId}
-              setNewResearchView={setNewResearchView}
-              setEditResearchView={setEditResearchView}
+              modalOpen={handleClickEditOpen}
             />
           ))}
         </tbody>
       </table>
       <Modal
-        open={open}
-        handleClose={handleClose}
+        open={addOpen}
+        handleClose={handlAddClose}
         pageName={"pesquisa"}
         data={showNewResearchView}
+        submit={localSubmit}
       />
-      {showEditResearchView()}
+      <Modal
+        open={editOpen}
+        handleClose={handlEditClose}
+        pageName={"pesquisa"}
+        data={showEditResearchView}
+        submit={submitEdit}
+      />
     </>
   );
 }

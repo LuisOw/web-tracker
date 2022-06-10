@@ -9,8 +9,7 @@ function QuestionnairesItem(props) {
     props.setTitle(localTitle);
     props.setPublic(localPublic);
     props.setId(id);
-    props.setNewQuestionnaireView(false);
-    props.setEditQuestionnaireView(true);
+    props.modalOpen();
   };
 
   return (
