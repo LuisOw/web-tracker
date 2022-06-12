@@ -89,7 +89,6 @@ function QuestionnairesList(props) {
             </option>
             <option value="publico">Público</option>
           </select>
-          <button type="submit">Enviar</button>
         </FormControl>
       </>
     );
@@ -160,16 +159,18 @@ function QuestionnairesList(props) {
       <Modal
         open={addOpen}
         handleClose={handlAddClose}
-        pageName={"pesquisa"}
+        pageName={"Questionário"}
         data={showNewQuestionnaireView}
         submit={localSubmit}
+        operation={"Adicionar"}
       />
       <Modal
         open={editOpen}
         handleClose={handlEditClose}
-        pageName={"pesquisa"}
+        pageName={"Questionário"}
         data={showEditQuestionnaireView}
         submit={submitEdit}
+        operation={"Editar"}
       />
     </>
   );

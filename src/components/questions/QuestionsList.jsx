@@ -177,16 +177,18 @@ function QuestionsList(props) {
       <Modal
         open={addOpen}
         handleClose={handlAddClose}
-        pageName={"pesquisa"}
+        pageName={"Questão"}
         data={showQuestionView}
         submit={localSubmit}
+        operation={"Adicionar"}
       />
       <Modal
         open={editOpen}
         handleClose={handlEditClose}
-        pageName={"pesquisa"}
+        pageName={"Questão"}
         data={showEditQuestionView}
         submit={submitEdit}
+        operation={"Editar"}
       />
     </>
   );

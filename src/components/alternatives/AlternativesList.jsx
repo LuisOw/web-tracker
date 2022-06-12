@@ -184,16 +184,18 @@ function AlternativesList(props) {
       <Modal
         open={addOpen}
         handleClose={handlAddClose}
-        pageName={"pesquisa"}
+        pageName={"Alternativa"}
         data={showAlternativeView}
         submit={localSubmit}
+        operation={"Adicionar"}
       />
       <Modal
         open={editOpen}
         handleClose={handlEditClose}
-        pageName={"pesquisa"}
+        pageName={"Alternativa"}
         data={showEditAlternativeView}
         submit={submitEdit}
+        operation={"Editar"}
       />
     </>
   );

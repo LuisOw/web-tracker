@@ -16,7 +16,6 @@ import QuestionnairesPage from "./pages/questionnairePage/QuestionnairesPage";
 import QuestionsPage from "./pages/questionPage/QuestionsPage";
 import AlternativesPage from "./pages/alternativesPage/AlternativesPage";
 import SigninPage from "./pages/authPages/signinPage/SigninPage";
-import Navbar from "./components/navbar/Navbar";
 
 const AppRoutes = () => {
   const Private = ({ children }) => {

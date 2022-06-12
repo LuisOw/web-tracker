@@ -139,6 +139,7 @@ function ResearchesList(props) {
         pageName={"pesquisa"}
         data={showNewResearchView}
         submit={localSubmit}
+        operation={"Adicionar"}
       />
       <Modal
         open={editOpen}
@@ -146,6 +147,7 @@ function ResearchesList(props) {
         pageName={"pesquisa"}
         data={showEditResearchView}
         submit={submitEdit}
+        operation={"Editar"}
       />
     </>
   );

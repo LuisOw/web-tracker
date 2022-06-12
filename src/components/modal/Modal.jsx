@@ -6,7 +6,14 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
-export default function Modal({ open, handleClose, pageName, data, submit }) {
+export default function Modal({
+  open,
+  handleClose,
+  pageName,
+  data,
+  submit,
+  operation,
+}) {
   return (
     <div>
       <Dialog
@@ -16,12 +23,12 @@ export default function Modal({ open, handleClose, pageName, data, submit }) {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {`Adicionar ${pageName}`}
+          {`${operation} ${pageName}`}
         </DialogTitle>
         <DialogContent>{data()}</DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancelar</Button>
-          <Button onClick={submit} autoFocus>
+          <Button onClick={submit} variant="contained" autoFocus>
             Enviar
           </Button>
         </DialogActions>
