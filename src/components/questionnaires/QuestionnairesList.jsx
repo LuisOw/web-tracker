@@ -67,7 +67,7 @@ function QuestionnairesList(props) {
   };
 
   const handleNavigate = (id) => {
-    navigate("/pesquisas/" + props.researchId + "/questionarios/" + id);
+    navigate(`/pesquisas/${props.researchId}/questionarios/${id}/questoes`);
   };
 
   const showNewQuestionnaireView = () => {

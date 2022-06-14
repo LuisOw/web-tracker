@@ -36,12 +36,7 @@ function QuestionsList(props) {
 
   const handleNavigate = (id) => {
     navigate(
-      "/pesquisas/" +
-        props.researchId +
-        "/questionarios/" +
-        props.questionnaireId +
-        "/questoes/" +
-        id
+      `/pesquisas/${props.researchId}/questionarios/${props.questionnaireId}/questoes/${id}/alternativas`
     );
   };
 

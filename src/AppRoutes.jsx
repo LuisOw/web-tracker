@@ -55,7 +55,7 @@ const AppRoutes = () => {
             }
           />
           <Route
-            path="/pesquisas/:researchId/questionarios/:questionnaireId"
+            path="/pesquisas/:researchId/questionarios/:questionnaireId/questoes"
             element={
               <Private>
                 <QuestionsPage />
@@ -63,7 +63,7 @@ const AppRoutes = () => {
             }
           />
           <Route
-            path="/pesquisas/:researchId/questionarios/:questionnaireId/questoes/:questionId"
+            path="/pesquisas/:researchId/questionarios/:questionnaireId/questoes/:questionId/alternativas"
             element={
               <Private>
                 <AlternativesPage />
