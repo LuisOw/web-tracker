@@ -107,31 +107,31 @@ function QuestionnairesList(props) {
           </DialogActions>
         </>
       );
-    } else if (viewState === 1) {
-      return <h1>Selector</h1>;
-    } else {
-      return (
-        <>
-          <FormControl>
-            <TextField
-              name="title"
-              placeholder="Título"
-              onChange={(event) => handleChange(event)}
-              variant="outlined"
-              margin="dense"
-              fullWidth
-              size="small"
-            />
-            <select name="public" onChange={(event) => handleChange(event)}>
-              <option defaultValue={"privado"} value="privado">
-                Privado
-              </option>
-              <option value="publico">Público</option>
-            </select>
-          </FormControl>
-        </>
-      );
     }
+    if (viewState === 1) {
+      return <h1>Selector</h1>;
+    }
+    return (
+      <>
+        <FormControl>
+          <TextField
+            name="title"
+            placeholder="Título"
+            onChange={(event) => handleChange(event)}
+            variant="outlined"
+            margin="dense"
+            fullWidth
+            size="small"
+          />
+          <select name="public" onChange={(event) => handleChange(event)}>
+            <option defaultValue={"privado"} value="privado">
+              Privado
+            </option>
+            <option value="publico">Público</option>
+          </select>
+        </FormControl>
+      </>
+    );
   };
 
   const showEditQuestionnaireView = () => {
