@@ -12,7 +12,7 @@ const BasicBreadcrumbs = () => {
     <div role="presentation">
       <MUIBreadcrumbs aria-label="breadcrumb">
         {pathNames.map((name, index) => {
-          if (index % 2 == 0) {
+          if (index % 2 === 0) {
             const routeTo = `/${pathNames.slice(0, index + 1).join("/")}`;
             const isLast = index === pathNames.length - 1;
             return isLast ? (

@@ -1,4 +1,10 @@
-import { FormControl, TextField } from "@mui/material";
+import {
+  Button,
+  DialogActions,
+  DialogContent,
+  FormControl,
+  TextField,
+} from "@mui/material";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import QuestionnariesItem from "./QuestionnairesItem";
@@ -16,6 +22,8 @@ function QuestionnairesList(props) {
   const [_public, setPublic] = useState("privado");
   const [addOpen, setAddOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(true);
+  const [viewState, setViewState] = useState(0);
 
   const handleClickAddOpen = () => {
     setAddOpen(true);
@@ -23,6 +31,8 @@ function QuestionnairesList(props) {
 
   const handlAddClose = () => {
     setAddOpen(false);
+    setIsDisabled(true);
+    setViewState(0);
   };
 
   const handleClickEditOpen = () => {
@@ -71,27 +81,57 @@ function QuestionnairesList(props) {
   };
 
   const showNewQuestionnaireView = () => {
-    return (
-      <>
-        <FormControl>
-          <TextField
-            name="title"
-            placeholder="Título"
-            onChange={(event) => handleChange(event)}
-            variant="outlined"
-            margin="dense"
-            fullWidth
-            size="small"
-          />
-          <select name="public" onChange={(event) => handleChange(event)}>
-            <option defaultValue={"privado"} value="privado">
-              Privado
-            </option>
-            <option value="publico">Público</option>
-          </select>
-        </FormControl>
-      </>
-    );
+    if (viewState === 0) {
+      return (
+        <>
+          <DialogContent>
+            Deseja buscar por templates de questionários?
+          </DialogContent>
+          <DialogActions>
+            <Button
+              onClick={() => {
+                setViewState(1);
+                setIsDisabled(false);
+              }}
+            >
+              Sim
+            </Button>
+            <Button
+              onClick={() => {
+                setViewState(2);
+                setIsDisabled(false);
+              }}
+            >
+              Não
+            </Button>
+          </DialogActions>
+        </>
+      );
+    } else if (viewState === 1) {
+      return <h1>Selector</h1>;
+    } else {
+      return (
+        <>
+          <FormControl>
+            <TextField
+              name="title"
+              placeholder="Título"
+              onChange={(event) => handleChange(event)}
+              variant="outlined"
+              margin="dense"
+              fullWidth
+              size="small"
+            />
+            <select name="public" onChange={(event) => handleChange(event)}>
+              <option defaultValue={"privado"} value="privado">
+                Privado
+              </option>
+              <option value="publico">Público</option>
+            </select>
+          </FormControl>
+        </>
+      );
+    }
   };
 
   const showEditQuestionnaireView = () => {
@@ -159,18 +199,17 @@ function QuestionnairesList(props) {
       <Modal
         open={addOpen}
         handleClose={handlAddClose}
-        pageName={"Questionário"}
+        title={"Adicionar questionário"}
         data={showNewQuestionnaireView}
         submit={localSubmit}
-        operation={"Adicionar"}
+        isDisabled={isDisabled}
       />
       <Modal
         open={editOpen}
         handleClose={handlEditClose}
-        pageName={"Questionário"}
+        title={"Edit questionário"}
         data={showEditQuestionnaireView}
         submit={submitEdit}
-        operation={"Editar"}
       />
     </>
   );

@@ -9,10 +9,10 @@ import DialogTitle from "@mui/material/DialogTitle";
 export default function Modal({
   open,
   handleClose,
-  pageName,
+  title,
   data,
   submit,
-  operation,
+  isDisabled,
 }) {
   return (
     <div>
@@ -22,13 +22,16 @@ export default function Modal({
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">
-          {`${operation} ${pageName}`}
-        </DialogTitle>
+        <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
         <DialogContent>{data()}</DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancelar</Button>
-          <Button onClick={submit} variant="contained" autoFocus>
+          <Button
+            disabled={isDisabled}
+            onClick={submit}
+            variant="contained"
+            autoFocus
+          >
             Enviar
           </Button>
         </DialogActions>
