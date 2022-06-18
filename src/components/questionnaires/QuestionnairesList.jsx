@@ -9,6 +9,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import QuestionnariesItem from "./QuestionnairesItem";
 import Modal from "../modal/Modal";
+import CollapsibleTable from "../CollapsTable";
 
 function QuestionnairesList(props) {
   const navigate = useNavigate();
@@ -109,7 +110,7 @@ function QuestionnairesList(props) {
       );
     }
     if (viewState === 1) {
-      return <h1>Selector</h1>;
+      return <CollapsibleTable />;
     }
     return (
       <>
