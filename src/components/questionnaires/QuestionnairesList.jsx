@@ -25,6 +25,7 @@ function QuestionnairesList(props) {
   const [editOpen, setEditOpen] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
   const [viewState, setViewState] = useState(0);
+  const [selectedIds, setSelectedIds] = useState([]);
 
   const handleClickAddOpen = () => {
     setAddOpen(true);
@@ -34,6 +35,7 @@ function QuestionnairesList(props) {
     setAddOpen(false);
     setIsDisabled(true);
     setViewState(0);
+    setSelectedIds([]);
   };
 
   const handleClickEditOpen = () => {
@@ -51,14 +53,20 @@ function QuestionnairesList(props) {
   };
 
   const localSubmit = (event) => {
-    event.preventDefault();
+    console.log(selectedIds.length);
     setAddOpen(false);
-    props.add(newQuestionnaire);
-    setNewQuestionnaire({
-      researchId: props.researchId,
-      title: "",
-      public: "privado",
-    });
+    if (selectedIds.length === 0) {
+      event.preventDefault();
+      props.add(newQuestionnaire);
+      setNewQuestionnaire({
+        researchId: props.researchId,
+        title: "",
+        public: "privado",
+      });
+    } else {
+      props.add({ SelectedIds: selectedIds }, "/templates");
+      setSelectedIds([]);
+    }
   };
 
   const submitEdit = (event) => {
@@ -110,7 +118,12 @@ function QuestionnairesList(props) {
       );
     }
     if (viewState === 1) {
-      return <CollapsibleTable />;
+      return (
+        <CollapsibleTable
+          selectedIds={selectedIds}
+          setSelectedIds={setSelectedIds}
+        />
+      );
     }
     return (
       <>

@@ -21,11 +21,17 @@ function QuestionnairesPage() {
     })();
   }, []);
 
-  const handleSubmit = async (dataToSend) => {
-    const response = await httpFetchWithBody(endpoint, "POST", dataToSend, {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    });
+  const handleSubmit = async (dataToSend, url = "") => {
+    console.log(`${endpoint}${url}`);
+    const response = await httpFetchWithBody(
+      `${endpoint}${url}`,
+      "POST",
+      dataToSend,
+      {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      }
+    );
     setQuestionnaires((prev) => [
       ...prev,
       {

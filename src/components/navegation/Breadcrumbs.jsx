@@ -6,7 +6,6 @@ const BasicBreadcrumbs = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const pathNames = location.pathname.split("/").filter((x) => x);
-  console.log(pathNames);
 
   return (
     <div role="presentation">

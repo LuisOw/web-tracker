@@ -9,10 +9,12 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
-import { Button } from "@mui/material";
+import { Button, Checkbox } from "@mui/material";
+import { useState } from "react";
 
-function createData(title) {
+function createData(id, title) {
   return {
+    id,
     title,
     questions: [
       {
@@ -98,12 +100,20 @@ function QuestionRow(props) {
 }
 
 function QuestionnaireRow(props) {
-  const { row } = props;
-  const [open, setOpen] = React.useState(false);
+  const { row, isSelected, handleClick } = props;
+  const [open, setOpen] = useState(false);
+  const isItemSelected = isSelected(row.id);
 
   return (
     <React.Fragment>
-      <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
+      <TableRow sx={{ "& > *": { borderBottom: "unset" } }} hover>
+        <TableCell>
+          <Checkbox
+            color="primary"
+            checked={isItemSelected}
+            onClick={(event) => handleClick(event, row.id)}
+          />
+        </TableCell>
         <TableCell component="th" scope="row">
           {row.title}
         </TableCell>
@@ -121,7 +131,7 @@ function QuestionnaireRow(props) {
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box sx={{ margin: 1 }}>
-              <Typography variant="h7" gutterBottom component="div">
+              <Typography variant="h6" gutterBottom component="div">
                 Questões
               </Typography>
               <Table size="small" aria-label="purchases">
@@ -147,26 +157,59 @@ function QuestionnaireRow(props) {
 }
 
 const rows = [
-  createData("Frozen yoghurt"),
-  createData("Ice cream sandwich"),
-  createData("Eclair"),
-  createData("Cupcake"),
-  createData("Gingerbread"),
+  createData(0, "Frozen yoghurt"),
+  createData(1, "Ice cream sandwich"),
+  createData(2, "Eclair"),
+  createData(3, "Cupcake"),
+  createData(4, "Gingerbread"),
 ];
 
-export default function CollapsibleTable() {
+export default function CollapsibleTable(props) {
+  const selectedIds = props.selectedIds;
+  const setSelectedIds = props.setSelectedIds;
+
+  const isSelected = (id) => selectedIds.indexOf(id) !== -1;
+
+  const handleClick = (event, id) => {
+    console.log("entrou" + id);
+    const selectedIndex = selectedIds.indexOf(id);
+    let newSelectedIds = [];
+
+    if (selectedIndex === -1) {
+      newSelectedIds = newSelectedIds.concat(selectedIds, id);
+    } else if (selectedIndex === 0) {
+      newSelectedIds = newSelectedIds.concat(selectedIds.slice(1));
+    } else if (selectedIndex === selectedIds.length - 1) {
+      newSelectedIds = newSelectedIds.concat(selectedIds.slice(0, -1));
+    } else if (selectedIndex > 0) {
+      newSelectedIds = newSelectedIds.concat(
+        selectedIds.slice(0, selectedIndex),
+        selectedIds.slice(selectedIndex + 1)
+      );
+    }
+
+    setSelectedIds(newSelectedIds);
+    console.log(selectedIds);
+  };
+
   return (
     <TableContainer component={Paper}>
       <Table aria-label="collapsible table">
         <TableHead>
           <TableRow>
+            <TableCell>Selecionados</TableCell>
             <TableCell>Título</TableCell>
             <TableCell>Questões</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-            <QuestionnaireRow key={row.title} row={row} />
+            <QuestionnaireRow
+              key={row.id}
+              row={row}
+              isSelected={isSelected}
+              handleClick={handleClick}
+            />
           ))}
         </TableBody>
       </Table>
