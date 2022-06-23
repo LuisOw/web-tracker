@@ -55,6 +55,8 @@ function QuestionnairesList(props) {
   const localSubmit = (event) => {
     console.log(selectedIds.length);
     setAddOpen(false);
+    setIsDisabled(true);
+    setViewState(0);
     if (selectedIds.length === 0) {
       event.preventDefault();
       props.add(newQuestionnaire);
