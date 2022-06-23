@@ -12,11 +12,14 @@ function QuestionnairesPage() {
   const endpoint = `pesquisas/${researchId}/questionarios`;
   const [loading, setLoading] = useState(true);
   const [questionnaires, setQuestionnaires] = useState([]);
+  const [rows, setRows] = useState([]);
 
   useEffect(() => {
     (async () => {
       const response = await httpFetch(endpoint, token);
       setQuestionnaires(response);
+      const rows = await httpFetch(`questionarios`, token);
+      setRows(rows);
       setLoading(false);
     })();
   }, []);
@@ -32,15 +35,13 @@ function QuestionnairesPage() {
         Authorization: `Bearer ${token}`,
       }
     );
-    setQuestionnaires((prev) => [
-      ...prev,
-      {
-        id: response.id,
-        researchId: response.researchId,
-        title: response.title,
-        public: response.public,
-      },
-    ]);
+    if (Array.isArray(response)) {
+      response.map((questionnaire) =>
+        setQuestionnaires((prev) => [...prev, { ...questionnaire }])
+      );
+      return;
+    }
+    setQuestionnaires((prev) => [...prev, { ...response }]);
   };
 
   const handleEdit = async (dataToSend) => {
@@ -93,6 +94,7 @@ function QuestionnairesPage() {
           add={handleSubmit}
           delete={handleDelete}
           edit={handleEdit}
+          rows={rows}
         />
       </div>
     </Layout>

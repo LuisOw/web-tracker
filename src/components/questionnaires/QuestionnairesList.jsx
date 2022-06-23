@@ -64,7 +64,7 @@ function QuestionnairesList(props) {
         public: "privado",
       });
     } else {
-      props.add({ SelectedIds: selectedIds }, "/templates");
+      props.add({ selected_ids: selectedIds }, "/templates");
       setSelectedIds([]);
     }
   };
@@ -99,19 +99,19 @@ function QuestionnairesList(props) {
           <DialogActions>
             <Button
               onClick={() => {
-                setViewState(1);
-                setIsDisabled(false);
-              }}
-            >
-              Sim
-            </Button>
-            <Button
-              onClick={() => {
                 setViewState(2);
                 setIsDisabled(false);
               }}
             >
               Não
+            </Button>
+            <Button
+              onClick={() => {
+                setViewState(1);
+                setIsDisabled(false);
+              }}
+            >
+              Sim
             </Button>
           </DialogActions>
         </>
@@ -122,19 +122,19 @@ function QuestionnairesList(props) {
         <CollapsibleTable
           selectedIds={selectedIds}
           setSelectedIds={setSelectedIds}
+          rows={props.rows}
         />
       );
     }
     return (
       <>
-        <FormControl>
+        <FormControl fullWidth>
           <TextField
             name="title"
             placeholder="Título"
             onChange={(event) => handleChange(event)}
             variant="outlined"
             margin="dense"
-            fullWidth
             size="small"
           />
           <select name="public" onChange={(event) => handleChange(event)}>
@@ -150,21 +150,23 @@ function QuestionnairesList(props) {
 
   const showEditQuestionnaireView = () => {
     return (
-      <FormControl>
+      <FormControl fullWidth>
         <TextField
           name="title"
           placeholder="Título"
           value={title}
           onChange={(event) => setTitle(event.target.value)}
         />
-        <select
-          name="public"
-          value={_public}
-          onChange={(event) => setPublic(event.target.value)}
-        >
-          <option value="privado">Privado</option>
-          <option value="publico">Público</option>
-        </select>
+        {_public === "template" ? null : (
+          <select
+            name="public"
+            value={_public}
+            onChange={(event) => setPublic(event.target.value)}
+          >
+            <option value="privado">Privado</option>
+            <option value="publico">Público</option>
+          </select>
+        )}
       </FormControl>
     );
   };

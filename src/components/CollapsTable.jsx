@@ -12,37 +12,6 @@ import Paper from "@mui/material/Paper";
 import { Button, Checkbox } from "@mui/material";
 import { useState } from "react";
 
-function createData(id, title) {
-  return {
-    id,
-    title,
-    questions: [
-      {
-        query: "pergunta",
-        order: "0",
-        alternatives: [
-          {
-            type: "discursiva",
-            text: "alternativa",
-            value: "0",
-          },
-        ],
-      },
-      {
-        query: "pergunta",
-        order: "0",
-        alternatives: [
-          {
-            type: "discursiva",
-            text: "alternativa",
-            value: "0",
-          },
-        ],
-      },
-    ],
-  };
-}
-
 function QuestionRow(props) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
@@ -156,22 +125,14 @@ function QuestionnaireRow(props) {
   );
 }
 
-const rows = [
-  createData(0, "Frozen yoghurt"),
-  createData(1, "Ice cream sandwich"),
-  createData(2, "Eclair"),
-  createData(3, "Cupcake"),
-  createData(4, "Gingerbread"),
-];
-
 export default function CollapsibleTable(props) {
   const selectedIds = props.selectedIds;
   const setSelectedIds = props.setSelectedIds;
+  const rows = props.rows;
 
   const isSelected = (id) => selectedIds.indexOf(id) !== -1;
 
   const handleClick = (event, id) => {
-    console.log("entrou" + id);
     const selectedIndex = selectedIds.indexOf(id);
     let newSelectedIds = [];
 
@@ -189,7 +150,6 @@ export default function CollapsibleTable(props) {
     }
 
     setSelectedIds(newSelectedIds);
-    console.log(selectedIds);
   };
 
   return (
