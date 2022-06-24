@@ -30,10 +30,7 @@ const ResearchesPage = () => {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     });
-    setResearches((prev) => [
-      ...prev,
-      { id: response.id, title: response.title },
-    ]);
+    setResearches((prev) => [...prev, { ...response }]);
   };
 
   const handleEdit = async (dataToSend) => {
@@ -79,7 +76,7 @@ const ResearchesPage = () => {
 
   return (
     <Layout>
-      <div className="page_container">
+      <div>
         <h1>Suas pesquisas</h1>
         <ResearchesList
           researches={researches}
