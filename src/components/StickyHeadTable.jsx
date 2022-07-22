@@ -47,7 +47,6 @@ export default function StickyHeadTable(props) {
         <Table stickyHeader aria-label="simple table">
           <TableHead>
             <TableRow>
-              bla.map()
               <TableCell>Dessert</TableCell>
               <TableCell>Calories</TableCell>
               <TableCell>Fat</TableCell>

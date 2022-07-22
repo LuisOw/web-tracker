@@ -16,8 +16,8 @@ body{
 
 .table {
     border-collapse: collapse;
-    width: 75vw;
-    max-width: 960px;
+    width: 85vw;
+    max-width: 1080px;
     min-width: 560px;
     text-align: center;
     margin-bottom: 15px;

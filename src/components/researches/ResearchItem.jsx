@@ -1,3 +1,5 @@
+import Chip from "../Chip";
+
 function ResearchesItem(props) {
   const research = props.research;
   const localDelete = () => {
@@ -5,22 +7,14 @@ function ResearchesItem(props) {
   };
 
   const handleEdit = () => {
-    props.setTitle(research.title);
-    props.setId(research.id);
-    props.setVisibility(research.visibility);
-    props.setInitialAge(research.initialAge);
-    props.setFinalAge(research.finalAge);
-    props.setInitialIncome(research.initialIncome);
-    props.setFinalIncome(research.finalIncome);
-    props.setGender(research.gender);
-    props.setSexualOrientation(research.sexualOrientation);
-    props.setRace(research.race);
+    props.setNewResearch(research);
     props.modalOpen();
   };
 
   return (
     <tr>
       <td>{research.title}</td>
+      <td>{research.description}</td>
       <td>{research.visibility}</td>
       <td>{research.state}</td>
       <td>
@@ -31,19 +25,14 @@ function ResearchesItem(props) {
           Exibir módulos ativos
         </button>
       </td>
-      <td>{research.initialAge}</td>
-      <td>{research.finalAge}</td>
-      <td>{research.initialIncome}</td>
-      <td>{research.finalIncome}</td>
-      <td>{research.gender}</td>
-      <td>{research.sexualOrientation}</td>
-      <td>{research.race}</td>
-
+      <td>
+        <Chip research={research} />
+      </td>
       <td>
         <button
           className="button button_view"
           onClick={() => {
-            props.navigate(research.id);
+            props.navigate(`${research.id}/questionarios`);
           }}
         >
           Exibir questionários

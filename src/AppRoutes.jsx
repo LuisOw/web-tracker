@@ -47,6 +47,15 @@ const AppRoutes = () => {
             }
           />
           <Route
+            exact
+            path="/pesquisas/:researchId/filtros"
+            element={
+              <Private>
+                <ResearchesPage />
+              </Private>
+            }
+          />
+          <Route
             path="/pesquisas/:researchId/questionarios"
             element={
               <Private>

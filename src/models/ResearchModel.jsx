@@ -1,11 +1,15 @@
 export const RESEARCH_MODEL = {
   title: "",
   visibility: "",
-  initialAge: 0,
-  finalAge: 1,
-  initialIncome: 0,
-  finalIncome: 1,
-  race: "",
-  gender: "",
-  sexualOrientation: "",
+  description: "",
 };
+
+export const FILTERS_ENUM = Object.freeze({
+  initialAge: "initialAge",
+  finalAge: "finalAge",
+  initialIncome: "initialIncome",
+  finalIncome: "finalIncome",
+  race: "race",
+  gender: "gender",
+  sexualOrientation: "sexualOrientation",
+});

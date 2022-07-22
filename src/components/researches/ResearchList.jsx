@@ -13,18 +13,7 @@ import {
 } from "../../constants/ResearchesEnum";
 
 function ResearchesList(props) {
-  console.log(props.researches);
   const [newResearch, setNewResearch] = useState(RESEARCH_MODEL);
-  const [title, setTitle] = useState("");
-  const [id, setId] = useState("");
-  const [visibility, setVisibility] = useState("");
-  const [initialAge, setInitialAge] = useState(-1);
-  const [finalAge, setFinalAge] = useState(-1);
-  const [initialIncome, setInitialIncome] = useState(-1);
-  const [finalIncome, setFinalIncome] = useState(-1);
-  const [race, setRace] = useState("");
-  const [gender, setGender] = useState("");
-  const [sexualOrientation, setSexualOrientation] = useState("");
   const navigate = useNavigate();
   const [addOpen, setAddOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
@@ -63,6 +52,7 @@ function ResearchesList(props) {
 
   const handlAddClose = () => {
     setAddOpen(false);
+    setNewResearch(RESEARCH_MODEL);
   };
 
   const handleClickEditOpen = () => {
@@ -71,11 +61,10 @@ function ResearchesList(props) {
 
   const handlEditClose = () => {
     setEditOpen(false);
+    setNewResearch(RESEARCH_MODEL);
   };
 
   const handleChange = (event) => {
-    console.log("name = " + event.target.name);
-    console.log("value = " + event.target.value);
     let data = newResearch;
     data[event.target.name] = event.target.value;
     setNewResearch(data);
@@ -91,33 +80,8 @@ function ResearchesList(props) {
   const submitEdit = (event) => {
     event.preventDefault();
     setEditOpen(false);
-    let data = newResearch;
-    data["title"] = title;
-    data["id"] = id;
-    data["visibility"] = visibility;
-    data["initialAge"] = initialAge;
-    data["finalAge"] = finalAge;
-    data["initialIncome"] = initialIncome;
-    data["finalIncome"] = finalIncome;
-    data["initialAge"] = initialAge;
-    data["gender"] = gender;
-    data["sexualOrientation"] = sexualOrientation;
-    data["race"] = race;
-    setNewResearch(data);
     props.edit(newResearch);
     setNewResearch(RESEARCH_MODEL);
-  };
-
-  const errorSetting = (error, text, setterError, setterText) => {
-    setterError(error);
-    setterText(text);
-  };
-
-  const isPositive = (value, setterError, setterText) => {
-    let error = "Valor deve ser positivo";
-    value < 0
-      ? errorSetting(true, error, setterError, setterText)
-      : errorSetting(false, "", setterError, setterText);
   };
 
   const showNewResearchView = () => {
@@ -126,6 +90,15 @@ function ResearchesList(props) {
         <TextField
           name="title"
           label="Título"
+          onChange={(event) => handleChange(event)}
+          variant="outlined"
+          margin="dense"
+          fullWidth
+          size="small"
+        />
+        <TextField
+          name="description"
+          label="Descrição"
           onChange={(event) => handleChange(event)}
           variant="outlined"
           margin="dense"
@@ -249,9 +222,17 @@ function ResearchesList(props) {
       <form>
         <TextField
           name="title"
-          placeholder="Título"
-          value={title}
-          onChange={(event) => setTitle(event.target.value)}
+          defaultValue={newResearch.title}
+          onChange={(event) => handleChange(event)}
+          variant="outlined"
+          margin="dense"
+          fullWidth
+          size="small"
+        />
+        <TextField
+          name="description"
+          defaultValue={newResearch.description}
+          onChange={(event) => handleChange(event)}
           variant="outlined"
           margin="dense"
           fullWidth
@@ -259,10 +240,10 @@ function ResearchesList(props) {
         />
         <TextField
           select
-          defaultValue={visibility}
+          defaultValue={newResearch.visibility}
           name="visibility"
           label="Visibilidade"
-          onChange={(event) => setVisibility(event.target.value)}
+          onChange={(event) => handleChange(event)}
           variant="outlined"
           margin="dense"
           fullWidth
@@ -275,12 +256,12 @@ function ResearchesList(props) {
           ))}
         </TextField>
         <TextField
-          value={initialAge}
+          defaultValue={newResearch.initialAge}
           name="initialAge"
           label="Idade inicial"
           type="number"
           onChange={(event) => {
-            setInitialAge(event.target.value);
+            handleChange(event);
           }}
           variant="outlined"
           margin="dense"
@@ -288,12 +269,12 @@ function ResearchesList(props) {
           size="small"
         />
         <TextField
-          value={finalAge}
+          defaultValue={newResearch.finalAge}
           name="finalAge"
           label="Idade final"
           type="number"
           onChange={(event) => {
-            setFinalAge(event.target.value);
+            handleChange(event);
           }}
           variant="outlined"
           margin="dense"
@@ -301,22 +282,22 @@ function ResearchesList(props) {
           size="small"
         />
         <TextField
-          value={initialIncome}
+          defaultValue={newResearch.initialIncome}
           name="initialIncome"
           label="Salário inicial"
           type="number"
-          onChange={(event) => setInitialIncome(event.target.value)}
+          onChange={(event) => handleChange(event)}
           variant="outlined"
           margin="dense"
           fullWidth
           size="small"
         />
         <TextField
-          value={finalIncome}
+          defaultValue={newResearch.finalIncome}
           name="finalIncome"
           label="Salário final"
           type="number"
-          onChange={(event) => setFinalIncome(event.target.value)}
+          onChange={(event) => handleChange(event)}
           variant="outlined"
           margin="dense"
           fullWidth
@@ -324,10 +305,10 @@ function ResearchesList(props) {
         />
         <TextField
           select
-          defaultValue={gender}
+          defaultValue={newResearch.gender}
           name="gender"
           label="Gênero"
-          onChange={(event) => setGender(event.target.value)}
+          onChange={(event) => handleChange(event)}
           variant="outlined"
           margin="dense"
           fullWidth
@@ -341,10 +322,10 @@ function ResearchesList(props) {
         </TextField>
         <TextField
           select
-          defaultValue={sexualOrientation}
+          defaultValue={newResearch.sexualOrientation}
           name="sexualOrientation"
           label="Orientação sexual"
-          onChange={(event) => setSexualOrientation(event.target.value)}
+          onChange={(event) => handleChange(event)}
           variant="outlined"
           margin="dense"
           fullWidth
@@ -358,10 +339,10 @@ function ResearchesList(props) {
         </TextField>
         <TextField
           select
-          defaultValue={race}
+          defaultValue={newResearch.race}
           name="race"
           label="Raça/Etinia"
-          onChange={(event) => setRace(event.target.value)}
+          onChange={(event) => handleChange(event)}
           variant="outlined"
           margin="dense"
           fullWidth
@@ -390,11 +371,13 @@ function ResearchesList(props) {
     );
   };
 
-  const navigateHandler = (id) => {
-    navigate("/pesquisas/" + id + "/questionarios");
+  const navigateHandler = (endpoint) => {
+    navigate(`/pesquisas/${endpoint}`);
   };
 
   function showModulesHandler() {}
+
+  console.log(props.researches);
 
   return (
     <>
@@ -403,16 +386,11 @@ function ResearchesList(props) {
         <tbody>
           <tr>
             <th>Título</th>
+            <th>Descrição</th>
             <th>Visibilidade</th>
             <th>Estado</th>
             <th>Módulos ativos</th>
-            <th>Idade inicial</th>
-            <th>Idade final</th>
-            <th>Salário inicial</th>
-            <th>Salário final</th>
-            <th>Gênero</th>
-            <th>Orientação sexual</th>
-            <th>Raça/Etinia</th>
+            <th>Filtros</th>
             <th>Questionários</th>
             <th>Ações</th>
           </tr>
@@ -423,17 +401,8 @@ function ResearchesList(props) {
               navigate={navigateHandler}
               showModulesHandler={showModulesHandler}
               handleDelete={props.delete}
-              setTitle={setTitle}
-              setId={setId}
-              setVisibility={setVisibility}
-              setInitialAge={setInitialAge}
-              setFinalAge={setFinalAge}
-              setInitialIncome={setInitialIncome}
-              setFinalIncome={setFinalIncome}
-              setRace={setRace}
-              setGender={setGender}
-              setSexualOrientation={setSexualOrientation}
               modalOpen={handleClickEditOpen}
+              setNewResearch={setNewResearch}
             />
           ))}
         </tbody>

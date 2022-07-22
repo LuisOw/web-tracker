@@ -26,6 +26,7 @@ const ResearchesPage = () => {
   };
 
   const handleSubmit = async (dataToSend) => {
+    console.log(dataToSend);
     const response = await httpFetchWithBody(endpoint, "POST", dataToSend, {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
@@ -76,7 +77,7 @@ const ResearchesPage = () => {
 
   return (
     <Layout>
-      <div>
+      <div className="page_container">
         <h1>Suas pesquisas</h1>
         <ResearchesList
           researches={researches}
