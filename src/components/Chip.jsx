@@ -2,6 +2,7 @@ import { Chip as MuiChip } from "@mui/material";
 import { FILTERS_ENUM } from "../models/ResearchModel";
 
 export default function Chip(props) {
+  console.log(props.research);
   return (
     <>
       {Object.keys(FILTERS_ENUM).map((filter) => {
@@ -76,7 +77,7 @@ export default function Chip(props) {
         } else if (
           filter === FILTERS_ENUM.finalAge ||
           filter === FILTERS_ENUM.finalIncome ||
-          props.research[filter] === null
+          props.research[filter] === ""
         ) {
           return null;
         } else {

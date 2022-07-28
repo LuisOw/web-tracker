@@ -3,14 +3,15 @@ import { useNavigate } from "react-router-dom";
 
 import ResearchItem from "./ResearchItem";
 import Modal from "../modal/Modal";
-import { MenuItem, TextField } from "@mui/material";
 import { RESEARCH_MODEL } from "../../models/ResearchModel";
 import {
   GENDER_TYPES,
   RACE_TYPES,
   SEXUAL_ORIENTATION,
   VISIBILITY,
+  DEFAULT_TYPE,
 } from "../../constants/ResearchesEnum";
+import { MenuItem, TextField } from "@mui/material";
 
 function ResearchesList(props) {
   const [newResearch, setNewResearch] = useState(RESEARCH_MODEL);
@@ -23,6 +24,7 @@ function ResearchesList(props) {
     { value: RACE_TYPES.PRETO, label: "Preto" },
     { value: RACE_TYPES.AMARELO, label: "Amarelo" },
     { value: RACE_TYPES.INDIGENA, label: "Indígena" },
+    { value: DEFAULT_TYPE.NENHUM, label: "Nenhum" },
   ];
 
   const genderList = [
@@ -32,6 +34,7 @@ function ResearchesList(props) {
     { value: GENDER_TYPES.MULHER_TRANS, label: "Mulher trans" },
     { value: GENDER_TYPES.NAO_BINARIO, label: "Não binário" },
     { value: GENDER_TYPES.OUTRO, label: "Outros" },
+    { value: DEFAULT_TYPE.NENHUM, label: "Nenhum" },
   ];
 
   const orientationList = [
@@ -39,6 +42,7 @@ function ResearchesList(props) {
     { value: SEXUAL_ORIENTATION.HOMO, label: "Homossexual" },
     { value: SEXUAL_ORIENTATION.BI, label: "Bissexual" },
     { value: SEXUAL_ORIENTATION.OUTRO, label: "Outro" },
+    { value: DEFAULT_TYPE.NENHUM, label: "Nenhum" },
   ];
 
   const visibilityList = [
@@ -65,9 +69,8 @@ function ResearchesList(props) {
   };
 
   const handleChange = (event) => {
-    let data = newResearch;
-    data[event.target.name] = event.target.value;
-    setNewResearch(data);
+    newResearch[event.target.name] = event.target.value;
+    setNewResearch(newResearch);
   };
 
   const localSubmit = (event) => {
@@ -358,7 +361,7 @@ function ResearchesList(props) {
     );
   };
 
-  const showAddResearchButton = () => {
+  const ShowAddResearchButton = () => {
     return (
       <button
         className="button button_add"
@@ -377,11 +380,9 @@ function ResearchesList(props) {
 
   function showModulesHandler() {}
 
-  console.log(props.researches);
-
   return (
     <>
-      {showAddResearchButton()}
+      <ShowAddResearchButton />
       <table className="table">
         <tbody>
           <tr>

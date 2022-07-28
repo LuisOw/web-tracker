@@ -26,3 +26,7 @@ export const VISIBILITY = {
   PUBLICO: "publico",
   PRIVADO: "privado",
 };
+
+export const DEFAULT_TYPE = {
+  NENHUM: "",
+};
