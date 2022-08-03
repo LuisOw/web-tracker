@@ -390,6 +390,8 @@ function ResearchesList(props) {
             <th>Descrição</th>
             <th>Visibilidade</th>
             <th>Estado</th>
+            <th>Início</th>
+            <th>Encerramento</th>
             <th>Módulos ativos</th>
             <th>Filtros</th>
             <th>Questionários</th>
@@ -404,6 +406,7 @@ function ResearchesList(props) {
               handleDelete={props.delete}
               modalOpen={handleClickEditOpen}
               setNewResearch={setNewResearch}
+              statusChange={props.statusChange}
             />
           ))}
         </tbody>

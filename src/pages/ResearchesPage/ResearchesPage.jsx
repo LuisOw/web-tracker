@@ -12,6 +12,10 @@ const ResearchesPage = () => {
   const [loading, setLoading] = useState(true);
   const [researches, setResearches] = useState([]);
   const endpoint = "pesquisas";
+  const header = {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${token}`,
+  };
 
   useEffect(() => {
     (async () => {
@@ -27,10 +31,12 @@ const ResearchesPage = () => {
 
   const handleSubmit = async (dataToSend) => {
     console.log(dataToSend);
-    const response = await httpFetchWithBody(endpoint, "POST", dataToSend, {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    });
+    const response = await httpFetchWithBody(
+      endpoint,
+      "POST",
+      dataToSend,
+      header
+    );
     setResearches((prev) => [...prev, { ...response }]);
   };
 
@@ -39,14 +45,28 @@ const ResearchesPage = () => {
       `${endpoint}/${dataToSend.id}`,
       "PUT",
       dataToSend,
-      {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      }
+      header
     );
     const newData = researches.map((research) => {
       if (research.id === dataToSend.id) {
         return dataToSend;
+      }
+      return research;
+    });
+    setResearches(newData);
+  };
+
+  const handleStatusChange = async (id) => {
+    const response = await httpFetchWithBody(
+      `${endpoint}/${id}`,
+      "PATCH",
+      null,
+      header
+    );
+    console.log({ ...response });
+    const newData = researches.map((research) => {
+      if (research.id === id) {
+        return { ...response };
       }
       return research;
     });
@@ -84,6 +104,7 @@ const ResearchesPage = () => {
           add={handleSubmit}
           delete={handleDelete}
           edit={handleEdit}
+          statusChange={handleStatusChange}
         />
       </div>
     </Layout>

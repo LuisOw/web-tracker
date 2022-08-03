@@ -18,7 +18,7 @@ export const httpFetchWithBody = async (endpoint, method, body, header) => {
     headers: { ...header },
     body: JSON.stringify(body),
   });
-  if (method.toUpperCase() === "POST") {
+  if (method.toUpperCase() === "POST" || method.toUpperCase() === "PATCH") {
     const data = await response.json();
     return data;
   }

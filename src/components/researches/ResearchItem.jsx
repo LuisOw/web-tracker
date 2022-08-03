@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import Chip from "../Chip";
 
 function ResearchesItem(props) {
@@ -11,12 +12,39 @@ function ResearchesItem(props) {
     props.modalOpen();
   };
 
+  const localStatus = () => {
+    props.statusChange(research.id);
+  };
+
+  const localDownload = () => {
+    props.downloadResult(research.id);
+  };
+
+  const conditionalButton = (state) => {
+    console.log(research.id);
+    return state !== "encerrada" ? (
+      <button className="button button_edit" onClick={localStatus}>
+        {state === "inativa" ? "Iniciar pesquisa" : "Encerrar pesquisa"}
+      </button>
+    ) : (
+      <button className="button button_edit" onClick={localDownload}>
+        Exibir resultados
+      </button>
+    );
+  };
+
+  const formatDateTime = (dateTime) => {
+    return dateTime ? dayjs(dateTime).format("DD/MM/YYYY-HH:mm:ss") : "";
+  };
+
   return (
     <tr>
       <td>{research.title}</td>
       <td>{research.description}</td>
       <td>{research.visibility}</td>
       <td>{research.state}</td>
+      <td>{formatDateTime(research.startTime)}</td>
+      <td>{formatDateTime(research.endTime)}</td>
       <td>
         <button
           className="button button_view"
@@ -40,6 +68,7 @@ function ResearchesItem(props) {
       </td>
       <td>
         <div className="flex-container">
+          {conditionalButton(research.state)}
           <button className="button button_edit" onClick={() => handleEdit()}>
             Editar
           </button>
