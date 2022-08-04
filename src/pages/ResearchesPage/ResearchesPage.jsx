@@ -3,7 +3,11 @@ import Layout from "../../components/layout/Layout";
 import ResearchesList from "../../components/researches/ResearchList";
 
 import { AuthContext } from "../../context/auth";
-import { httpFetch, httpFetchWithBody } from "../../services/Services";
+import {
+  httpFetch,
+  httpFetchDownloader,
+  httpFetchWithBody,
+} from "../../services/Services";
 
 import "./ResearchesPage.css";
 
@@ -85,6 +89,10 @@ const ResearchesPage = () => {
     stateRemoval(id);
   };
 
+  const handleDownload = (id, filename) => {
+    httpFetchDownloader(id, token, filename);
+  };
+
   const stateRemoval = (id) => {
     let state = researches;
     const newState = state.filter((research) => research.id !== id);
@@ -105,6 +113,7 @@ const ResearchesPage = () => {
           delete={handleDelete}
           edit={handleEdit}
           statusChange={handleStatusChange}
+          downloadResult={handleDownload}
         />
       </div>
     </Layout>

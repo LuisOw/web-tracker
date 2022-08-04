@@ -407,6 +407,7 @@ function ResearchesList(props) {
               modalOpen={handleClickEditOpen}
               setNewResearch={setNewResearch}
               statusChange={props.statusChange}
+              downloadResult={props.downloadResult}
             />
           ))}
         </tbody>

@@ -17,7 +17,9 @@ function ResearchesItem(props) {
   };
 
   const localDownload = () => {
-    props.downloadResult(research.id);
+    let date = dayjs().format("DD-MM-YYYY-HH-mm");
+    let filename = `${date}-${research.id}`;
+    props.downloadResult(research.id, filename);
   };
 
   const conditionalButton = (state) => {

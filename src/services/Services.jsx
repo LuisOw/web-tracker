@@ -23,3 +23,25 @@ export const httpFetchWithBody = async (endpoint, method, body, header) => {
     return data;
   }
 };
+
+export const httpFetchDownloader = (id, token, filename) => {
+  fetch(`${baseUrl}/pesquisas/${id}/arquivo`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((resp) => resp.blob())
+    .then((blob) => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.style.display = "none";
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      alert("your file has downloaded!"); //change later
+    })
+    .catch(() => alert("oh no!"));
+};
