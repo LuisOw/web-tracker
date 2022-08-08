@@ -11,7 +11,19 @@ import {
   VISIBILITY,
   DEFAULT_TYPE,
 } from "../../constants/ResearchesEnum";
-import { MenuItem, TextField } from "@mui/material";
+import {
+  Box,
+  MenuItem,
+  Paper,
+  Table,
+  TableBody,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TextField,
+} from "@mui/material";
+import { StyledButton, StyledTableCell } from "../StyledTableComponents";
+import BasicBreadcrumbs from "../../components/navegation/Breadcrumbs";
 
 function ResearchesList(props) {
   const [newResearch, setNewResearch] = useState(RESEARCH_MODEL);
@@ -363,14 +375,14 @@ function ResearchesList(props) {
 
   const ShowAddResearchButton = () => {
     return (
-      <button
-        className="button button_add"
+      <StyledButton
+        sx={{ fontSize: 12 }}
         onClick={() => {
           handleClickAddOpen();
         }}
       >
         Adicionar pesquisa
-      </button>
+      </StyledButton>
     );
   };
 
@@ -382,36 +394,41 @@ function ResearchesList(props) {
 
   return (
     <>
+      <BasicBreadcrumbs />
       <ShowAddResearchButton />
-      <table className="table">
-        <tbody>
-          <tr>
-            <th>Título</th>
-            <th>Descrição</th>
-            <th>Visibilidade</th>
-            <th>Estado</th>
-            <th>Início</th>
-            <th>Encerramento</th>
-            <th>Módulos ativos</th>
-            <th>Filtros</th>
-            <th>Questionários</th>
-            <th>Ações</th>
-          </tr>
-          {props.researches.map((research) => (
-            <ResearchItem
-              key={research.id}
-              research={research}
-              navigate={navigateHandler}
-              showModulesHandler={showModulesHandler}
-              handleDelete={props.delete}
-              modalOpen={handleClickEditOpen}
-              setNewResearch={setNewResearch}
-              statusChange={props.statusChange}
-              downloadResult={props.downloadResult}
-            />
-          ))}
-        </tbody>
-      </table>
+      <TableContainer component={Paper}>
+        <Table size="small" aria-label="dense table">
+          <TableHead>
+            <TableRow sx={{ borderBottom: "2px solid black" }}>
+              <StyledTableCell>Título</StyledTableCell>
+              <StyledTableCell>Descrição</StyledTableCell>
+              <StyledTableCell>Visibilidade</StyledTableCell>
+              <StyledTableCell>Estado</StyledTableCell>
+              <StyledTableCell>Início</StyledTableCell>
+              <StyledTableCell>Encerramento</StyledTableCell>
+              <StyledTableCell>Módulos ativos</StyledTableCell>
+              <StyledTableCell>Filtros</StyledTableCell>
+              <StyledTableCell>Questionários</StyledTableCell>
+              <StyledTableCell align="center">Ações</StyledTableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {props.researches.map((research) => (
+              <ResearchItem
+                key={research.id}
+                research={research}
+                navigate={navigateHandler}
+                showModulesHandler={showModulesHandler}
+                handleDelete={props.delete}
+                modalOpen={handleClickEditOpen}
+                setNewResearch={setNewResearch}
+                statusChange={props.statusChange}
+                downloadResult={props.downloadResult}
+              />
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
       <Modal
         open={addOpen}
         handleClose={handlAddClose}

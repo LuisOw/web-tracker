@@ -1,5 +1,10 @@
 import dayjs from "dayjs";
 import Chip from "../Chip";
+import {
+  StyledTableCell,
+  StyledTableRow,
+  StyledButton,
+} from "../StyledTableComponents";
 
 function ResearchesItem(props) {
   const research = props.research;
@@ -25,13 +30,13 @@ function ResearchesItem(props) {
   const conditionalButton = (state) => {
     console.log(research.id);
     return state !== "encerrada" ? (
-      <button className="button button_edit" onClick={localStatus}>
+      <StyledButton size="small" variant="contained" onClick={localStatus}>
         {state === "inativa" ? "Iniciar pesquisa" : "Encerrar pesquisa"}
-      </button>
+      </StyledButton>
     ) : (
-      <button className="button button_edit" onClick={localDownload}>
+      <StyledButton size="small" variant="contained" onClick={localDownload}>
         Exibir resultados
-      </button>
+      </StyledButton>
     );
   };
 
@@ -40,46 +45,53 @@ function ResearchesItem(props) {
   };
 
   return (
-    <tr>
-      <td>{research.title}</td>
-      <td>{research.description}</td>
-      <td>{research.visibility}</td>
-      <td>{research.state}</td>
-      <td>{formatDateTime(research.startTime)}</td>
-      <td>{formatDateTime(research.endTime)}</td>
-      <td>
-        <button
-          className="button button_view"
+    <StyledTableRow key={props.id}>
+      <StyledTableCell>{research.title}</StyledTableCell>
+      <StyledTableCell>{research.description}</StyledTableCell>
+      <StyledTableCell>{research.visibility}</StyledTableCell>
+      <StyledTableCell>{research.state}</StyledTableCell>
+      <StyledTableCell>{formatDateTime(research.startTime)}</StyledTableCell>
+      <StyledTableCell>{formatDateTime(research.endTime)}</StyledTableCell>
+      <StyledTableCell>
+        <StyledButton
+          size="small"
+          variant="contained"
           onClick={() => props.showModulesHandler()}
         >
-          Exibir módulos ativos
-        </button>
-      </td>
-      <td>
+          Exibir módulos
+        </StyledButton>
+      </StyledTableCell>
+      <StyledTableCell>
         <Chip research={research} />
-      </td>
-      <td>
-        <button
-          className="button button_view"
+      </StyledTableCell>
+      <StyledTableCell>
+        <StyledButton
+          size="small"
+          variant="contained"
           onClick={() => {
             props.navigate(`${research.id}/questionarios`);
           }}
         >
           Exibir questionários
-        </button>
-      </td>
-      <td>
+        </StyledButton>
+      </StyledTableCell>
+      <StyledTableCell>
         <div className="flex-container">
           {conditionalButton(research.state)}
-          <button className="button button_edit" onClick={() => handleEdit()}>
+          <StyledButton
+            sx={{ marginLeft: "2px", marginRight: "2px" }}
+            size="small"
+            variant="contained"
+            onClick={() => handleEdit()}
+          >
             Editar
-          </button>
-          <button className="button button_delete" onClick={localDelete}>
+          </StyledButton>
+          <StyledButton size="small" variant="contained" onClick={localDelete}>
             Excluir
-          </button>
+          </StyledButton>
         </div>
-      </td>
-    </tr>
+      </StyledTableCell>
+    </StyledTableRow>
   );
 }
 

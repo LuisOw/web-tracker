@@ -105,17 +105,15 @@ const ResearchesPage = () => {
 
   return (
     <Layout>
-      <div className="page_container">
-        <h1>Suas pesquisas</h1>
-        <ResearchesList
-          researches={researches}
-          add={handleSubmit}
-          delete={handleDelete}
-          edit={handleEdit}
-          statusChange={handleStatusChange}
-          downloadResult={handleDownload}
-        />
-      </div>
+      <h1>Suas pesquisas</h1>
+      <ResearchesList
+        researches={researches}
+        add={handleSubmit}
+        delete={handleDelete}
+        edit={handleEdit}
+        statusChange={handleStatusChange}
+        downloadResult={handleDownload}
+      />
     </Layout>
   );
 };

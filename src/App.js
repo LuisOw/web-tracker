@@ -1,6 +1,10 @@
 import AppRoutes from "./AppRoutes";
 import { purple } from "@mui/material/colors";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
+import {
+  ThemeProvider,
+  createTheme,
+  StyledEngineProvider,
+} from "@mui/material/styles";
 
 import "./App.css";
 
@@ -14,11 +18,13 @@ const theme = createTheme({
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <div className="App">
-        <AppRoutes />
-      </div>
-    </ThemeProvider>
+    <StyledEngineProvider injectFirst>
+      <ThemeProvider theme={theme}>
+        <div className="App">
+          <AppRoutes />
+        </div>
+      </ThemeProvider>
+    </StyledEngineProvider>
   );
 }
 

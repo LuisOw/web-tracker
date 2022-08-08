@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import QuestionnariesItem from "./QuestionnairesItem";
 import Modal from "../modal/Modal";
 import CollapsibleTable from "../CollapsTable";
+import BasicBreadcrumbs from "../../components/navegation/Breadcrumbs";
 
 function QuestionnairesList(props) {
   const navigate = useNavigate();
@@ -189,6 +190,7 @@ function QuestionnairesList(props) {
   return (
     <>
       <h2>Questionários</h2>
+      <BasicBreadcrumbs />
       {showAddQuestionnaireButton()}
       <table className="table">
         <tbody>

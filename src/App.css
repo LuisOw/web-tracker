@@ -1,9 +1,6 @@
 body{
-    width:100%; 
     text-align:center;
-    margin: 20px 0px 20px 0px;   
     margin-top: 70px;
-    font-family: 'Roboto', sans-serif;
   }
 
 .page_container {
@@ -44,7 +41,6 @@ body{
 
 .flex-container {
     display: flex;
-    justify-content: space-evenly;
 }
 
 .button {
