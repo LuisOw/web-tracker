@@ -3,7 +3,16 @@ import { useNavigate } from "react-router-dom";
 import QuestionItem from "./QuestionsItem";
 import Modal from "../modal/Modal";
 
-import { TextField } from "@mui/material";
+import {
+  TableContainer,
+  TextField,
+  Paper,
+  Table,
+  TableHead,
+  TableRow,
+} from "@mui/material";
+import { StyledButton, StyledTableCell } from "../StyledTableComponents";
+import BasicBreadcrumbs from "../navegation/Breadcrumbs";
 
 function QuestionsList(props) {
   const navigate = useNavigate();
@@ -129,30 +138,32 @@ function QuestionsList(props) {
 
   const showAddQuestionButton = () => {
     return (
-      <button
-        className="button button_add"
+      <StyledButton
         onClick={() => {
           handleClickAddOpen();
         }}
       >
         Adicionar questão
-      </button>
+      </StyledButton>
     );
   };
 
   return (
     <>
       <h2>Questões</h2>
+      <BasicBreadcrumbs />
       {showAddQuestionButton()}
-      <table className="table">
-        <tbody>
-          <tr>
-            <th>ID</th>
-            <th>Pergunta</th>
-            <th>Ordem</th>
-            <th>Alternativas</th>
-            <th>Ações</th>
-          </tr>
+      <TableContainer component={Paper}>
+        <Table size="small" aria-label="dense table">
+          <TableHead>
+            <TableRow sx={{ borderBottom: "2px solid black" }}>
+              <StyledTableCell>ID</StyledTableCell>
+              <StyledTableCell>Pergunta</StyledTableCell>
+              <StyledTableCell>Ordem</StyledTableCell>
+              <StyledTableCell>Alternativas</StyledTableCell>
+              <StyledTableCell>Ações</StyledTableCell>
+            </TableRow>
+          </TableHead>
           {props.questions.map((question) => (
             <QuestionItem
               key={question.id}
@@ -167,8 +178,8 @@ function QuestionsList(props) {
               modalOpen={handleClickEditOpen}
             />
           ))}
-        </tbody>
-      </table>
+        </Table>
+      </TableContainer>
       <Modal
         open={addOpen}
         handleClose={handlAddClose}

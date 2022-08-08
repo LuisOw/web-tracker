@@ -80,17 +80,15 @@ function AlternativesPage() {
 
   return (
     <Layout>
-      <div className="page_container">
-        <AlternativesList
-          alternatives={alternatives}
-          researchId={researchId}
-          questionnaireId={questionnaireId}
-          questionId={questionId}
-          add={handleSubmit}
-          delete={handleDelete}
-          edit={handleEdit}
-        />
-      </div>
+      <AlternativesList
+        alternatives={alternatives}
+        researchId={researchId}
+        questionnaireId={questionnaireId}
+        questionId={questionId}
+        add={handleSubmit}
+        delete={handleDelete}
+        edit={handleEdit}
+      />
     </Layout>
   );
 }

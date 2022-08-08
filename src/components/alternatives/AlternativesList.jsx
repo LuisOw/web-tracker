@@ -1,7 +1,16 @@
-import { FormControl, TextField } from "@mui/material";
+import {
+  FormControl,
+  TextField,
+  TableContainer,
+  Paper,
+  Table,
+  TableHead,
+  TableRow,
+} from "@mui/material";
 import { useState } from "react";
 import AlternativesItem from "./AlternativesItem";
 import Modal from "../modal/Modal";
+import { StyledButton, StyledTableCell } from "../StyledTableComponents";
 
 function AlternativesList(props) {
   const [newAlternative, setNewAlternative] = useState({
@@ -155,15 +164,18 @@ function AlternativesList(props) {
   return (
     <>
       <h2>Alternativas</h2>
+
       {showAddAlternativeButton()}
-      <table className="table">
-        <tbody>
-          <tr>
-            <th>Tipo</th>
-            <th>Texto</th>
-            <th>Valor</th>
-            <th>Ações</th>
-          </tr>
+      <TableContainer component={Paper}>
+        <Table size="small" aria-label="dense table">
+          <TableHead>
+            <TableRow sx={{ borderBottom: "2px solid black" }}>
+              <StyledTableCell>Tipo</StyledTableCell>
+              <StyledTableCell>Texto</StyledTableCell>
+              <StyledTableCell>Valor</StyledTableCell>
+              <StyledTableCell>Ações</StyledTableCell>
+            </TableRow>
+          </TableHead>
           {props.alternatives.map((alternative) => (
             <AlternativesItem
               key={alternative.id}
@@ -179,8 +191,8 @@ function AlternativesList(props) {
               modalOpen={handleClickEditOpen}
             />
           ))}
-        </tbody>
-      </table>
+        </Table>
+      </TableContainer>
       <Modal
         open={addOpen}
         handleClose={handlAddClose}

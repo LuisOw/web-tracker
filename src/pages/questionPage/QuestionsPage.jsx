@@ -79,16 +79,14 @@ function QuestionsPage() {
 
   return (
     <Layout>
-      <div className="page_container">
-        <QuestionsList
-          questions={questions}
-          researchId={researchId}
-          questionnaireId={questionnaireId}
-          add={handleSubmit}
-          delete={handleDelete}
-          edit={handleEdit}
-        />
-      </div>
+      <QuestionsList
+        questions={questions}
+        researchId={researchId}
+        questionnaireId={questionnaireId}
+        add={handleSubmit}
+        delete={handleDelete}
+        edit={handleEdit}
+      />
     </Layout>
   );
 }

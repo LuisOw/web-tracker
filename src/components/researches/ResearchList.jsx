@@ -409,7 +409,7 @@ function ResearchesList(props) {
               <StyledTableCell>Módulos ativos</StyledTableCell>
               <StyledTableCell>Filtros</StyledTableCell>
               <StyledTableCell>Questionários</StyledTableCell>
-              <StyledTableCell align="center">Ações</StyledTableCell>
+              <StyledTableCell>Ações</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>

@@ -1,3 +1,9 @@
+import {
+  StyledButton,
+  StyledTableCell,
+  StyledTableRow,
+} from "../StyledTableComponents";
+
 function AlternativesItem(props) {
   const localDelete = () => {
     props.handleDelete(props.id);
@@ -12,26 +18,31 @@ function AlternativesItem(props) {
   };
 
   return (
-    <tr>
-      <td>{props.type}</td>
-      <td>{props.text}</td>
-      <td>{props.value}</td>
-      <td>
-        <div className="flex-container">
-          <button
-            className="button button_edit"
-            onClick={() => {
-              handleEdit(props.id, props.type, props.text, props.value);
-            }}
-          >
-            Editar
-          </button>
-          <button className="button button_delete" onClick={localDelete}>
-            Excluir
-          </button>
-        </div>
-      </td>
-    </tr>
+    <StyledTableRow>
+      <StyledTableCell>{props.type}</StyledTableCell>
+      <StyledTableCell>{props.text}</StyledTableCell>
+      <StyledTableCell>{props.value}</StyledTableCell>
+      <StyledTableCell>
+        <StyledButton
+          sx={{ marginRight: "1px" }}
+          size="small"
+          variant="contained"
+          onClick={() => {
+            handleEdit(props.id, props.type, props.text, props.value);
+          }}
+        >
+          Editar
+        </StyledButton>
+        <StyledButton
+          sx={{ marginLeft: "1px" }}
+          size="small"
+          variant="contained"
+          onClick={localDelete}
+        >
+          Excluir
+        </StyledButton>
+      </StyledTableCell>
+    </StyledTableRow>
   );
 }
 

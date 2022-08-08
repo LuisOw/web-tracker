@@ -35,7 +35,7 @@ function ResearchesItem(props) {
       </StyledButton>
     ) : (
       <StyledButton size="small" variant="contained" onClick={localDownload}>
-        Exibir resultados
+        Baixar resultados
       </StyledButton>
     );
   };

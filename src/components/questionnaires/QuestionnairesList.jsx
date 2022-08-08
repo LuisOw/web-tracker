@@ -3,7 +3,12 @@ import {
   DialogActions,
   DialogContent,
   FormControl,
+  TableContainer,
   TextField,
+  Paper,
+  Table,
+  TableHead,
+  TableRow,
 } from "@mui/material";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -11,6 +16,7 @@ import QuestionnariesItem from "./QuestionnairesItem";
 import Modal from "../modal/Modal";
 import CollapsibleTable from "../CollapsTable";
 import BasicBreadcrumbs from "../../components/navegation/Breadcrumbs";
+import { StyledButton, StyledTableCell } from "../StyledTableComponents";
 
 function QuestionnairesList(props) {
   const navigate = useNavigate();
@@ -176,14 +182,13 @@ function QuestionnairesList(props) {
 
   const showAddQuestionnaireButton = () => {
     return (
-      <button
-        className="button button_add"
+      <StyledButton
         onClick={() => {
           handleClickAddOpen();
         }}
       >
         Adicionar questionário
-      </button>
+      </StyledButton>
     );
   };
 
@@ -192,14 +197,16 @@ function QuestionnairesList(props) {
       <h2>Questionários</h2>
       <BasicBreadcrumbs />
       {showAddQuestionnaireButton()}
-      <table className="table">
-        <tbody>
-          <tr>
-            <th>Título</th>
-            <th>Visibilidade</th>
-            <th>Questões</th>
-            <th>Ações</th>
-          </tr>
+      <TableContainer component={Paper}>
+        <Table size="small" aria-label="dense table">
+          <TableHead>
+            <TableRow sx={{ borderBottom: "2px solid black" }}>
+              <StyledTableCell>Título</StyledTableCell>
+              <StyledTableCell>Visibilidade</StyledTableCell>
+              <StyledTableCell>Questões</StyledTableCell>
+              <StyledTableCell>Ações</StyledTableCell>
+            </TableRow>
+          </TableHead>
           {props.questionnaires.map((questionnaire) => (
             <QuestionnariesItem
               key={questionnaire.id}
@@ -214,8 +221,8 @@ function QuestionnairesList(props) {
               modalOpen={handleClickEditOpen}
             />
           ))}
-        </tbody>
-      </table>
+        </Table>
+      </TableContainer>
       <Modal
         open={addOpen}
         handleClose={handlAddClose}

@@ -1,3 +1,9 @@
+import {
+  StyledButton,
+  StyledTableCell,
+  StyledTableRow,
+} from "../StyledTableComponents";
+
 function QuestionnairesItem(props) {
   const localDelete = () => {
     props.handleDelete(props.id);
@@ -12,31 +18,37 @@ function QuestionnairesItem(props) {
 
   return (
     <>
-      <tr>
-        <td>{props.title}</td>
-        <td>{JSON.stringify(props.public)}</td>
-        <td>
-          <button
-            className="button button_view"
+      <StyledTableRow key={props.id}>
+        <StyledTableCell>{props.title}</StyledTableCell>
+        <StyledTableCell>{JSON.stringify(props.public)}</StyledTableCell>
+        <StyledTableCell>
+          <StyledButton
+            size="small"
+            variant="contained"
             onClick={() => props.navigate(props.id)}
           >
             Exibit questões
-          </button>
-        </td>
-        <td>
-          <div className="flex-container">
-            <button
-              className="button button_edit"
-              onClick={() => handleEdit(props.id, props.title, props.public)}
-            >
-              Editar
-            </button>
-            <button className="button button_delete" onClick={localDelete}>
-              Excluir
-            </button>
-          </div>
-        </td>
-      </tr>
+          </StyledButton>
+        </StyledTableCell>
+        <StyledTableCell>
+          <StyledButton
+            sx={{ marginRight: "1px" }}
+            size="small"
+            variant="contained"
+            onClick={() => handleEdit(props.id, props.title, props.public)}
+          >
+            Editar
+          </StyledButton>
+          <StyledButton
+            sx={{ marginLeft: "1px" }}
+            size="small"
+            variant="contained"
+            onClick={localDelete}
+          >
+            Excluir
+          </StyledButton>
+        </StyledTableCell>
+      </StyledTableRow>
     </>
   );
 }

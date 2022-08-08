@@ -87,16 +87,14 @@ function QuestionnairesPage() {
 
   return (
     <Layout>
-      <div className="page_container">
-        <QuestionnairesList
-          questionnaires={questionnaires}
-          researchId={researchId}
-          add={handleSubmit}
-          delete={handleDelete}
-          edit={handleEdit}
-          rows={rows}
-        />
-      </div>
+      <QuestionnairesList
+        questionnaires={questionnaires}
+        researchId={researchId}
+        add={handleSubmit}
+        delete={handleDelete}
+        edit={handleEdit}
+        rows={rows}
+      />
     </Layout>
   );
 }
