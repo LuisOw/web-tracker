@@ -23,7 +23,7 @@ function ResearchesItem(props) {
 
   const localDownload = () => {
     let date = dayjs().format("DD-MM-YYYY-HH-mm");
-    let filename = `${date}-${research.id}`;
+    let filename = `${date}-${research.title}`;
     props.downloadResult(research.id, filename);
   };
 

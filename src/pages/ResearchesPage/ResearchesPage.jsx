@@ -100,7 +100,7 @@ const ResearchesPage = () => {
   };
 
   if (loading) {
-    return <div>Carregante...</div>;
+    return <div>Carregando...</div>;
   }
 
   return (

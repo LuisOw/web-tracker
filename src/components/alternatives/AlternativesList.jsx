@@ -11,6 +11,7 @@ import { useState } from "react";
 import AlternativesItem from "./AlternativesItem";
 import Modal from "../modal/Modal";
 import { StyledButton, StyledTableCell } from "../StyledTableComponents";
+import BasicBreadcrumbs from "../navegation/Breadcrumbs";
 
 function AlternativesList(props) {
   const [newAlternative, setNewAlternative] = useState({
@@ -150,21 +151,20 @@ function AlternativesList(props) {
 
   const showAddAlternativeButton = () => {
     return (
-      <button
-        className="button button_add"
+      <StyledButton
         onClick={() => {
           handleClickAddOpen();
         }}
       >
         Adicionar alternativa
-      </button>
+      </StyledButton>
     );
   };
 
   return (
     <>
       <h2>Alternativas</h2>
-
+      <BasicBreadcrumbs />
       {showAddAlternativeButton()}
       <TableContainer component={Paper}>
         <Table size="small" aria-label="dense table">
