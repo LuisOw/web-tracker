@@ -21,7 +21,6 @@ function AlternativesList(props) {
     value: 0,
   });
   const [id, setId] = useState("");
-  const [type, setType] = useState("");
   const [text, setText] = useState("");
   const [value, setValue] = useState("");
   const [addOpen, setAddOpen] = useState(false);
@@ -55,7 +54,6 @@ function AlternativesList(props) {
     props.add(newAlternative);
     setNewAlternative({
       questionId: props.questionId,
-      type: "discursiva",
       text: "",
       value: 0,
     });
@@ -65,7 +63,6 @@ function AlternativesList(props) {
     event.preventDefault();
     setEditOpen(false);
     let data = newAlternative;
-    data["type"] = type;
     data["text"] = text;
     data["value"] = value;
     data["id"] = id;
@@ -83,14 +80,6 @@ function AlternativesList(props) {
     return (
       <>
         <FormControl>
-          <select
-            defaultValue={"discursiva"}
-            name="type"
-            onChange={(event) => handleChange(event)}
-          >
-            <option value="discursiva">Discursiva</option>
-            <option value="multiplaEscolha">Multipla escolha</option>
-          </select>
           <TextField
             name="text"
             placeholder="Texto da alternativa"
@@ -118,14 +107,6 @@ function AlternativesList(props) {
   const showEditAlternativeView = () => {
     return (
       <FormControl>
-        <select
-          name="type"
-          value={type}
-          onChange={(event) => setType(event.target.value)}
-        >
-          <option value="discursiva">Discursiva</option>
-          <option value="multiplaEscolha">Multipla escolha</option>
-        </select>
         <TextField
           name="text"
           placeholder="Texto da alternativa"
@@ -170,7 +151,6 @@ function AlternativesList(props) {
         <Table size="small" aria-label="dense table">
           <TableHead>
             <TableRow sx={{ borderBottom: "2px solid black" }}>
-              <StyledTableCell>Tipo</StyledTableCell>
               <StyledTableCell>Texto</StyledTableCell>
               <StyledTableCell>Valor</StyledTableCell>
               <StyledTableCell>Ações</StyledTableCell>
@@ -180,7 +160,6 @@ function AlternativesList(props) {
             <AlternativesItem
               key={alternative.id}
               id={alternative.id}
-              type={alternative.type}
               text={alternative.text}
               value={alternative.value}
               handleDelete={props.delete}

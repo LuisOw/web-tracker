@@ -5,6 +5,7 @@ import {
 } from "../StyledTableComponents";
 
 function QuestionItem(props) {
+  const isDisabled = useState(props.type === "descritiva");
   const localDelete = () => {
     props.handleDelete(props.id);
   };
@@ -28,6 +29,7 @@ function QuestionItem(props) {
           <StyledButton
             size="small"
             variant="contained"
+            disabled="true"
             onClick={() => props.navigate(props.id)}
           >
             Exibir alternativas
@@ -38,7 +40,9 @@ function QuestionItem(props) {
             sx={{ marginRight: "1px" }}
             size="small"
             variant="contained"
-            onClick={() => handleEdit(props.id, props.query, props.order)}
+            onClick={() =>
+              handleEdit(props.id, props.query, props.order, props.type)
+            }
           >
             Editar
           </StyledButton>
