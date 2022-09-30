@@ -9,9 +9,10 @@ function QuestionItem(props) {
     props.handleDelete(props.id);
   };
 
-  const handleEdit = (id, localQuery, localOrder) => {
+  const handleEdit = (id, localQuery, localOrder, localType) => {
     props.setQuery(localQuery);
     props.setOrder(localOrder);
+    props.setType(localType);
     props.setId(id);
     props.modalOpen();
   };
@@ -22,6 +23,7 @@ function QuestionItem(props) {
         <StyledTableCell>{props.id}</StyledTableCell>
         <StyledTableCell>{props.query}</StyledTableCell>
         <StyledTableCell>{props.order}</StyledTableCell>
+        <StyledTableCell>{props.type}</StyledTableCell>
         <StyledTableCell>
           <StyledButton
             size="small"

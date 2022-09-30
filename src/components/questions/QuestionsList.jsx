@@ -24,6 +24,7 @@ function QuestionsList(props) {
   const [id, setId] = useState("");
   const [query, setQuery] = useState("");
   const [order, setOrder] = useState(0);
+  const [type, setType] = useState("");
   const [addOpen, setAddOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
 
@@ -63,6 +64,7 @@ function QuestionsList(props) {
       questionnaireId: props.questionnaireId,
       query: "",
       order: 0,
+      type: "",
     });
   };
 
@@ -72,6 +74,7 @@ function QuestionsList(props) {
     let data = newQuestion;
     data["query"] = query;
     data["order"] = order;
+    data["type"] = type;
     data["id"] = id;
     setNewQuestion(data);
     props.edit(newQuestion);
@@ -79,6 +82,7 @@ function QuestionsList(props) {
       questionnaireId: props.questionnaireId,
       query: "",
       order: 0,
+      type: "",
     });
   };
 
@@ -104,6 +108,14 @@ function QuestionsList(props) {
           fullWidth
           size="small"
         />
+        <select
+          defaultValue={"discursiva"}
+          name="type"
+          onChange={(event) => handleChange(event)}
+        >
+          <option value="discursiva">Discursiva</option>
+          <option value="multiplaEscolha">Multipla escolha</option>
+        </select>
       </form>
     );
   };
@@ -132,6 +144,14 @@ function QuestionsList(props) {
           fullWidth
           size="small"
         />
+        <select
+          name="type"
+          value={type}
+          onChange={(event) => setType(event.target.value)}
+        >
+          <option value="discursiva">Discursiva</option>
+          <option value="multiplaEscolha">Multipla escolha</option>
+        </select>
       </form>
     );
   };
@@ -160,6 +180,7 @@ function QuestionsList(props) {
               <StyledTableCell>ID</StyledTableCell>
               <StyledTableCell>Pergunta</StyledTableCell>
               <StyledTableCell>Ordem</StyledTableCell>
+              <StyledTableCell>Tipo</StyledTableCell>
               <StyledTableCell>Alternativas</StyledTableCell>
               <StyledTableCell>Ações</StyledTableCell>
             </TableRow>
@@ -170,6 +191,7 @@ function QuestionsList(props) {
               id={question.id}
               query={question.query}
               order={question.order}
+              type={question.type}
               handleDelete={props.delete}
               navigate={handleNavigate}
               setQuery={setQuery}

@@ -32,6 +32,7 @@ function QuestionsPage() {
         questionnaireId: response.questionnaireId,
         query: response.query,
         order: response.order,
+        type: response.type,
       },
     ]);
   };
