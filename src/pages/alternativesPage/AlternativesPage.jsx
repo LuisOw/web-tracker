@@ -30,7 +30,6 @@ function AlternativesPage() {
       {
         id: response.id,
         questionId: response.questionId,
-        type: response.type,
         text: response.text,
         value: response.value,
       },

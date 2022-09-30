@@ -9,8 +9,7 @@ function AlternativesItem(props) {
     props.handleDelete(props.id);
   };
 
-  const handleEdit = (id, localType, localText, localValue) => {
-    props.setType(localType);
+  const handleEdit = (id, localText, localValue) => {
     props.setText(localText);
     props.setValue(localValue);
     props.setId(id);
@@ -19,7 +18,6 @@ function AlternativesItem(props) {
 
   return (
     <StyledTableRow>
-      <StyledTableCell>{props.type}</StyledTableCell>
       <StyledTableCell>{props.text}</StyledTableCell>
       <StyledTableCell>{props.value}</StyledTableCell>
       <StyledTableCell>
@@ -28,7 +26,7 @@ function AlternativesItem(props) {
           size="small"
           variant="contained"
           onClick={() => {
-            handleEdit(props.id, props.type, props.text, props.value);
+            handleEdit(props.id, props.text, props.value);
           }}
         >
           Editar
