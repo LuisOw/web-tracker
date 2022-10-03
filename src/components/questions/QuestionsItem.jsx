@@ -30,7 +30,7 @@ function QuestionItem(props) {
           <StyledButton
             size="small"
             variant="contained"
-            disabled="true"
+            disabled={isDisabled}
             onClick={() => props.navigate(props.id)}
           >
             Exibir alternativas
