@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 import { StyledButton, StyledTableCell } from "../StyledTableComponents";
 import BasicBreadcrumbs from "../navegation/Breadcrumbs";
+import { TYPE } from "../../constants/QuestionEnum";
 
 function QuestionsList(props) {
   const navigate = useNavigate();
@@ -27,6 +28,11 @@ function QuestionsList(props) {
   const [type, setType] = useState("");
   const [addOpen, setAddOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
+
+  const typeList = [
+    { value: TYPE.DESCRITIVA, label: "Descritiva" },
+    { value: TYPE.MULTI_ESCOLHA, label: "Múltupla escolha" },
+  ];
 
   const handleClickAddOpen = () => {
     setAddOpen(true);
@@ -108,14 +114,11 @@ function QuestionsList(props) {
           fullWidth
           size="small"
         />
-        <select
-          defaultValue={"discursiva"}
-          name="type"
-          onChange={(event) => handleChange(event)}
-        >
-          <option value="discursiva">Discursiva</option>
-          <option value="multiplaEscolha">Multipla escolha</option>
-        </select>
+        {typeList.map((type) => (
+          <MenuItem key={type.value} value={type.value}>
+            {type.label}
+          </MenuItem>
+        ))}
       </form>
     );
   };
@@ -144,14 +147,11 @@ function QuestionsList(props) {
           fullWidth
           size="small"
         />
-        <select
-          name="type"
-          value={type}
-          onChange={(event) => setType(event.target.value)}
-        >
-          <option value="discursiva">Discursiva</option>
-          <option value="multiplaEscolha">Multipla escolha</option>
-        </select>
+        {typeList.map((type) => (
+          <MenuItem key={type.value} value={type.value}>
+            {type.label}
+          </MenuItem>
+        ))}
       </form>
     );
   };
