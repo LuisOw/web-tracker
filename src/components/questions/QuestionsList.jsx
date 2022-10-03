@@ -19,6 +19,7 @@ function QuestionsList(props) {
   const navigate = useNavigate();
   const [newQuestion, setNewQuestion] = useState({
     questionnaireId: props.questionnaireId,
+    type: "",
     query: "",
     order: 0,
   });
@@ -207,6 +208,7 @@ function QuestionsList(props) {
               navigate={handleNavigate}
               setQuery={setQuery}
               setOrder={setOrder}
+              setType={setType}
               setId={setId}
               modalOpen={handleClickEditOpen}
             />
