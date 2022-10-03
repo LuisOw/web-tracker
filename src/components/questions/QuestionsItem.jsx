@@ -3,6 +3,7 @@ import {
   StyledTableCell,
   StyledTableRow,
 } from "../StyledTableComponents";
+import { useState } from "react";
 
 function QuestionItem(props) {
   const isDisabled = useState(props.type === "descritiva");

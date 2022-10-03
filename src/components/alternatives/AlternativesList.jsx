@@ -163,7 +163,6 @@ function AlternativesList(props) {
               text={alternative.text}
               value={alternative.value}
               handleDelete={props.delete}
-              setType={setType}
               setText={setText}
               setValue={setValue}
               setId={setId}
