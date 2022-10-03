@@ -12,7 +12,6 @@ import {
   DEFAULT_TYPE,
 } from "../../constants/ResearchesEnum";
 import {
-  Box,
   MenuItem,
   Paper,
   Table,
