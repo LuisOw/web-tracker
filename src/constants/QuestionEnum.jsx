@@ -1,4 +1,4 @@
 export const TYPE = {
-  DESCRITIVA: "descrivita",
+  DESCRITIVA: "descritiva",
   MULTI_ESCOLHA: "multipla_escolha",
 };
