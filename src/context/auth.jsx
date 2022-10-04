@@ -37,7 +37,7 @@ export const AuthProvider = ({ children }) => {
   const signin = (username, password, name) => {
     (async () => {
       const response = await httpFetchWithBody(
-        "create",
+        "pesquisador",
         "POST",
         { username, password, name },
         {
