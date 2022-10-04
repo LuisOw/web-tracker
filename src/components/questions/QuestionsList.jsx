@@ -33,7 +33,7 @@ function QuestionsList(props) {
 
   const typeList = [
     { value: TYPE.DESCRITIVA, label: "Descritiva" },
-    { value: TYPE.MULTI_ESCOLHA, label: "Múltupla escolha" },
+    { value: TYPE.MULTI_ESCOLHA, label: "Múltipla escolha" },
   ];
 
   const handleClickAddOpen = () => {
@@ -160,22 +160,6 @@ function QuestionsList(props) {
           fullWidth
           size="small"
         />
-        <TextField
-          select
-          name="type"
-          label="type"
-          onChange={(event) => handleChange(event)}
-          variant="outlined"
-          margin="dense"
-          fullWidth
-          size="small"
-        >
-          {typeList.map((type) => (
-            <MenuItem key={type.value} value={type.value}>
-              {type.label}
-            </MenuItem>
-          ))}
-        </TextField>
       </form>
     );
   };
