@@ -1,4 +1,4 @@
-const baseUrl = "https://f09a-2804-14d-baa2-8ff4-9c90-8914-8ffc-605d.ngrok.io/";
+const baseUrl = "https://f09a-2804-14d-baa2-8ff4-9c90-8914-8ffc-605d.ngrok.io";
 
 export const httpFetch = async (endpoint, token) => {
   const response = await fetch(`${baseUrl}/${endpoint}`, {
